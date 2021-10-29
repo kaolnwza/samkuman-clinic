@@ -7,12 +7,8 @@ const login = () => {
     return (
         <View style={{ flex: 1 }}>
             <Text>Login</Text>
-            <TextInput
-                placeholder="User"
-            />
-            <TextInput
-                placeholder="Password"
-            />
+            <TextInput placeholder="User" />
+            <TextInput placeholder="Password" />
             <Button title='Login' />
         </View>
     )
