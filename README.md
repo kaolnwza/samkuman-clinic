@@ -1,1 +1,0 @@
-# samkuman-clinic
