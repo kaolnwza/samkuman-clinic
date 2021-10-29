@@ -189,3 +189,19 @@ func CreateHistory(response http.ResponseWriter, request *http.Request) {
 	//send result to postman
 	json.NewEncoder(response).Encode(insertStruct)
 }
+
+func CreateTest2(response http.ResponseWriter, request *http.Request) {
+
+	fmt.Println("Create Function")
+	response.Header().Add("content-type", "application/json")
+	var user models.Testza
+
+	json.NewDecoder(request.Body).Decode(&user)
+
+	collection := client.Database("test").Collection("za")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	result, _ := collection.InsertOne(ctx, user)
+
+	json.NewEncoder(response).Encode(result)
+}

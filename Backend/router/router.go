@@ -22,5 +22,8 @@ func Router() *mux.Router {
 	router.HandleFunc("/findtest", services.CallOnlyOneInOject).Methods("GET")
 	router.HandleFunc("/createhistory", services.CreateHistory).Methods("POST")
 
+	router.HandleFunc("/register", services.Register).Methods("POST")
+	router.HandleFunc("/login", services.Login).Methods("POST")
+
 	return router
 }

@@ -1,6 +1,8 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 type Person struct {
 	ID       primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
@@ -48,4 +50,22 @@ type History_Create struct {
 	Doctor_Id     string `json:"doctor_id" bson:"doctor_id"`
 	Symptom       string `json:"symptom" bson:"symptom"`
 	Doctor_Advice string `json:"doctor_advice" bson:"doctor_advice"`
+}
+
+type Testza struct {
+	Usef *User  `json:"hee" bson:"hee"`
+	Name string `json:"name" bson:"name"`
+}
+
+type Register struct {
+	ID              int    `json:"id" bson:"id"`
+	Username        string `json:"username" bson:"username"`
+	Password        string `json:"password" bson:"password"`
+	Identity_number int    `json:"identity_number" bson:"identity_number"`
+}
+
+type Login struct {
+	ID       int    `json:"id" bson:"id"`
+	Username string `json:"username" bson:"username"`
+	Password string `json:"password" bson:"password"`
 }
