@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -12,27 +13,44 @@ const login = () => {
     }
     return (
         <View style={styles.container}>
-            <View style={styles.image, styles.im3}>
-                <Image source={require('../assets/normal_u12.png')} />
+            <View style={styles.header}>
+                <View style={styles.image, styles.im3}>
+                    <Image source={require('../assets/normal_u12.png')} />
+                </View>
+                <View style={styles.image, styles.im2}>
+                    <Image source={require('../assets/normal_u13.png')} />
+                </View>
+                <View style={styles.image}>
+                    <Image source={require('../assets/normal_u15.png')} />
+                </View>
+                <Text style={styles.headerText}>SIGN IN
+                    <FontAwesome name="sign-in" size={50} color="white" />
+                </Text>
             </View>
-            <View style={styles.image, styles.im2}>
-                <Image source={require('../assets/normal_u13.png')} />
-            </View>
-            <View style={styles.image}>
-                <Image source={require('../assets/normal_u15.png')} />
-            </View>
-            <Text style={styles.header}>SIGN IN
-                <FontAwesome name="sign-in" size={50} color="white" />
-            </Text>
-
-            <TextInput style={styles.input} placeholder="username" />
-            <TextInput style={styles.input} placeholder="password" />
-            <View>
-                <TouchableOpacity style={styles.btn} >
+            <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-50}>
+                <Text style={styles.label}>Username</Text>
+                <TextInput style={styles.input} placeholder="username" />
+                <Text style={styles.label}>Password</Text>
+                <TextInput style={styles.input} placeholder="password" secureTextEntry={true} />
+                <View style={{ marginTop: 20 }}>
+                    <TouchableOpacity style={{ alignItems: 'flex-end' }}
+                        onPress={() => {
+                            console.warn("sign up")
+                        }}
+                    >
+                        <Text style={{ color: '#007AFF' }}>Sign Up</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAwareScrollView>
+            <View style={{ justifyContent: "flex-end", paddingBottom: "20%" }}
+            >
+                <TouchableOpacity style={styles.btn} onPress={() => {
+                    console.warn("login")
+                }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#333333' }}>LOGIN</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </View >
     )
 }
 
@@ -42,18 +60,30 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%'
-
+    },
+    containerinput: {
+        flex: 1,
+        paddingHorizontal: "12%",
+        fontFamily: 'Poppins',
     },
     input: {
+        fontSize: 18,
         height: 40,
-        margin: 12,
-        borderWidth: 1,
         padding: 10,
-
-
+        borderBottomWidth: 1,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
+    },
+    label: {
+        fontSize: 15,
+        marginTop: 20
+    },
+    header: {
+        transform: [{ translateY: "20%" }]
     },
     image: {
-        flex: 1,
         justifyContent: "center",
         transform: [{ translateX: "-80%" }, { translateY: "-25%" }],
         position: 'absolute'
@@ -66,13 +96,13 @@ const styles = StyleSheet.create({
         transform: [{ translateX: "30%" }, { translateY: "-150%" }],
         position: 'absolute'
     },
-    header: {
+    headerText: {
         position: "absolute",
         fontSize: 50,
         top: 200,
         color: 'white',
         fontFamily: 'Poppins',
-        fontWeight: '900',
+        fontWeight: 'bold',
         marginLeft: 10
     },
     btn: {
