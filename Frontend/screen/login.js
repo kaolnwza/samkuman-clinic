@@ -27,7 +27,7 @@ const login = () => {
                     <FontAwesome name="sign-in" size={50} color="white" />
                 </Text>
             </View>
-            <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-50}>
+            <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Username</Text>
                 <TextInput style={styles.input} placeholder="username" />
                 <Text style={styles.label}>Password</Text>
