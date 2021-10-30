@@ -3,8 +3,10 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, Key
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
+import { Link } from '@react-navigation/native';
 
-const login = () => {
+
+const login = ({ navigation }) => {
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
     });
@@ -35,17 +37,16 @@ const login = () => {
                 <View style={{ marginTop: 20 }}>
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
                         onPress={() => {
-                            console.warn("sign up")
+                            navigation.navigate("signup")
                         }}
                     >
                         <Text style={{ color: '#007AFF' }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>
-            <View style={{ justifyContent: "flex-end", paddingBottom: "20%" }}
-            >
+            <View style={{ justifyContent: "flex-end", paddingBottom: "20%" }}>
                 <TouchableOpacity style={styles.btn} onPress={() => {
-                    console.warn("login")
+                    navigation.navigate("main")
                 }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#333333' }}>LOGIN</Text>
                 </TouchableOpacity>
@@ -59,7 +60,9 @@ export default login
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%'
+        width: '100%',
+        backgroundColor: '#FFF9EC',
+
     },
     containerinput: {
         flex: 1,
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         fontSize: 50,
         top: 200,
-        color: 'white',
+        color: '#FFF9EC',
         fontFamily: 'Poppins',
         fontWeight: 'bold',
         marginLeft: 10
