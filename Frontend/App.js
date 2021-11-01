@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './screen/Login';
 import Navigater from './navigator/Navigation';
 import { useFonts } from 'expo-font';
 
@@ -11,5 +10,5 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  
+
 });

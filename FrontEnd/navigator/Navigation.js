@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Login from '../screen/Login'
+import Login from '../screen/login'
 import SignUp from '../screen/SignUp'
 import Main from '../screen/Main'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
