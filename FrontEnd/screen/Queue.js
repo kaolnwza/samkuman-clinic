@@ -22,8 +22,7 @@ const Main = ({ navigation }) => {
                     <Image source={require('../assets/normal_u4.png')} />
                 </View>
                 <View style={styles.Name}>
-                    <Text style={styles.FN}>FirstName</Text>
-                    <Text style={styles.LN}>LastName</Text>
+                    <Text style={styles.TextHeader}>Queue</Text>
                 </View>
             </View>
         </View>
@@ -53,20 +52,16 @@ const styles = StyleSheet.create({
     Name: {
         position: 'absolute',
         right: 0,
-        paddingTop: 30,
+        paddingTop: 20,
         paddingRight: 20
     },
-    FN: {
-        fontSize: 25,
+
+    TextHeader: {
+        fontSize: 40,
         fontFamily: 'Poppins',
         fontWeight: 'bold',
         color: '#0d253f',
 
     },
-    LN: {
-        fontSize: 25,
-        color: '#0d253f',
-        fontFamily: 'Poppins',
-        fontWeight: 'bold',
-    },
+
 })

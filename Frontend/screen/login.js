@@ -3,8 +3,6 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, Key
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
-import { useLinkTo } from '@react-navigation/native';
-import Main from './Main';
 
 const login = ({ navigation }) => {
     const [loaded] = useFonts({
@@ -62,7 +60,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         backgroundColor: '#FFF9EC',
-
     },
     containerinput: {
         flex: 1,
