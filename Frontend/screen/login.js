@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, Key
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
-import { Link } from '@react-navigation/native';
-
+import { useLinkTo } from '@react-navigation/native';
+import Main from './Main';
 
 const login = ({ navigation }) => {
     const [loaded] = useFonts({
@@ -46,7 +46,7 @@ const login = ({ navigation }) => {
             </KeyboardAwareScrollView>
             <View style={{ justifyContent: "flex-end", paddingBottom: "20%" }}>
                 <TouchableOpacity style={styles.btn} onPress={() => {
-                    navigation.navigate("main")
+                    navigation.replace('main')
                 }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#333333' }}>LOGIN</Text>
                 </TouchableOpacity>

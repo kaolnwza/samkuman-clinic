@@ -4,6 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { RadioButton } from 'react-native-paper';
+
 const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
     const [value, setValue] = React.useState('first');

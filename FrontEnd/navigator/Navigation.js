@@ -27,9 +27,8 @@ const Navigation = () => {
                     }} />
                 <Stack.Screen name="main" component={Main}
                     options={{
-                        headerShown: false,
-                        title: null,
-                        headerTintColor: "white"
+                        title: "main",
+                        headerTintColor: "black",
                     }}
                 />
             </Stack.Navigator>
