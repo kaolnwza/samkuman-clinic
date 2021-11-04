@@ -4,16 +4,20 @@ import Login from '../screen/Login'
 import SignUp from '../screen/SignUp'
 import Main from '../screen/Main'
 import Queue from '../screen/Queue'
+import Reserve from '../screen/Reserve'
+import Notify from '../screen/Notify'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
-import { color } from 'react-native-reanimated'
+import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+
 
 const Navigation = () => {
     return (
@@ -46,13 +50,27 @@ const Navigation = () => {
 const Custom = props => {
     return (
         <DrawerContentScrollView {...props}>
-            <Text>Pawaris</Text>
+            <View style={{ height: '70%', flexDirection: 'row' }}>
+                <View style={{ height: 80, width: 80, borderRadius: 40, marginTop: 10, marginHorizontal: 10, borderWidth: 1 }} />
+                <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                    <Text style={{ fontFamily: 'Poppins' }}>
+                        Pawaris
+                    </Text>
+                    <Text style={{ fontFamily: 'Poppins' }}>
+                        Wongsaied
+                    </Text>
+                </View>
+            </View>
+
             <DrawerItemList {...props} />
         </DrawerContentScrollView>
     )
 }
 
 const Menu = () => {
+    const [loaded] = useFonts({
+        Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
+    });
     return (
 
         <Drawer.Navigator drawerContent={(props) => <Custom {...props} />}
@@ -60,6 +78,7 @@ const Menu = () => {
                 headerTransparent: true,
                 title: null,
                 headerTintColor: 'black',
+                drawerLabelStyle: { fontFamily: 'Poppins' }
             }} >
 
             <Drawer.Screen name="1" component={BottomTab}
@@ -69,7 +88,7 @@ const Menu = () => {
                         <Ionicons
                             name="md-home"
                             size={size}
-                            color={focused ? '#7cc' : '#ccc'}
+                            color={focused ? '#6488e4' : '#ccc'}
                         />
                     ),
                 }} />
@@ -80,30 +99,48 @@ const Menu = () => {
 
 const BottomTab = () => {
     return (
-        <Tab.Navigator screenOptions={{
-            headerShown: false,
-            tabBarActiveTintColor: "#0d253f",
-            tabBarStyle: {
-                backgroundColor: "#f9be7c",
-                padding: 0,
-                margin: 0
-            },
-            tabBarLabelStyle: { fontSize: 15 },
-        }}>
-            <Tab.Screen name="Meals" component={Main}
+        <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+                tabBarActiveTintColor: "#0d253f",
+                tabBarStyle: {
+                    backgroundColor: "#f9be7c",
+                },
+
+                tabBarLabelStyle: { fontSize: 15, },
+                tabBarShowLabel: false
+            }}>
+            <Tab.Screen name="Main" component={Main}
                 options={{
                     tabBarIcon: ({ color, size }) => {
                         return <Ionicons name="home" size={size} color={color} />;
                     },
                 }}
             />
-            <Tab.Screen name="Favorites" component={Queue}
-            // options={{
-            //     tabBarIcon: ({ color, size }) => {
-            //         return <AntDesign name="staro" size={size} color={color} />;
-            //     },
-            // }}
+            <Tab.Screen name="Reserve" component={Reserve}
+                options={{
+                    tabBarIcon: ({ color, size }) => {
+                        return <MaterialIcons name="queue" size={size} color={color} />;
+                    },
+                }}
             />
+            <Tab.Screen name="Queue" component={Queue}
+                options={{
+                    tabBarIcon: ({ color, size }) => {
+                        return <MaterialIcons name="add-to-queue" size={size} color={color} />;
+                    },
+                }}
+            />
+            <Tab.Screen name="Noti" component={Notify}
+                options={{
+                    tabBarBadge: 3,
+                    tabBarIcon: ({ color, size }) => {
+                        return <Ionicons name="notifications" size={size} color={color} />;
+                    },
+
+                }}
+            />
+
         </Tab.Navigator>
     )
 }
