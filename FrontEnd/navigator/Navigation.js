@@ -6,13 +6,17 @@ import Main from '../screen/Main'
 import Queue from '../screen/Queue'
 import Reserve from '../screen/Reserve'
 import Notify from '../screen/Notify'
+import Appointment from '../screen/Appointment'
+import History from '../screen/History'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,9 +54,9 @@ const Navigation = () => {
 const Custom = props => {
     return (
         <DrawerContentScrollView {...props}>
-            <View style={{ height: '70%', flexDirection: 'row' }}>
-                <View style={{ height: 80, width: 80, borderRadius: 40, marginTop: 10, marginHorizontal: 10, borderWidth: 1 }} />
-                <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{ height: 80, width: 80, borderRadius: 40, margin: 10, borderWidth: 1 }} />
+                <View style={{ flexDirection: 'column', marginTop: 10 }}>
                     <Text style={{ fontFamily: 'Poppins' }}>
                         Pawaris
                     </Text>
@@ -81,17 +85,32 @@ const Menu = () => {
                 drawerLabelStyle: { fontFamily: 'Poppins' }
             }} >
 
-            <Drawer.Screen name="1" component={BottomTab}
+            <Drawer.Screen name="home" component={BottomTab}
                 options={{
                     drawerLabel: "Main",
                     drawerIcon: ({ focused, size }) => (
                         <Ionicons
                             name="md-home"
                             size={size}
-                            color={focused ? '#6488e4' : '#ccc'}
+                            color={focused ? '#007AFF' : '#ccc'}
                         />
                     ),
                 }} />
+            <Drawer.Screen name="appoint" component={Appointment}
+                options={{
+                    drawerLabel: "Appointment",
+                    drawerIcon: ({ focused, size }) => (
+                        <FontAwesome name="pencil-square-o" size={size} color={focused ? '#007AFF' : '#ccc'} />
+                    ),
+                }} />
+            <Drawer.Screen name="history" component={History}
+                options={{
+                    drawerLabel: "History",
+                    drawerIcon: ({ focused, size }) => (
+                        <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
+                    ),
+                }} />
+
 
         </Drawer.Navigator>
     )
