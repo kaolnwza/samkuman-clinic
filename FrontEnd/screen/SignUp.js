@@ -16,13 +16,13 @@ const SignUp = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <View style={styles.image, styles.im3}>
+                <View style={styles.im3Ipad}>
                     <Image source={require('../assets/normal_u1.png')} />
                 </View>
-                <View style={styles.image, styles.im2}>
+                <View style={styles.im2Ipad}>
                     <Image source={require('../assets/normal_u2.png')} />
                 </View>
-                <View style={styles.image}>
+                <View style={styles.imageIpad}>
                     <Image source={require('../assets/normal_u3.png')} />
                 </View>
                 <Text style={styles.headerText}>SIGN UP
@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
     inputH: {
         color: '#FFF9EC',
         width: '100%',
-
         fontSize: 18,
         height: 40,
         padding: 10,
@@ -147,9 +146,22 @@ const styles = StyleSheet.create({
         transform: [{ translateX: "-80%" }, { translateY: "-25%" }],
         position: 'absolute'
     },
+    imageIpad: {
+        justifyContent: "center",
+        transform: [{ translateX: "150%" }, { translateY: "-100%" }, { scale: 1.66 }],
+        position: 'absolute'
+    },
+    im2Ipad: {
+        transform: [{ translateX: "200%" }, { translateY: "30%" }, { scale: 1.75 }],
+        justifyContent: "center"
+    },
     im2: {
         transform: [{ translateX: "-60%" }, { translateY: "-30%" }],
         justifyContent: "center"
+    },
+    im3Ipad: {
+        transform: [{ translateX: "200%" }, { translateY: "550%" }, { scale: 2 }],
+        position: 'absolute'
     },
     im3: {
         transform: [{ translateX: "-150%" }, { translateY: "450%" }],

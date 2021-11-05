@@ -1,18 +1,26 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import * as Device from 'expo-device';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 
 const Pagebg = (props) => {
     return (
         <View style={styles.header}>
-            <View style={styles.image, styles.im2}>
+            <View style={[Device.osName === "iPadOS" ? styles.im2Ipad : styles.im2]}>
                 <Image source={require('../assets/normal_u5.png')} />
             </View>
-            <View style={styles.image}>
+            <View style={[Device.osName === "iPadOS" ? styles.imageIpad : styles.image]}>
                 <Image source={require('../assets/normal_u4.png')} />
             </View>
             <View style={styles.Name}>
                 <Text style={styles.FN}>{props.Text1}</Text>
                 <Text style={styles.LN}>{props.Text2}</Text>
+                <Text>
+                    {Device.osName}
+                </Text>
             </View>
         </View>
     )
@@ -29,8 +37,17 @@ const styles = StyleSheet.create({
         transform: [{ translateX: "-50%" }, { translateY: "-20%" }],
         position: 'absolute'
     },
+    imageIpad: {
+        justifyContent: "center",
+        transform: [{ translateX: "200%" }, { translateY: "-20%" }, { scale: 1.89 }],
+        position: 'absolute'
+    },
     im2: {
         transform: [{ translateX: "-10%" }, { translateY: "-30%" }],
+        justifyContent: "center"
+    },
+    im2Ipad: {
+        transform: [{ translateX: "330%" }, { translateY: "-30%" }, { scale: 1.9 }],
         justifyContent: "center"
     },
     Name: {
