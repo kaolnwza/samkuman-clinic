@@ -17,6 +17,9 @@ import (
 func init() {
 	connectDB()
 }
+
+const SecretKey = "hehee"
+
 func Register(response http.ResponseWriter, request *http.Request) {
 
 	response.Header().Add("content-type", "application/json")
@@ -39,7 +42,6 @@ func Register(response http.ResponseWriter, request *http.Request) {
 	result, _ := collection.InsertOne(ctx, new_data)
 	_ = result
 	json.NewEncoder(response).Encode(new_data)
-
 }
 
 func Login(response http.ResponseWriter, request *http.Request) {
@@ -74,7 +76,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 		ExpiresAt: expir.Unix(),
 	})
 
-	token, err := claims.SignedString([]byte("hee"))
+	token, err := claims.SignedString([]byte(SecretKey))
 	if err != nil {
 		json.NewEncoder(response).Encode("Can't Login")
 	}
@@ -88,4 +90,19 @@ func Login(response http.ResponseWriter, request *http.Request) {
 		})
 
 	json.NewEncoder(response).Encode(token)
+}
+
+func GetCookie(response http.ResponseWriter, request *http.Request) {
+	tokenCookie, _ := request.Cookie("jwt")
+	token, _ := jwt.ParseWithClaims(tokenCookie.Value, &jwt.StandardClaims{},
+		func(t *jwt.Token) (interface{}, error) {
+			return []byte(SecretKey), nil
+		})
+
+	claims := token.Claims.(*jwt.StandardClaims)
+
+	collection := client.Database("test").Collection("user")
+	
+
+	json.NewEncoder(response).Encode(claims)
 }
