@@ -102,7 +102,6 @@ func GetCookie(response http.ResponseWriter, request *http.Request) {
 	claims := token.Claims.(*jwt.StandardClaims)
 
 	collection := client.Database("test").Collection("user")
-	
 
 	json.NewEncoder(response).Encode(claims)
 }
