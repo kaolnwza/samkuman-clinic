@@ -3,6 +3,10 @@ module go-mongo
 go 1.17
 
 require (
+<<<<<<< HEAD
+=======
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+>>>>>>> parent of b6e5e04 (Data structure)
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
