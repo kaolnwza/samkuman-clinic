@@ -1,10 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
+import axios from "axios";
+
+
 
 const login = ({ navigation }) => {
+    const [usernameLogin, setUsernameLogin] = useState("12345678912346")
+    const [passwordLogin, setPasswordLogin] = useState("12345")
+
+    const testLogin = () => {
+        console.log(usernameLogin, passwordLogin);
+        postData()
+    }
+    const local = "http://localhost:12345"
+
+    const instance = axios.create({
+        withCredentials: true
+    })
+
+
+    const postData = () => {
+        const headers = {
+            "Content-Type": "application/json",
+        };
+
+        console.log("send");
+        const data = {
+            identity_number: usernameLogin,
+            password: passwordLogin
+        }
+        instance
+            .post(local + "/login", data)
+            .then((res) => {
+                console.log(res.data)
+            }
+            )
+        // instance.get(local + "/getcookie")
+        //     .then(
+        //         console.log("done get cookie")
+        //     )
+
+    }
+
+    const Logout = () => {
+        instance
+            .get(local + "/logout")
+            .then((res) => {
+                console.log(res.data);
+            })
+    }
+
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
     });
@@ -29,13 +77,14 @@ const login = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Username</Text>
-                <TextInput style={styles.input} placeholder="username" />
+                <TextInput style={styles.input} placeholder="username" onChangeText={setUsernameLogin} />
                 <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="password" secureTextEntry={true} />
+                <TextInput style={styles.input} placeholder="password" secureTextEntry={true} onChangeText={setPasswordLogin} />
                 <View style={{ marginTop: 20 }}>
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
                         onPress={() => {
-                            navigation.navigate("signup")
+                            Logout()
+                            //navigation.navigate("signup")
                         }}
                     >
                         <Text style={{ color: '#007AFF' }}>Sign Up</Text>
@@ -44,7 +93,8 @@ const login = ({ navigation }) => {
             </KeyboardAwareScrollView>
             <View style={{ justifyContent: "flex-end", paddingBottom: "20%" }}>
                 <TouchableOpacity style={styles.btn} onPress={() => {
-                    navigation.replace('main')
+                    testLogin()
+                    // navigation.replace('main')
                 }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#333333' }}>LOGIN</Text>
                 </TouchableOpacity>

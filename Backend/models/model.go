@@ -65,7 +65,7 @@ type Register struct {
 }
 
 type Login struct {
-	ID       int    `json:"id" bson:"id"`
-	Username string `json:"username" bson:"username"`
-	Password string `json:"password" bson:"password"`
+	ID              int    `json:"id" bson:"id"`
+	Identity_number string `json:"identity_number" bson:"identity_number"`
+	Password        string `json:"password" bson:"password"`
 }
