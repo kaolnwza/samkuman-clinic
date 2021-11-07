@@ -19,7 +19,6 @@ func init() {
 }
 
 const SecretKey = "hehee"
-const database = "samkumandb"
 
 func Register(response http.ResponseWriter, request *http.Request) {
 
@@ -28,7 +27,7 @@ func Register(response http.ResponseWriter, request *http.Request) {
 
 	json.NewDecoder(request.Body).Decode(&data)
 
-	collection := client.Database(database).Collection("auth")
+	collection := client.Database("test").Collection("auth")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
 	password_token, _ := bcrypt.GenerateFromPassword([]byte(data.Password), 7)
@@ -50,27 +49,21 @@ func Login(response http.ResponseWriter, request *http.Request) {
 
 	var data_get models.Login
 	json.NewDecoder(request.Body).Decode(&data_get)
-	fmt.Println(data_get.Identity_number)
-	fmt.Println(data_get.Password)
-	collection := client.Database(database).Collection("user")
+
+	collection := client.Database("test").Collection("auth")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
-	var data models.User
-	_ = collection.FindOne(ctx, bson.M{"identity_number": data_get.Identity_number}).Decode(&data)
+	var data models.Login
+	_ = collection.FindOne(ctx, bson.M{"username": data_get.Username}).Decode(&data)
 
-	if data.Identity_number == "" {
-		fmt.Println(data.Identity_number)
-		fmt.Println("User not found")
-		json.NewEncoder(response).Encode("User not found")
-
+	if data.Username == "" {
+		json.NewEncoder(response).Encode("Username not found")
 		return
 	}
 	//result := "Right"
 
 	if err := bcrypt.CompareHashAndPassword([]byte(data.Password), []byte(data_get.Password)); err != nil {
-		// fmt.Println(data.Password)
-		// fmt.Println(data_get.Password)
-		fmt.Println("Incorrect Password")
+
 		json.NewEncoder(response).Encode("Incorrect Password")
 		return
 
@@ -79,7 +72,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 	expir := time.Now().Add(time.Hour * 1)
 
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    strconv.Itoa(int(data.User_id)),
+		Issuer:    strconv.Itoa(int(data.ID)),
 		ExpiresAt: expir.Unix(),
 	})
 
@@ -95,14 +88,9 @@ func Login(response http.ResponseWriter, request *http.Request) {
 			Expires:  expir,
 			HttpOnly: true,
 		})
-	fmt.Println("Login success token: ", token)
-
-	response.Header().Set("Access-Control-Allow-Origin", "http://localhost:19006")
 
 	json.NewEncoder(response).Encode(token)
 }
-
-var userCookieId = -1
 
 func GetCookie(response http.ResponseWriter, request *http.Request) {
 	tokenCookie, _ := request.Cookie("jwt")
@@ -113,97 +101,7 @@ func GetCookie(response http.ResponseWriter, request *http.Request) {
 
 	claims := token.Claims.(*jwt.StandardClaims)
 
-	//collection := client.Database(database).Collection("user")
-	///fmt.Println(claims.Issuer)
-	//userCookieId = claims.Issuer
-	userCookieId, _ = strconv.Atoi(claims.Issuer)
-	println("Get cookie success: ", userCookieId)
-	//fmt.Println(userCookieId)
+	//collection := client.Database("test").Collection("user")
+
 	json.NewEncoder(response).Encode(claims)
-
-}
-
-func Logout(response http.ResponseWriter, request *http.Request) {
-	response.Header().Add("content-type", "application/json")
-
-	http.SetCookie(response,
-		&http.Cookie{
-			Name:     "jwt",
-			Value:    "",
-			Expires:  time.Now().Add(-time.Hour),
-			HttpOnly: true,
-		})
-
-	json.NewEncoder(response).Encode("Logout success")
-}
-
-func FindUser(response http.ResponseWriter, request *http.Request) {
-	//test
-	response.Header().Add("content-type", "application/json")
-
-	collection := client.Database(database).Collection("user")
-	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
-
-	//objectId, _ := primitive.ObjectIDFromHex("6171174184330dedf05e86a2")
-	//fmt.Println(objectId)
-	var result bson.M
-	find_object := bson.M{"id": userCookieId}
-	err := collection.FindOne(ctx, find_object).Decode((&result))
-
-	if err != nil {
-		response.WriteHeader(http.StatusInternalServerError)
-		response.Write([]byte(`{"message": "` + err.Error() + `"}`))
-		return
-	}
-	// for _, x := range result {
-	// 	fmt.Println(x)
-	// }
-
-	toJson, _ := json.Marshal(result)
-	//jjj := string(xxx)
-	var reading models.Login
-	_ = json.Unmarshal([]byte(string(toJson)), &reading)
-	fmt.Println(reading)
-	json.NewEncoder(response).Encode(reading)
-
-}
-
-func SignUp(response http.ResponseWriter, request *http.Request) {
-
-	fmt.Println("Create Function")
-	response.Header().Add("content-type", "application/json")
-	//find range of user_id
-
-	user_collection := client.Database(database).Collection("user")
-	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
-
-	cursor, err := user_collection.Find(ctx, bson.M{})
-	if err != nil {
-		response.WriteHeader(http.StatusInternalServerError)
-		response.Write([]byte(`{"message": "` + err.Error() + `"}`))
-		return
-	}
-	count := 0
-	defer cursor.Close(ctx)
-	for cursor.Next(ctx) {
-
-		count++
-	}
-	// end of finding user range
-	fmt.Println(count)
-	var user models.User
-
-	json.NewDecoder(request.Body).Decode(&user)
-	user.User_id = count
-	user.Password = EncodePassword(user.Password)
-	collection := client.Database(database).Collection("user")
-	result, _ := collection.InsertOne(ctx, user)
-	_ = result
-	json.NewEncoder(response).Encode(user)
-
-}
-
-func EncodePassword(income_password string) string {
-	password_token, _ := bcrypt.GenerateFromPassword([]byte(income_password), 7)
-	return string(password_token)
 }

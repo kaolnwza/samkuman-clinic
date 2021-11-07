@@ -15,10 +15,10 @@ func main() {
 	fmt.Println("sdf")
 
 	r := router.Router()
-	credentials := handlers.AllowCredentials()
+
 	headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authirization"})
 	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
-	origins := handlers.AllowedOrigins([]string{"http://localhost:19006"})
+	origins := handlers.AllowedOrigins([]string{"*"})
 
-	http.ListenAndServe(":12345", handlers.CORS(credentials, headers, methods, origins)(r))
+	http.ListenAndServe(":12345", handlers.CORS(headers, methods, origins)(r))
 }
