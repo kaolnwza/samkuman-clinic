@@ -1,9 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import * as Device from 'expo-device';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 
 const Pagebg = (props) => {
@@ -17,7 +15,6 @@ const Pagebg = (props) => {
             </View>
             <View style={styles.Name}>
                 <Text style={styles.FN}>{props.Text1}</Text>
-                <Text style={styles.LN}>{props.Text2}</Text>
                 <Text>
                     {Device.osName}
                 </Text>
@@ -54,20 +51,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         paddingTop: 30,
-        paddingRight: 20
+        paddingRight: 20,
     },
     FN: {
-        fontSize: 25,
+        fontSize: RFPercentage(5),
         fontFamily: 'Poppins',
         fontWeight: 'bold',
         color: '#0d253f',
 
     },
-    LN: {
-        fontSize: 25,
-        color: '#0d253f',
-        fontFamily: 'Poppins',
-        fontWeight: 'bold',
-    },
+
 
 })

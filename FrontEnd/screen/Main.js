@@ -14,7 +14,7 @@ const Main = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            <Bg Text1='FirstName' Text2='LastName' />
+            <Bg Text1='Home' />
         </View>
     )
 }

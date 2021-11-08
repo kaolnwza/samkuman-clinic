@@ -1,8 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+
 import { FontAwesome } from '@expo/vector-icons';
+import * as Device from 'expo-device';
+
 import Bg from '../components/Pagebg'
 
 const Queue = ({ navigation }) => {
@@ -15,31 +19,30 @@ const Queue = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Bg Text1='Queue' />
-            <View style={styles.position}>
-            
+            <View style={[Device.osName === "iPadOS" ? styles.position : styles.position]}>
                 <View style={styles.queueBorder}>
-                    <Text style={[styles.font1 ,{fontSize: 50}]}>5</Text>    
+                    <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>5</Text>
                 </View>
-                <Text style={[styles.font1 ,{fontSize: 20}]}>Current Queue</Text>
+                <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
 
 
-                <Text style={[styles.font1 ,{fontSize: 50 , marginTop: 70}]}>Your Queue</Text> 
-                <Text style={[styles.font1 ,{fontSize: 30}]}>Is</Text> 
+                <Text style={[styles.font1, { fontSize: RFPercentage(5), marginTop: 50 }]}>Your Queue</Text>
+                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>Is</Text>
                 <View style={styles.queueBorder2}>
-                    <Text style={[styles.font1 ,{fontSize: 70}]}>6</Text>    
+                    <Text style={[styles.font1, { fontSize: RFPercentage(7) }]}>6</Text>
                 </View>
-                <Text style={[styles.font1 ,{fontSize: 15}]}>1 more queue</Text> 
+                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>1 more queue</Text>
 
 
-                <View style={styles.cancel}>
-                    <Text style={{fontSize: 28, fontFamily: 'Poppins', color: '#0d253f'}}>CANCEL</Text>
-                </View>   
-                
-                
+                <TouchableOpacity style={styles.cancel}>
+                    <Text style={{ fontSize: RFPercentage(4), fontFamily: 'Poppins', color: '#0d253f' }}>CANCEL</Text>
+                </TouchableOpacity>
+
+
 
             </View>
-            
-        </View>
+
+        </View >
     )
 }
 
@@ -50,37 +53,37 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         backgroundColor: '#6488e4',
-    
     },
 
     queueBorder: {
         borderColor: "#309397",
-        borderWidth: 5,
+        borderWidth: RFPercentage(0.8),
         borderRadius: 25,
-        height: 100,
-        width: 100,
+        height: RFPercentage(13),
+        width: RFPercentage(13),
         margin: 20,
         justifyContent: 'center',
-        alignItems: 'center',
-    
+        alignSelf: 'center',
+        alignItems: 'center'
     },
 
     queueBorder2: {
         borderColor: "#e46472",
-        borderWidth: 5,
+        borderWidth: RFPercentage(0.8),
         borderRadius: 25,
-        height: 120,
-        width: 120,
+        height: RFPercentage(15),
+        width: RFPercentage(15),
         margin: 10,
         justifyContent: 'center',
-        alignItems: 'center',
-    
+        alignSelf: 'center',
+        alignItems: 'center'
     },
 
     position: {
         flexDirection: 'column',
-        alignItems: 'center',
-        transform: [{ translateX: "0%" }, { translateY: "-600%" }],
+        alignSelf: 'center',
+        position: 'absolute',
+        transform: [{ translateY: RFPercentage(20) }]
     },
 
 
@@ -88,16 +91,19 @@ const styles = StyleSheet.create({
     cancel: {
         backgroundColor: '#e46472',
         borderRadius: 40,
-        height: 80,
-        width: 375,
+        height: RFPercentage(8),
+        width: RFPercentage(40),
         margin: 30,
         justifyContent: 'center',
         alignItems: 'center',
     },
 
+
     font1: {
+        alignSelf: 'center',
+
         fontFamily: 'Poppins',
-        color: '#fff9ec'
+        color: '#fff9ec',
     }
 
 })

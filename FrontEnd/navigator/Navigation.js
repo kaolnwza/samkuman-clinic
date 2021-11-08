@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Login from '../screen/Login'
 import SignUp from '../screen/SignUp'
 import Main from '../screen/Main'
@@ -17,6 +17,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,8 +55,8 @@ const Navigation = () => {
 
 const Custom = props => {
     return (
-        <DrawerContentScrollView {...props}>
-            <View style={{ flexDirection: 'row' }}>
+        <DrawerContentScrollView style={{ backgroundColor: '#fff9ec' }} {...props}>
+            <View style={{ flexDirection: 'row', flex: 1 }}>
                 <View style={{ height: 80, width: 80, borderRadius: 40, margin: 10, borderWidth: 1 }} />
                 <View style={{ flexDirection: 'column', marginTop: 10 }}>
                     <Text style={{ fontFamily: 'Poppins' }}>
@@ -63,7 +65,13 @@ const Custom = props => {
                     <Text style={{ fontFamily: 'Poppins' }}>
                         Wongsaied
                     </Text>
+                    <TouchableOpacity style={styles.logout}>
+                        <Text style={{
+                            fontFamily: 'Poppins'
+                        }}>Log Out</Text>
+                    </TouchableOpacity>
                 </View>
+
             </View>
 
             <DrawerItemList {...props} />
@@ -167,4 +175,12 @@ const BottomTab = () => {
 
 export default Navigation
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    logout: {
+        backgroundColor: '#e46472',
+        borderRadius: 5,
+        paddingHorizontal: 16,
+        paddingVertical: 5,
+        marginVertical: 10
+    }
+})
