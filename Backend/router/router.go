@@ -20,10 +20,11 @@ func Router() *mux.Router {
 	router.HandleFunc("/getuser", services.GetUser).Methods("GET")
 
 	router.HandleFunc("/findtest", services.CallOnlyOneInOject).Methods("GET")
-	router.HandleFunc("/createhistory", services.CreateHistory).Methods("POST")
+	//router.HandleFunc("/createhistory", services.CreateHistory).Methods("POST")
 
 	router.HandleFunc("/register", services.Register).Methods("POST")
 	router.HandleFunc("/login", services.Login).Methods("POST")
+	router.HandleFunc("/getcookie", services.GetCookie).Methods("GET")
 
 	return router
 }
