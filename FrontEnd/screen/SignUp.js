@@ -4,6 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { RadioButton } from 'react-native-paper';
+import * as Device from 'expo-device';
 
 const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
@@ -16,13 +17,13 @@ const SignUp = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <View style={styles.im3Ipad}>
+                <View style={[Device.osName === 'iPadOS' ? styles.im3Ipad : styles.im3]}>
                     <Image source={require('../assets/normal_u1.png')} />
                 </View>
-                <View style={styles.im2Ipad}>
+                <View style={[Device.osName === 'iPadOS' ? styles.im2Ipad : styles.im2]}>
                     <Image source={require('../assets/normal_u2.png')} />
                 </View>
-                <View style={styles.imageIpad}>
+                <View style={[Device.osName === 'iPadOS' ? styles.imageIpad : styles.image]}>
                     <Image source={require('../assets/normal_u3.png')} />
                 </View>
                 <Text style={styles.headerText}>SIGN UP
