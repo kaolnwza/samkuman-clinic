@@ -6,6 +6,9 @@ import Btn from '../components/Button';
 import Bg from '../components/Pagebg'
 
 const Queue = ({ navigation }) => {
+    const [currentQueue, setCurrentQueue] = useState();
+    const [yourQueue, setYourQueue] = useState();
+    const [moreQueue, setMoreQueue] = useState();
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
     });
@@ -14,9 +17,7 @@ const Queue = ({ navigation }) => {
     }
 
 
-    const [ currentQueue, setCurrentQueue] = useState();
-    const [ yourQueue, setYourQueue] = useState(); 
-    const [ moreQueue, setMoreQueue] = useState();  
+
 
     return (
         <View style={styles.container}>

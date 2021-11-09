@@ -24,14 +24,14 @@ const SignUp = ({ navigation }) => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [height, setHeight] = useState(0);
-    const [weight, setWeight] = useState(0);   
-    const [allergic, setAllergic] = useState('');   
-    const [disease, setDisease] = useState('');   
-    const [username, setUsername] = useState('');   
-    const [password, setPassword] = useState('');   
-    const [confirmPassword, setConfirmPassword] = useState(''); 
-    
-    
+    const [weight, setWeight] = useState(0);
+    const [allergic, setAllergic] = useState('');
+    const [disease, setDisease] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+
 
     return (
         <View style={styles.container}>
@@ -105,8 +105,9 @@ const SignUp = ({ navigation }) => {
                 <TextInput style={styles.input} placeholder="Password" />
                 <Text style={styles.label}>Confirm Password</Text>
                 <TextInput style={styles.input} placeholder="Confirm Password" />
+                <Btn navigation={navigation} label='SIGN UP' color='#f9be7c' to='login' />
+
             </KeyboardAwareScrollView >
-            <Btn navigation={navigation} label='SIGN UP' color='#f9be7c' to='login' />
 
         </View >
     )

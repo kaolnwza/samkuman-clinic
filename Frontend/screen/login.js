@@ -7,6 +7,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Btn from '../components/Button';
 
 const login = ({ navigation }) => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
     });
@@ -14,8 +16,7 @@ const login = ({ navigation }) => {
         return null;
     }
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+
 
     return (
         <View style={styles.container}>
@@ -35,9 +36,9 @@ const login = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Username</Text>
-                <TextInput style={styles.input} placeholder="username" />
+                <TextInput style={styles.input} placeholder="username" value={username} />
                 <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="password" secureTextEntry={true} />
+                <TextInput style={styles.input} placeholder="password" value={password} secureTextEntry={true} />
                 <View style={{ marginTop: 20 }}>
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
                         onPress={() => {
