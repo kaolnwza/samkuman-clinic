@@ -16,6 +16,22 @@ const SignUp = ({ navigation }) => {
         setDate(currentDate);
     };
 
+    const [identityNumber, setIdentityNumber] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [height, setHeight] = useState(0);
+    const [weight, setWeight] = useState(0);   
+    const [allergic, setAllergic] = useState('');   
+    const [disease, setDisease] = useState('');   
+    const [username, setUsername] = useState('');   
+    const [password, setPassword] = useState('');   
+    const [confirmPassword, setConfirmPassword] = useState(''); 
+    
+    
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -86,8 +102,8 @@ const SignUp = ({ navigation }) => {
                 <TextInput style={styles.input} placeholder="Username" />
                 <Text style={styles.label}>Password</Text>
                 <TextInput style={styles.input} placeholder="Password" />
-                <Text style={styles.label}>Confrim Password</Text>
-                <TextInput style={styles.input} placeholder="Confrim Password" />
+                <Text style={styles.label}>Confirm Password</Text>
+                <TextInput style={styles.input} placeholder="Confirm Password" />
             </KeyboardAwareScrollView >
             <View style={{ flex: 1, position: 'absolute', alignSelf: "center", bottom: 0, paddingBottom: "20%" }}>
                 <TouchableOpacity style={styles.btn} onPress={() => {

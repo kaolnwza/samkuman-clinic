@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
@@ -16,6 +16,12 @@ const Queue = ({ navigation }) => {
     if (!loaded) {
         return null;
     }
+
+
+    const [ currentQueue, setCurrentQueue] = useState();
+    const [ yourQueue, setYourQueue] = useState(); 
+    const [ moreQueue, setMoreQueue] = useState();  
+
     return (
         <View style={styles.container}>
             <Bg Text1='Queue' />
