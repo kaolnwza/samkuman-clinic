@@ -12,7 +12,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const DATA1 = [
     {
         title: 'PUBLIC RELATION',
-        info: "Lorem Ipsum is simplysdsdngsdkfnkdsfnksldbfldsfbsdifhoesgufssafsdgfdsghrthtrhteruytagdsgrdoignreigheriogerho dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum        ",
+        info: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum        ",
         color: '#f9be7c'
     },
     {
@@ -115,23 +115,18 @@ const Main = ({ navigation }) => {
         <View style={styles.container}>
             <Bg Text1='Home' />
             <View style={styles.contentContainer}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: RFPercentage(1) }}>
-                    <TouchableOpacity style={{ ...styles.tabSelect, ...{ backgroundColor: Select === true ? '#309397' : '#e46472' } }} onPress={() => {
-                        setSelect(true)
-                    }}>
-                        <Text style={styles.tabFont}>PUBLIC RELATION</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ ...styles.tabSelect, ...{ backgroundColor: Select === false ? '#309397' : '#e46472' } }} onPress={() => {
-                        setSelect(false)
-                    }}>
-                        <Text style={styles.tabFont}>INFORMATION</Text>
-                    </TouchableOpacity>
+                <View style={{ ...styles.tabSelect }} >
+                    <Text style={styles.tabFont}>PUBLIC RELATION</Text>
+                </View>
+
+                <SafeAreaView style={styles.content}>
+                    <Information datalist={DATA1} />
+                </SafeAreaView>
+                <View style={{ ...styles.tabSelect, backgroundColor: '#309397' }} >
+                    <Text style={styles.tabFont}>INFORMATION</Text>
                 </View>
                 <SafeAreaView style={styles.content}>
-                    {Select ? <Information datalist={DATA1} /> : <Information datalist={DATA2} />}
-
-
-
+                    <Information datalist={DATA2} />
                 </SafeAreaView>
             </View >
         </View >
@@ -149,14 +144,12 @@ const styles = StyleSheet.create({
     contentContainer: {
         alignSelf: 'center',
         position: 'absolute',
-        transform: [{ translateY: RFPercentage(27) }]
+        transform: [{ translateY: RFPercentage(21.) }]
     },
     content: {
-        height: hp('70%'),
-        width: wp('80%'),
     },
     tabSelect: {
-        backgroundColor: '#309397',
+        backgroundColor: '#e46472',
         paddingVertical: RFPercentage(1.5),
         width: wp('38%'),
         borderRadius: RFPercentage(5),

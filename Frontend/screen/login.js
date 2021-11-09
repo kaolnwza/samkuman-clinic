@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import Btn from '../components/Button';
 
 const login = ({ navigation }) => {
     const [loaded] = useFonts({
@@ -44,13 +44,7 @@ const login = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>
-            <View style={{ justifyContent: "flex-end", paddingBottom: "20%" }}>
-                <TouchableOpacity style={styles.btn} onPress={() => {
-                    navigation.replace('main')
-                }}>
-                    <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#333333' }}>LOGIN</Text>
-                </TouchableOpacity>
-            </View>
+            <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' />
         </View >
     )
 }
@@ -107,16 +101,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 10
     },
-    btn: {
-        fontFamily: 'Poppins',
-        alignSelf: 'center',
-        backgroundColor: '#f9be7c',
-        paddingHorizontal: wp('25%'),
-        paddingVertical: 10,
-        borderRadius: 40,
-        shadowColor: "#000",
-        shadowOffset: { height: 7, width: 0 }, // IOS
-        shadowOpacity: 0.2, // IOS
-        shadowRadius: 3,
-    }
+
 })

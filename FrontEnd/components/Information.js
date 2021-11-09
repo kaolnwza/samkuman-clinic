@@ -22,7 +22,8 @@ const Information = (props) => {
             data={props.datalist}
             renderItem={renderItem}
             sliderWidth={wp('80%')}
-            itemWidth={wp('80%')}
+            itemWidth={wp('70%')}
+            layout={'stack'} layoutCardOffset={13}
         />
 
     )

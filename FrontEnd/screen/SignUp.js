@@ -7,6 +7,7 @@ import { RadioButton } from 'react-native-paper';
 import * as Device from 'expo-device';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Btn from '../components/Button';
 
 const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
@@ -89,13 +90,8 @@ const SignUp = ({ navigation }) => {
                 <Text style={styles.label}>Confrim Password</Text>
                 <TextInput style={styles.input} placeholder="Confrim Password" />
             </KeyboardAwareScrollView >
-            <View style={{ flex: 1, position: 'absolute', alignSelf: "center", bottom: 0, paddingBottom: "20%" }}>
-                <TouchableOpacity style={styles.btn} onPress={() => {
-                    navigation.navigate("login")
-                }}>
-                    <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#333333' }}>SIGN UP</Text>
-                </TouchableOpacity>
-            </View>
+            <Btn navigation={navigation} label='SIGN UP' color='#f9be7c' to='login' />
+
         </View >
     )
 }
@@ -179,15 +175,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: wp('8%')
     },
-    btn: {
-        fontFamily: 'Poppins',
-        backgroundColor: '#f9be7c',
-        paddingHorizontal: wp('25%'),
-        paddingVertical: 10,
-        borderRadius: 40,
-        shadowColor: "#000",
-        shadowOffset: { height: 7, width: 0 }, // IOS
-        shadowOpacity: 0.2, // IOS
-        shadowRadius: 3,
-    }
+
 })

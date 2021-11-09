@@ -1,12 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-
-import { FontAwesome } from '@expo/vector-icons';
-import * as Device from 'expo-device';
-
+import Btn from '../components/Button';
 import Bg from '../components/Pagebg'
 
 const Queue = ({ navigation }) => {
@@ -19,7 +15,7 @@ const Queue = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Bg Text1='Queue' />
-            <View style={[Device.osName === "iPadOS" ? styles.position : styles.position]}>
+            <View style={styles.position}>
                 <View style={styles.queueBorder}>
                     <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>5</Text>
                 </View>
@@ -34,9 +30,7 @@ const Queue = ({ navigation }) => {
                 <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>1 more queue</Text>
 
 
-                <TouchableOpacity style={styles.cancel}>
-                    <Text style={{ fontSize: RFPercentage(4), fontFamily: 'Poppins', color: '#0d253f' }}>CANCEL</Text>
-                </TouchableOpacity>
+                <Btn navigation={navigation} label='CANCEL' color='#e46472' />
 
 
 
@@ -88,15 +82,7 @@ const styles = StyleSheet.create({
 
 
 
-    cancel: {
-        backgroundColor: '#e46472',
-        borderRadius: 40,
-        height: RFPercentage(8),
-        width: RFPercentage(40),
-        margin: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+
 
 
     font1: {
