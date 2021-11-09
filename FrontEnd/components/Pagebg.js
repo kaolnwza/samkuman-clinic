@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
     },
     image: {
         justifyContent: "center",
-        transform: [{ translateX: "-50%" }, { translateY: "-20%" }],
+        transform: [{ translateX: "-50%" }, { translateY: "-20%" }, { rotate: '-5deg' }, { scale: 1.11 }],
         position: 'absolute'
     },
     imageIpad: {
         justifyContent: "center",
-        transform: [{ translateX: "200%" }, { translateY: "-20%" }, { scale: 1.89 }],
+        transform: [{ translateX: "200%" }, { translateY: "-20%" }, { scale: 1.92 }, { rotate: '-5deg' }],
         position: 'absolute'
     },
     im2: {

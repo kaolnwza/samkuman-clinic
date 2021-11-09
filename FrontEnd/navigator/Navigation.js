@@ -8,16 +8,19 @@ import Reserve from '../screen/Reserve'
 import Notify from '../screen/Notify'
 import Appointment from '../screen/Appointment'
 import History from '../screen/History'
+import Profile from '../screen/Profile'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from "@react-navigation/drawer";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { StatusBar } from 'expo-status-bar';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,7 +30,9 @@ const Drawer = createDrawerNavigator();
 
 const Navigation = () => {
     return (
+
         <NavigationContainer>
+            <StatusBar barStyle="dark-content" />
             <Stack.Navigator initialRouteName="login"
                 screenOptions={{
                     headerShown: false,
@@ -56,8 +61,12 @@ const Navigation = () => {
 const Custom = props => {
     return (
         <DrawerContentScrollView style={{ backgroundColor: '#fff9ec' }} {...props}>
-            <View style={{ flexDirection: 'row', flex: 1 }}>
-                <View style={{ height: 80, width: 80, borderRadius: 40, margin: 10, borderWidth: 1 }} />
+            <TouchableOpacity style={{ flexDirection: 'row', flex: 1, }} onPress={() => {
+                props.navigation.navigate('profile');
+
+            }}>
+
+                <View style={styles.profile} />
                 <View style={{ flexDirection: 'column', marginTop: 10 }}>
                     <Text style={{ fontFamily: 'Poppins' }}>
                         Pawaris
@@ -72,7 +81,22 @@ const Custom = props => {
                     </TouchableOpacity>
                 </View>
 
-            </View>
+            </TouchableOpacity>
+            {/* <DrawerItem
+                style={{
+                    left: 0,
+
+                }}
+                label="Appointment"
+                activeBackgroundColor='#007AFF'
+                activeTintColor="#007AFF"
+                icon={({ focused, size }) => (
+                    <FontAwesome name="pencil-square-o" size={size} color={focused ? '#007AFF' : '#ccc'} />
+                )}
+                onPress={() => {
+                    props.navigation.navigate('appoint');
+                }}
+            /> */}
 
             <DrawerItemList {...props} />
         </DrawerContentScrollView>
@@ -91,7 +115,9 @@ const Menu = () => {
                 title: null,
                 headerTintColor: 'black',
                 drawerLabelStyle: { fontFamily: 'Poppins' }
+
             }} >
+
 
             <Drawer.Screen name="home" component={BottomTab}
                 options={{
@@ -120,6 +146,13 @@ const Menu = () => {
                 }} />
 
 
+            <Drawer.Screen name="profile" component={Profile}
+                options={{
+                    drawerLabel: () => null,
+                    drawerIcon: () => null,
+                    drawerActiveBackgroundColor: 'transparent',
+                    drawerItemStyle: { height: 0 }
+                }} />
         </Drawer.Navigator>
     )
 }
@@ -134,7 +167,6 @@ const BottomTab = () => {
                     backgroundColor: "#f9be7c",
                 },
 
-                tabBarLabelStyle: { fontSize: 15, },
                 tabBarShowLabel: false
             }}>
             <Tab.Screen name="Main" component={Main}
@@ -181,6 +213,22 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 16,
         paddingVertical: 5,
-        marginVertical: 10
+        marginVertical: 10,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
+    },
+    profile: {
+        height: 80,
+        width: 80,
+        borderRadius: 40,
+        margin: 10,
+        borderWidth: RFPercentage(0.5),
+        borderColor: '#309397',
+        shadowColor: "#000",
+        shadowOffset: { height: 5, width: 2 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
     }
 })

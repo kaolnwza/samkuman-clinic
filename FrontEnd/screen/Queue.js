@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     queueBorder: {
         borderColor: "#309397",
         borderWidth: RFPercentage(0.8),
-        borderRadius: 25,
+        borderRadius: RFPercentage(4),
         height: RFPercentage(13),
         width: RFPercentage(13),
         margin: 20,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     queueBorder2: {
         borderColor: "#e46472",
         borderWidth: RFPercentage(0.8),
-        borderRadius: 25,
+        borderRadius: RFPercentage(4),
         height: RFPercentage(15),
         width: RFPercentage(15),
         margin: 10,

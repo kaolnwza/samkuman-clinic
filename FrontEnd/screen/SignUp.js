@@ -5,6 +5,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { RadioButton } from 'react-native-paper';
 import * as Device from 'expo-device';
+import { RFPercentage } from 'react-native-responsive-fontsize';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF9EC',
     },
     containerInput: {
-        position: 'absolute', alignSelf: 'center', transform: [{ translateY: 250 }], width: '80%', height: '54%'
+        position: 'absolute', alignSelf: 'center', transform: [{ translateY: 250 }], width: wp('80%'), height: hp('53%')
     },
     input: {
         color: '#FFF9EC',
@@ -170,17 +172,17 @@ const styles = StyleSheet.create({
     },
     headerText: {
         position: "absolute",
-        fontSize: 50,
+        fontSize: RFPercentage(5),
         top: 100,
         color: '#0d253f',
         fontFamily: 'Poppins',
         fontWeight: 'bold',
-        marginLeft: 10
+        marginLeft: wp('8%')
     },
     btn: {
         fontFamily: 'Poppins',
         backgroundColor: '#f9be7c',
-        paddingHorizontal: 70,
+        paddingHorizontal: wp('25%'),
         paddingVertical: 10,
         borderRadius: 40,
         shadowColor: "#000",

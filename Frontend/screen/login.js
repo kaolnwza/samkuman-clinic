@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, Key
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 const login = ({ navigation }) => {
     const [loaded] = useFonts({
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     headerText: {
         position: "absolute",
         fontSize: 50,
-        top: 200,
+        top: hp('20%'),
         color: '#FFF9EC',
         fontFamily: 'Poppins',
         fontWeight: 'bold',
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins',
         alignSelf: 'center',
         backgroundColor: '#f9be7c',
-        paddingHorizontal: 70,
+        paddingHorizontal: wp('25%'),
         paddingVertical: 10,
         borderRadius: 40,
         shadowColor: "#000",
