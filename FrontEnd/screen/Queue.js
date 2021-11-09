@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -12,6 +12,12 @@ const Queue = ({ navigation }) => {
     if (!loaded) {
         return null;
     }
+
+
+    const [ currentQueue, setCurrentQueue] = useState();
+    const [ yourQueue, setYourQueue] = useState(); 
+    const [ moreQueue, setMoreQueue] = useState();  
+
     return (
         <View style={styles.container}>
             <Bg Text1='Queue' />

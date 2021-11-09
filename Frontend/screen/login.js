@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
@@ -13,6 +13,10 @@ const login = ({ navigation }) => {
     if (!loaded) {
         return null;
     }
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
