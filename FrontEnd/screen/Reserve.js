@@ -1,35 +1,55 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Picker } from '@react-native-picker/picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Btn from '../components/Button';
+import { Keyboard } from 'react-native'
 
 const Reserve = ({ navigation }) => {
     const [selectedValue, setSelectedValue] = useState("java");
     return (
         <View style={styles.container}>
             <Bg Text1='Reservation' />
-            <View style={styles.position}>
-                <Picker
-                    selectedValue={selectedValue}
-                    style={{ width: wp('80%'), }}
-                    itemStyle={{ color: 'white' }}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                >
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
-                    <Picker.Item label="qwe" value="1" />
-                    <Picker.Item label="asd" value="2" />
-                    <Picker.Item label="zxc" value="3" />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
-                </Picker>
-                <Text style={styles.label}>Symtom</Text>
-                <TextInput style={styles.input} placeholder="username" />
+                <View style={styles.position}>
 
-                <Btn navigation={navigation} label='CONFIRM' color='#309397' />
-            </View>
+                    <Text style={styles.label}>Doctor</Text>
+
+                    <Picker
+                        selectedValue={selectedValue}
+                        style={{ width: wp('80%'), }}
+                        itemStyle={{ color: 'white', fontFamily: 'Poppins' }}
+                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                    >
+                        <Picker.Item label="Java" value="java" />
+                        <Picker.Item label="JavaScript" value="js" />
+                        <Picker.Item label="qwe" value="1" />
+                        <Picker.Item label="asd" value="2" />
+                        <Picker.Item label="zxc" value="3" />
+
+                    </Picker>
+                    {/* <TextInput style={styles.input} placeholder="Please Elaborate" multiline
+                    numberOfLines={4} /> */}
+
+
+                    <View >
+                        <Text style={styles.label}>Symtom</Text>
+
+                        <TextInput style={styles.input} placeholder="Please Elaborate" multiline
+                            numberOfLines={4} />
+                    </View>
+                    <View style={styles.queueBorder}>
+                        <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>5</Text>
+                    </View>
+                    <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
+                    <Btn navigation={navigation} label='CONFIRM' color='#309397' />
+
+                </View>
+            </TouchableWithoutFeedback>
+
         </View>
     )
 }
@@ -49,9 +69,10 @@ const styles = StyleSheet.create({
         transform: [{ translateY: RFPercentage(20) }]
     },
     input: {
+        fontFamily: 'Poppins',
         color: 'white',
         fontSize: 18,
-        height: hp('10%'),
+        height: hp('9%'),
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: 'white',
@@ -63,6 +84,24 @@ const styles = StyleSheet.create({
     },
     label: {
         color: 'white',
-        fontSize: RFPercentage(2),
+        fontSize: RFPercentage(2.5),
+        fontFamily: 'Poppins'
     },
+    queueBorder: {
+        borderColor: "#309397",
+        borderWidth: RFPercentage(0.8),
+        borderRadius: RFPercentage(4),
+        height: RFPercentage(13),
+        width: RFPercentage(13),
+        margin: 20,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
+    font1: {
+        alignSelf: 'center',
+
+        fontFamily: 'Poppins',
+        color: '#fff9ec',
+    }
 })

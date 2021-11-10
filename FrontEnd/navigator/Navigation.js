@@ -21,7 +21,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { StatusBar } from 'expo-status-bar';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import { AntDesign } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -66,7 +66,9 @@ const Custom = props => {
 
             }}>
 
-                <View style={styles.profile} />
+                <View >
+                    <AntDesign name="user" style={styles.profile} size={80} color="#309397" />
+                </View>
                 <View style={{ flexDirection: 'column', marginTop: 10 }}>
                     <Text style={{ fontFamily: 'Poppins' }}>
                         Pawaris
@@ -220,12 +222,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     profile: {
-        height: 80,
-        width: 80,
-        borderRadius: 40,
-        margin: 10,
-        borderWidth: RFPercentage(0.5),
-        borderColor: '#309397',
+        borderWidth: RFPercentage(0.5), borderRadius: 44, margin: RFPercentage(1),
         shadowColor: "#000",
         shadowOffset: { height: 5, width: 2 }, // IOS
         shadowOpacity: 0.2, // IOS

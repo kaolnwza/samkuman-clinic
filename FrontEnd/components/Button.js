@@ -19,7 +19,9 @@ export default Button
 
 const styles = StyleSheet.create({
     btn: {
-        marginVertical: hp('5%'),
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+
         fontFamily: 'Poppins',
         alignSelf: 'center',
         backgroundColor: '#f9be7c',
