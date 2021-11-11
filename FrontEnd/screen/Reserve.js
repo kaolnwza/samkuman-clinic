@@ -8,7 +8,8 @@ import Btn from '../components/Button';
 import { Keyboard } from 'react-native'
 
 const Reserve = ({ navigation }) => {
-    const [selectedValue, setSelectedValue] = useState("java");
+    const [selectedValue, setSelectedValue] = useState("1");
+    const [Day, setDay] = useState('W')
     return (
         <View style={styles.container}>
             <Bg Text1='Reservation' />
@@ -24,11 +25,15 @@ const Reserve = ({ navigation }) => {
                         itemStyle={{ color: 'white', fontFamily: 'Poppins' }}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     >
-                        <Picker.Item label="Java" value="java" />
-                        <Picker.Item label="JavaScript" value="js" />
-                        <Picker.Item label="qwe" value="1" />
-                        <Picker.Item label="asd" value="2" />
-                        <Picker.Item label="zxc" value="3" />
+                        <Picker.Item label="Normal" value="1" />
+                        {Day === 'M' || 'TH' || 'W' ? <Picker.Item label="Eye" value="2" /> : null}
+                        {Day === 'T' ? <Picker.Item label="Leg" value="2" /> : null}
+                        {Day === 'W' ? <Picker.Item label="Testical" value="2" /> : null}
+                        {Day === 'TH' ? <Picker.Item label="AssHole" value="2" /> : null}
+
+                        {Day === 'F' ? <Picker.Item label="Dick" value="2" /> : null}
+
+
 
                     </Picker>
                     {/* <TextInput style={styles.input} placeholder="Please Elaborate" multiline

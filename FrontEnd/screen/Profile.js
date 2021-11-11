@@ -19,7 +19,7 @@ const Profile = ({ navigation }) => {
                     <InfoHalfBox titleL='Address' infoL='653/1, RNP, Chalongkrung1, Ladkrabang BKK' colorL='#f9be7c' titleR='Phone' infoR='0954035514' colorR='#309397' iconL='address-book' iconR='phone' />
                     <InfoHalfBox titleL='Height' infoL='171' colorL='#e46472' titleR='Weight' infoR='62' colorR='#f9be7c' iconL='arrows-alt-h' iconR='arrows-alt-v' />
                     <InfoHalfBox titleL='Allergic' infoL='Peanut Butter' colorL='#309397' iconL='allergies' titleR='Congenital Disease' infoR='Diabetes' colorR='#e46472' iconR='disease' />
-                    <InfoBox titleTop='' titleMid='' titleBot='' f='farrocker@outlook.co.th' m='far_rocker555' l='FUCKU' icon='alternate-email' />
+                    <InfoBox titleTop='ID' titleMid='Email' titleBot='Password' f='1100600434386' m='farrocker@outlook.co.th' l='FUCKU' icon='alternate-email' />
                     <Btn navigation={navigation} label='EDIT' color='#f9be7c' />
                 </KeyboardAwareScrollView>
             </View>

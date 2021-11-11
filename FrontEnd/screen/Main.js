@@ -87,33 +87,26 @@ const DATA2 = [
 const Main = ({ navigation }) => {
     const [Select, setSelect] = useState(true);
 
-    const [loaded] = useFonts({
-        Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
-    });
-    if (!loaded) {
-        return null;
-    }
-
-    const renderItem = ({ item, index }) => {
-        return (
-            <View style={{
-                backgroundColor: 'floralwhite',
-                borderRadius: 5,
-                height: 250,
-                padding: 50,
-                marginLeft: 25,
-                marginRight: 25,
-            }}>
-                <Text style={{ fontSize: 30 }}>{item.id}</Text>
-                <Text>{item.info}</Text>
-            </View>
-        )
-    }
 
     return (
         <View style={styles.container}>
             <Bg Text1='Home' />
             <View style={styles.contentContainer}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <TouchableOpacity onPress={() => {
+                        setSelect(true)
+                    }} style={{ ...styles.tabSelect, backgroundColor: Select === true ? '#309397' : '#e46472' }} >
+                        <Text style={styles.tabFont}>INFORMATION</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        setSelect(false)
+                    }} style={{ ...styles.tabSelect, backgroundColor: Select === false ? '#309397' : '#e46472' }} >
+                        <Text style={styles.tabFont}>Doctor Schedule</Text>
+                    </TouchableOpacity>
+                </View>
+                {Select === true ? <SafeAreaView style={styles.content}>
+                    <Information datalist={DATA2} />
+                </SafeAreaView> : null}
                 <View style={{ ...styles.tabSelect }} >
                     <Text style={styles.tabFont}>PUBLIC RELATION</Text>
                 </View>
@@ -121,12 +114,8 @@ const Main = ({ navigation }) => {
                 <SafeAreaView style={styles.content}>
                     <Information datalist={DATA1} />
                 </SafeAreaView>
-                <View style={{ ...styles.tabSelect, backgroundColor: '#309397' }} >
-                    <Text style={styles.tabFont}>INFORMATION</Text>
-                </View>
-                <SafeAreaView style={styles.content}>
-                    <Information datalist={DATA2} />
-                </SafeAreaView>
+
+
             </View >
         </View >
     )

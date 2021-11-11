@@ -18,10 +18,10 @@ const NotiGridTile = (props) => {
         style={styles.container}
       >
         {/* <Text>{itemData.item.title}</Text> */}
-        <Text style={styles.title} numberOfLines={2}> 
+        <Text style={styles.title} numberOfLines={2}>
           {props.title}
         </Text>
-        <Text style={styles.info} > 
+        <Text style={styles.info} >
           {props.info}
         </Text>
       </View>
@@ -49,13 +49,13 @@ const styles = StyleSheet.create({
 
   title: {
     fontFamily: 'Poppins',
-    fontSize: RFPercentage(2),
+    fontSize: RFPercentage(3),
     fontWeight: "bold",
   },
 
   info: {
     fontFamily: 'Poppins',
-    fontSize: RFPercentage(1.2),
+    fontSize: RFPercentage(1.8),
   }
 });
 

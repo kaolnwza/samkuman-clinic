@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Login from '../screen/Login'
 import SignUp from '../screen/SignUp'
@@ -22,6 +22,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { StatusBar } from 'expo-status-bar';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AntDesign } from '@expo/vector-icons';
+import PassQueue from '../screen/QueueManagement'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -106,6 +107,8 @@ const Custom = props => {
 }
 
 const Menu = () => {
+    const [Role, setRole] = useState('Doctor')
+
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
     });
@@ -146,6 +149,21 @@ const Menu = () => {
                         <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),
                 }} />
+            {Role === 'Doctor' ? <Drawer.Screen name="pass" component={PassQueue}
+                options={{
+                    drawerLabel: "Pass Queue",
+                    drawerIcon: ({ focused, size }) => (
+                        <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
+                    ),
+                }} /> : null}
+
+            {Role === 'Doctor' ? <Drawer.Screen name="AandH" component={History}
+                options={{
+                    drawerLabel: "Patient appointment and history",
+                    drawerIcon: ({ focused, size }) => (
+                        <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
+                    ),
+                }} /> : null}
 
 
             <Drawer.Screen name="profile" component={Profile}
@@ -194,7 +212,7 @@ const BottomTab = () => {
             />
             <Tab.Screen name="Noti" component={Notify}
                 options={{
-                    tabBarBadge: 3,
+                    tabBarBadge: 999,
                     tabBarIcon: ({ color, size }) => {
                         return <Ionicons name="notifications" size={size} color={color} />;
                     },

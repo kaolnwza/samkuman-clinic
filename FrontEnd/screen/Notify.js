@@ -47,6 +47,7 @@ const DATA1 = [
 const Notify = ({ navigation }) => {
     const renderGridItem = (itemData) => {
         return (
+
             <NotiGridTile
                 // style={{ height: "50", }}
                 title={itemData.item.title}
@@ -69,9 +70,7 @@ const Notify = ({ navigation }) => {
         <View style={styles.container}>
             <Bg Text1='Notification' />
             <View style={styles.position}>
-                <KeyboardAwareScrollView style={{ height: hp('70%') }}>
-                    <FlatList data={DATA1} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} />
-                </KeyboardAwareScrollView>
+                <FlatList data={DATA1} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} />
             </View>
         </View>
 
@@ -93,6 +92,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignSelf: 'center',
         position: 'absolute',
-        transform: [{ translateY: RFPercentage(20) }]
+        transform: [{ translateY: RFPercentage(20) }],
+        height: hp('70%')
     }
 })

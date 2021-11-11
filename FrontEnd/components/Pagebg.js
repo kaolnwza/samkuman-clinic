@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins',
         fontWeight: 'bold',
         color: '#0d253f',
+        lineHeight: RFPercentage(5.7)
 
     },
 
