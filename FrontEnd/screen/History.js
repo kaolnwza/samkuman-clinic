@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList , Alert, Modal,Pressable} from 'react-native'
+import { StyleSheet, Text, View, FlatList, Alert, Modal, Pressable } from 'react-native'
 import Bg from '../components/Pagebg'
 import HistoryGridTile from '../components/HistoryGridTile';
 import { useFonts } from 'expo-font';
@@ -59,7 +59,7 @@ const History = () => {
     };
     return (
         <View style={styles.container}>
-            <Bg Text1='History' />    
+            <Bg Text1='History' />
             <View style={styles.position}>
                 <FlatList data={DATA1} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} />
             </View>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignSelf: 'center',
         position: 'absolute',
-        transform: [{ translateY: RFPercentage(20) }],
+        transform: [{ translateY: hp('25%') }],
         height: hp('70%')
     },
 })

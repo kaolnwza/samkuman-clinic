@@ -15,9 +15,6 @@ const Pagebg = (props) => {
             </View>
             <View style={styles.Name}>
                 <Text style={styles.FN}>{props.Text1}</Text>
-                <Text>
-                    {Device.osName}
-                </Text>
             </View>
         </View>
     )
