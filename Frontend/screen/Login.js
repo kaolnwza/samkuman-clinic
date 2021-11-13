@@ -56,6 +56,10 @@ const login = ({ navigation }) => {
             .then(res =>
                 console.log(res.data)
             )
+        await instance.get(local + "/getuserinformation")
+            .then(res => {
+
+            })
 
     }
 
