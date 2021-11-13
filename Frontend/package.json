@@ -19,6 +19,7 @@
     "expo-device": "~4.0.3",
     "expo-font": "~10.0.3",
     "expo-status-bar": "~1.1.0",
+    "moment": "^2.29.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.2",

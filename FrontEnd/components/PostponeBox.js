@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View, FlatList, Modal } from 'react
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import Moment from 'moment';
 
 const PostponeBox = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -17,7 +18,7 @@ const PostponeBox = (props) => {
         return (
 
             <View style={styles.box}>
-                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>Next Appontment {date}</Text>
+                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>Next Appontment {Moment(date).format('LLL ')}</Text>
                 <View style={{ marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(1) }}>
                     <Text style={styles.detail}>Name : {item.name}</Text>
                     <Text style={styles.detail}>Doctor : {item.doctor}</Text>

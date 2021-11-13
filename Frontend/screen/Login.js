@@ -108,8 +108,8 @@ const login = ({ navigation }) => {
             </KeyboardAwareScrollView>
             {/* <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' /> */}
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
-                //navigation.replace('main')
-                postData()
+                navigation.replace('main')
+                // postData()
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
             </TouchableOpacity>
