@@ -85,3 +85,8 @@ type Queue struct {
 	Queue_number int                `json:"queue_number" bson:"queue_number"`
 	Status       bool               `json:"status" bson:"status"`
 }
+
+type UserInformation struct {
+	User
+	History
+}
