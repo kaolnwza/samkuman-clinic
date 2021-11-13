@@ -5,9 +5,11 @@ import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Btn from '../components/Button';
+import axios from 'axios'
+import { RFPercentage } from 'react-native-responsive-fontsize';
+
 
 const login = ({ navigation }) => {
-<<<<<<< HEAD
     const [usernameLogin, setUsernameLogin] = useState("12345678912345")
     const [passwordLogin, setPasswordLogin] = useState("12345")
 
@@ -53,10 +55,6 @@ const login = ({ navigation }) => {
             })
     }
 
-=======
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
->>>>>>> a2edee9d10a88bc402456e15e5acf057e8e937b0
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
     });
@@ -84,9 +82,9 @@ const login = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Username</Text>
-                <TextInput style={styles.input} placeholder="username" value={username} />
+                <TextInput style={styles.input} placeholder="username" value={usernameLogin} />
                 <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="password" value={password} secureTextEntry={true} />
+                <TextInput style={styles.input} placeholder="password" value={passwordLogin} secureTextEntry={true} />
                 <View style={{ marginTop: 20 }}>
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
                         onPress={() => {
@@ -97,7 +95,12 @@ const login = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>
-            <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' />
+            {/* <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' /> */}
+            <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
+                navigation.replace('main')
+            }}>
+                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
+            </TouchableOpacity>
         </View >
     )
 }
@@ -154,5 +157,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 10
     },
+    btn: {
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+
+        fontFamily: 'Poppins',
+        alignSelf: 'center',
+        backgroundColor: '#f9be7c',
+        width: wp('80%'),
+        paddingVertical: 10,
+        borderRadius: 40,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
+    }
 
 })
