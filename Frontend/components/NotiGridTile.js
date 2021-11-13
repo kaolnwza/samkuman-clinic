@@ -7,7 +7,7 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 const NotiGridTile = (props) => {
   return (
-    <TouchableOpacity
+    <View
       style={styles.gridItem}
     //   onPress={() => {
     //     props.onSelect();
@@ -25,7 +25,7 @@ const NotiGridTile = (props) => {
           {props.info}
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
