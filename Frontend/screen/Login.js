@@ -39,7 +39,7 @@ const login = ({ navigation }) => {
         const headers = {
             "Content-Type": "application/json",
         };
-
+        console.log("prayuth");
         console.log("send");
         const data = {
             identity_number: usernameLogin,
