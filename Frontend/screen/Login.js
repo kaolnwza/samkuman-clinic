@@ -10,14 +10,14 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("12345678912345")
+    const [usernameLogin, setUsernameLogin] = useState("12345678912346")
     const [passwordLogin, setPasswordLogin] = useState("12345")
 
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    const local = "http://192.168.1.19:12345"
+    const local = "http://192.168.1.32:12345"
 
     const instance = axios.create({
         withCredentials: true
@@ -39,7 +39,8 @@ const login = ({ navigation }) => {
         const headers = {
             "Content-Type": "application/json",
         };
-
+        console.log("prayuth");
+        console.log("prayuth");
         console.log("send");
         const data = {
             identity_number: usernameLogin,
@@ -52,9 +53,13 @@ const login = ({ navigation }) => {
             }
             )
         await instance.get(local + "/getcookie")
-            .then(
-                console.log("done get cookie")
+            .then(res =>
+                console.log(res.data)
             )
+        await instance.get(local + "/getuserinformation")
+            .then(res => {
+
+            })
 
     }
 
