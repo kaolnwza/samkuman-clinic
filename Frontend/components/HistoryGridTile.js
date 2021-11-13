@@ -106,24 +106,22 @@ const styles = StyleSheet.create({
     shadowRadius: RFPercentage(0.5),
     elevation: 3,
     padding: RFPercentage(1.2),
-    backgroundColor: "#fff9ec",
+    backgroundColor: '#6488e4',
   },
 
   title: {
     fontFamily: 'Poppins',
     fontSize: RFPercentage(3),
     fontWeight: "bold",
+
   },
 
   date: {
     fontFamily: 'Poppins',
     fontSize: RFPercentage(1.8),
-    paddingLeft: RFPercentage(2),
+    paddingLeft:RFPercentage(1.8),
   },
 
-
-
-  
   centeredView: {
     flex: 1,
     justifyContent: "center",
