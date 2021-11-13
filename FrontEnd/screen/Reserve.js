@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Picker } from '@react-native-picker/picker';
@@ -50,7 +50,12 @@ const Reserve = ({ navigation }) => {
                         <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>5</Text>
                     </View>
                     <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
-                    <Btn navigation={navigation} label='CONFIRM' color='#309397' />
+                    {/* <Btn navigation={navigation} label='CONFIRM' color='#309397' /> */}
+                    <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
+                        // navigation.replace(props.to)
+                    }}>
+                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>CONFIRM</Text>
+                    </TouchableOpacity>
 
                 </View>
             </TouchableWithoutFeedback>
@@ -108,5 +113,19 @@ const styles = StyleSheet.create({
 
         fontFamily: 'Poppins',
         color: '#fff9ec',
-    }
+    },
+    btn: {
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+        fontFamily: 'Poppins',
+        alignSelf: 'center',
+        backgroundColor: '#309397',
+        width: wp('80%'),
+        paddingVertical: 10,
+        borderRadius: 40,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
+    },
 })

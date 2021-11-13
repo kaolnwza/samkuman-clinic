@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import Btn from '../components/Button';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 import Bg from '../components/Pagebg'
 
 const Queue = ({ navigation }) => {
@@ -35,9 +36,11 @@ const Queue = ({ navigation }) => {
                     <Text style={[styles.font1, { fontSize: RFPercentage(7) }]}>6</Text>
                 </View>
                 <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>1 more queue</Text>
-
-
-                <Btn navigation={navigation} label='CANCEL' color='#e46472' />
+                <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
+                    // navigation.replace(props.to)
+                }}>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>CANCEL</Text>
+                </TouchableOpacity>
 
 
 
@@ -55,7 +58,20 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#6488e4',
     },
-
+    btn: {
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+        fontFamily: 'Poppins',
+        alignSelf: 'center',
+        backgroundColor: '#e46472',
+        width: wp('80%'),
+        paddingVertical: 10,
+        borderRadius: 40,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
+    },
     queueBorder: {
         borderColor: "#309397",
         borderWidth: RFPercentage(0.8),
@@ -86,11 +102,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         transform: [{ translateY: RFPercentage(20) }]
     },
-
-
-
-
-
 
     font1: {
         alignSelf: 'center',

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -20,7 +20,12 @@ const Profile = ({ navigation }) => {
                     <InfoHalfBox titleL='Height' infoL='171' colorL='#e46472' titleR='Weight' infoR='62' colorR='#f9be7c' iconL='arrows-alt-h' iconR='arrows-alt-v' />
                     <InfoHalfBox titleL='Allergic' infoL='Peanut Butter' colorL='#309397' iconL='allergies' titleR='Congenital Disease' infoR='Diabetes' colorR='#e46472' iconR='disease' />
                     <InfoBox titleTop='ID' titleMid='Email' titleBot='Password' f='1100600434386' m='farrocker@outlook.co.th' l='FUCKU' icon='alternate-email' />
-                    <Btn navigation={navigation} label='EDIT' color='#f9be7c' />
+                    {/* <Btn navigation={navigation} label='EDIT' color='#f9be7c' /> */}
+                    <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
+                        // navigation.replace(props.to)
+                    }}>
+                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>EDIT</Text>
+                    </TouchableOpacity>
                 </KeyboardAwareScrollView>
             </View>
         </View>
@@ -61,5 +66,19 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins',
         fontSize: RFPercentage(2),
 
-    }
+    },
+    btn: {
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+        fontFamily: 'Poppins',
+        alignSelf: 'center',
+        backgroundColor: '#f9be7c',
+        width: wp('80%'),
+        paddingVertical: 10,
+        borderRadius: 40,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
+    },
 })

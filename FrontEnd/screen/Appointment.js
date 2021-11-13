@@ -32,7 +32,7 @@ const Appointment = () => {
         <View style={styles.container}>
             <Bg Text1='Appointment' />
             <View style={styles.position}>
-                <View style={{ marginTop: RFPercentage(1), height: hp('58%') }}>
+                <View style={{ marginTop: RFPercentage(1), height: hp('62%') }}>
                     <PostponeBox appintList={APPOINT} />
                 </View>
             </View>

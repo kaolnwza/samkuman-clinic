@@ -23,6 +23,7 @@ import { StatusBar } from 'expo-status-bar';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { AntDesign } from '@expo/vector-icons';
 import PassQueue from '../screen/QueueManagement'
+import Patient from '../screen/Patient'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -157,7 +158,7 @@ const Menu = () => {
                     ),
                 }} /> : null}
 
-            {Role === 'Doctor' ? <Drawer.Screen name="AandH" component={History}
+            {Role === 'Doctor' ? <Drawer.Screen name="AandH" component={Patient}
                 options={{
                     drawerLabel: "Patient appointment and history",
                     drawerIcon: ({ focused, size }) => (

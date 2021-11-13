@@ -10,7 +10,7 @@ const InfoBox = (props) => {
 
     return (
         <View style={styles.box}>
-            <MaterialIcons name={props.icon} style={styles.profile} size={RFPercentage(10)} color="#0d253f" />
+            <MaterialIcons name={props.icon} style={styles.profile} size={wp('15%')} color="#0d253f" />
             <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
                 <Text style={styles.info}>{props.titleTop}: {props.f}</Text>
                 {props.m != null ? <Text style={styles.info}>{props.titleMid}: {props.m}</Text> : null}

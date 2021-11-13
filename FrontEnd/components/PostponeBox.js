@@ -4,6 +4,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Moment from 'moment';
+import * as Device from 'expo-device';
 
 const PostponeBox = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -18,12 +19,12 @@ const PostponeBox = (props) => {
         return (
 
             <View style={styles.box}>
-                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>Next Appontment {Moment(date).format('LLL ')}</Text>
+                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>Next Appontment </Text>
                 <View style={{ marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(1) }}>
                     <Text style={styles.detail}>Name : {item.name}</Text>
                     <Text style={styles.detail}>Doctor : {item.doctor}</Text>
-                    <Text style={styles.detail}>Date : {item.date}</Text>
-                    <Text style={styles.detail}>Time : {item.time}</Text>
+                    <Text style={styles.detail}>Date : {Moment(date).format('LL')}</Text>
+                    <Text style={styles.detail}>Time : {Moment(date).format('HH.mm A')}</Text>
 
                     <TouchableOpacity onPress={() => {
                         setModalVisible(true)
@@ -43,10 +44,10 @@ const PostponeBox = (props) => {
                             <View style={styles.modalView}>
                                 <Text style={styles.modalText}>Select your Date and Time</Text>
                                 <DateTimePicker
-                                    style={{ width: wp('50%') }}
+                                    style={{ marginRight: Device.osName === 'iPadOS' ? wp('30%') : null, width: wp('57%'), marginBottom: RFPercentage(2), }}
                                     testID="dateTimePicker"
                                     value={date}
-                                    mode="date"
+                                    mode="datetime"
                                     display="default"
                                     onChange={onChange}
                                     themeVariant="light"
@@ -99,7 +100,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22
+        marginTop: 22,
+
     },
     modalView: {
         margin: 20,
@@ -115,7 +117,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
+        backgroundColor: '#FFF9EC'
     },
     button: {
         borderRadius: 20,
@@ -124,9 +127,12 @@ const styles = StyleSheet.create({
     },
     buttonCancel: {
         backgroundColor: "#e46472",
+        width: wp('25%')
     },
     buttonSave: {
         backgroundColor: "#309397",
+        width: wp('25%'),
+
     },
     textStyle: {
         color: "white",
@@ -135,9 +141,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins'
     },
     modalText: {
-        marginBottom: 15,
+        marginBottom: RFPercentage(2),
         textAlign: "center",
-        fontFamily: 'Poppins'
+        fontFamily: 'Poppins',
+        fontSize: RFPercentage(2)
 
     }
 })
