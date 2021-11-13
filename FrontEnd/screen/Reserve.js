@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Picker } from '@react-native-picker/picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Btn from '../components/Button';
-import { Keyboard } from 'react-native'
 
 const Reserve = ({ navigation }) => {
     const [selectedValue, setSelectedValue] = useState("1");
