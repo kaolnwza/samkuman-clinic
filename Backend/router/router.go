@@ -29,5 +29,15 @@ func Router() *mux.Router {
 	router.HandleFunc("/signup", services.SignUp).Methods("POST")
 	router.HandleFunc("/logout", services.Logout).Methods("GET")
 
+	//queye
+	router.HandleFunc("/addqueue", services.AddQueue).Methods("POST")
+	router.HandleFunc("/usercanclequeue", services.UserCancelQueue).Methods("DELETE")
+	router.HandleFunc("/reachqueue", services.ReachQueue).Methods("DELETE")
+	router.HandleFunc("/getuserqueue", services.GetUserQueue).Methods("GET")
+
+	//history
+	router.HandleFunc("/addhistory", services.AddHistory).Methods("POST")
+	router.HandleFunc("/gethistory", services.GetHistory).Methods("GET")
+
 	return router
 }

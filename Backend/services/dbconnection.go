@@ -10,6 +10,10 @@ import (
 
 var client *mongo.Client
 
+const database = "samkumandb"
+
+// const database = "test"
+
 func connectDB() {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	//client, _ = mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))

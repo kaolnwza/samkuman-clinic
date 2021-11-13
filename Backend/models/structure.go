@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -24,44 +26,41 @@ type User struct {
 }
 
 type Doctor struct {
-	ID           primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Doctor_id    int                `json:"doctor_id" bson:"doctor_id"`
-	Firstname    string             `json:"firstname" bson:"firstname"`
-	Lastname     string             `json:"lastname" bson:"lastname"`
-	Gender       bool               `json:"gender" bson:"gender"`
-	Phone_number string             `json:"phone_number" bson:"phone_number"`
+	Doctor_id           int    `json:"doctor_id" bson:"doctor_id"`
+	Doctor_Firstname    string `json:"doctor_firstname" bson:"doctor_firstname"`
+	Doctor_Lastname     string `json:"doctor_lastname" bson:"doctor_lastname"`
+	Doctor_Gender       string `json:"doctor_gender" bson:"doctor_gender"`
+	Doctor_Phone_number string `json:"doctor_phone_number" bson:"doctor_phone_number"`
 }
 
 type Department struct {
-	ID              primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Department_id   int                `json:"department_id" bson:"department_id"`
-	Department_name string             `json:"department_name" bson:"department_name"`
+	Department_id   int    `json:"department_id" bson:"department_id"`
+	Department_name string `json:"department_name" bson:"department_name"`
 }
 
 type Doctor_schedule struct {
-	ID          primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Schedule_id int                `json:"schedule_id" bson:"schedule_id"`
-	Date        string             `json:"date" bson:"date"`
-	Time_start  string             `json:"time_start" bson:"time_start"`
-	Time_end    string             `json:"time_end" bson:"time_end"`
+	Schedule_id int    `json:"schedule_id" bson:"schedule_id"`
+	Date        string `json:"date" bson:"date"`
+	Time_start  string `json:"time_start" bson:"time_start"`
+	Time_end    string `json:"time_end" bson:"time_end"`
 }
 
 type Appointment struct {
-	ID             primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Appointment_id int                `json:"appointment_id " bson:"appointment_id "`
-	Date           string             `json:"date" bson:"date"`
-	Time           string             `json:"time" bson:"time"`
+	Appointment_id int    `json:"appointment_id " bson:"appointment_id "`
+	Date           string `json:"date" bson:"date"`
+	Time           string `json:"time" bson:"time"`
 }
 
 type History struct {
-	ID            primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	History_id    int                `json:"history_id " bson:"history_id "`
-	Date          string             `json:"date" bson:"date"`
-	Symptom       string             `json:"symptom" bson:"symptom"`
-	Diagnose      string             `json:"diagnose" bson:"diagnose"`
-	Doctor_advice string             `json:"doctor_advice" bson:"doctor_advice"`
-	Medicine      string             `json:"medicine" bson:"medicine"`
-	Usage         string             `json:"usage" bson:"usage"`
+	History_id int `json:"history_id " bson:"history_id "`
+	User
+	Doctor
+	Date          time.Time `json:"date" bson:"date"`
+	Symptom       string    `json:"symptom" bson:"symptom"`
+	Diagnose      string    `json:"diagnose" bson:"diagnose"`
+	Doctor_advice string    `json:"doctor_advice" bson:"doctor_advice"`
+	Medicine      string    `json:"medicine" bson:"medicine"`
+	Usage         string    `json:"usage" bson:"usage"`
 }
 
 type Notification struct {
@@ -82,7 +81,7 @@ type Announce struct {
 
 type Queue struct {
 	ID           primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Queue_id     int                `json:"queue_id" bson:"queue_id "`
-	Queue_number string             `json:"queue_number" bson:"queue_number"`
+	User_id      int                `json:"user_id" bson:"user_id"`
+	Queue_number int                `json:"queue_number" bson:"queue_number"`
 	Status       bool               `json:"status" bson:"status"`
 }

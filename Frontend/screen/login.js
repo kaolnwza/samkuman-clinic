@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("12345678912346")
+    const [usernameLogin, setUsernameLogin] = useState("12345678912345")
     const [passwordLogin, setPasswordLogin] = useState("12345")
 
     const testLogin = () => {
@@ -22,7 +22,7 @@ const login = ({ navigation }) => {
     })
 
 
-    const postData = () => {
+    const postData = async () => {
         const headers = {
             "Content-Type": "application/json",
         };
@@ -32,21 +32,21 @@ const login = ({ navigation }) => {
             identity_number: usernameLogin,
             password: passwordLogin
         }
-        instance
+        await instance
             .post(local + "/login", data)
             .then((res) => {
                 console.log(res.data)
             }
             )
-        // instance.get(local + "/getcookie")
-        //     .then(
-        //         console.log("done get cookie")
-        //     )
+        await instance.get(local + "/getcookie")
+            .then(
+                console.log("done get cookie")
+            )
 
     }
 
-    const Logout = () => {
-        instance
+    const Logout = async () => {
+        await instance
             .get(local + "/logout")
             .then((res) => {
                 console.log(res.data);

@@ -19,7 +19,6 @@ func init() {
 }
 
 const SecretKey = "hehee"
-const database = "samkumandb"
 
 func Register(response http.ResponseWriter, request *http.Request) {
 
@@ -146,25 +145,17 @@ func FindUser(response http.ResponseWriter, request *http.Request) {
 
 	//objectId, _ := primitive.ObjectIDFromHex("6171174184330dedf05e86a2")
 	//fmt.Println(objectId)
-	var result bson.M
-	find_object := bson.M{"id": userCookieId}
-	err := collection.FindOne(ctx, find_object).Decode((&result))
+	var get_data models.User
+	find_object := bson.M{"user_id": userCookieId}
+	err := collection.FindOne(ctx, find_object).Decode((&get_data))
 
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
 		response.Write([]byte(`{"message": "` + err.Error() + `"}`))
 		return
 	}
-	// for _, x := range result {
-	// 	fmt.Println(x)
-	// }
 
-	toJson, _ := json.Marshal(result)
-	//jjj := string(xxx)
-	var reading models.Login
-	_ = json.Unmarshal([]byte(string(toJson)), &reading)
-	fmt.Println(reading)
-	json.NewEncoder(response).Encode(reading)
+	json.NewEncoder(response).Encode(get_data)
 
 }
 
