@@ -17,12 +17,23 @@ const login = ({ navigation }) => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    const local = "http://localhost:12345"
+    const local = "http://192.168.1.19:12345"
 
     const instance = axios.create({
         withCredentials: true
     })
 
+
+    const getTest = async () => {
+        const data = {
+            user_id: 0
+        }
+
+        await axios.get(`${local}/gethistory`, data)
+            .then((res) => {
+                console.log('sdf')
+            })
+    }
 
     const postData = async () => {
         const headers = {
@@ -97,7 +108,8 @@ const login = ({ navigation }) => {
             </KeyboardAwareScrollView>
             {/* <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' /> */}
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
-                navigation.replace('main')
+                //navigation.replace('main')
+                postData()
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
             </TouchableOpacity>
