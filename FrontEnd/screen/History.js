@@ -46,8 +46,9 @@ const History = () => {
     const renderGridItem = (itemData) => {
         return (
             <HistoryGridTile
-                title={itemData.item.title}
                 date={itemData.item.date}
+                title={itemData.item.title}
+                
             // color={itemData.item.color}
             // onSelect={() => {
             //   // เขียนโค้ดเพิ่ม
