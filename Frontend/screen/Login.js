@@ -40,6 +40,7 @@ const login = ({ navigation }) => {
             "Content-Type": "application/json",
         };
         console.log("prayuth");
+        console.log("prayuth");
         console.log("send");
         const data = {
             identity_number: usernameLogin,
