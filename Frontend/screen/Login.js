@@ -92,7 +92,7 @@ const login = ({ navigation }) => {
                 </Text>
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
-                <Text style={styles.label}>Username</Text>
+                <Text style={styles.label}>Email</Text>
                 <TextInput style={styles.input} placeholder="username" value={usernameLogin} />
                 <Text style={styles.label}>Password</Text>
                 <TextInput style={styles.input} placeholder="password" value={passwordLogin} secureTextEntry={true} />
@@ -139,10 +139,12 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 7, width: 0 }, // IOS
         shadowOpacity: 0.2, // IOS
         shadowRadius: 3,
+        fontFamily: 'Poppins'
     },
     label: {
-        fontSize: 15,
-        marginTop: 20
+        fontSize: RFPercentage(2),
+        marginTop: 20,
+        fontFamily: 'Poppins'
     },
     header: {
         transform: [{ translateY: "20%" }]

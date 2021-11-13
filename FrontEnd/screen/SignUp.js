@@ -83,8 +83,7 @@ const SignUp = ({ navigation }) => {
                 <TextInput style={styles.input} placeholder="address" />
                 <Text style={styles.label}>Phone</Text>
                 <TextInput style={styles.input} placeholder="Phone" keyboardType='phone-pad' />
-                <Text style={styles.label}>Email</Text>
-                <TextInput style={styles.input} placeholder="Email" keyboardType='email-address' />
+
                 <View style={{ flexDirection: 'row', }}>
                     <View style={{ flex: 1, marginRight: 5 }}>
                         <Text style={styles.label}>Height</Text>
@@ -99,8 +98,8 @@ const SignUp = ({ navigation }) => {
                 <TextInput style={styles.input} placeholder="Allergic" />
                 <Text style={styles.label}>Congenital disease</Text>
                 <TextInput style={styles.input} placeholder="Congenital disease" />
-                <Text style={styles.label}>Username</Text>
-                <TextInput style={styles.input} placeholder="Username" />
+                <Text style={styles.label}>Email</Text>
+                <TextInput style={styles.input} placeholder="Email" keyboardType='email-address' />
                 <Text style={styles.label}>Password</Text>
                 <TextInput style={styles.input} placeholder="Password" />
                 <Text style={styles.label}>Confirm Password</Text>
