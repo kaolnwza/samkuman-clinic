@@ -2,6 +2,24 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Bg from '../components/Pagebg'
 
+
+const DATA1 = [
+    {
+        title: 'อาการปวดหัว',
+        date: "Lorem Ipsum is  it",
+        symptom: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
+        diagnose: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
+        doctorAdvice: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
+        medicine: ["1", "2", "3" ],
+        howToUse: ["HTU1",["HTU2",["HTU3"],
+        doctor
+
+    },
+
+
+
+];
+
 const History = () => {
     return (
         <View style={styles.container}>
