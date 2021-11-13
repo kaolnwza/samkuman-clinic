@@ -96,7 +96,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 		})
 	fmt.Println("Login success token: ", token)
 
-	response.Header().Set("Access-Control-Allow-Origin", "http://localhost:19006")
+	response.Header().Set("Access-Control-Allow-Origin", "http://http://192.168.1.32:19000")
 
 	json.NewEncoder(response).Encode(token)
 }
@@ -116,8 +116,10 @@ func GetCookie(response http.ResponseWriter, request *http.Request) {
 	///fmt.Println(claims.Issuer)
 	//userCookieId = claims.Issuer
 	userCookieId, _ = strconv.Atoi(claims.Issuer)
-	println("Get cookie success: ", userCookieId)
+	fmt.Println("Get cookie success: ", userCookieId)
+	fmt.Println("userCookieId: ", userCookieId)
 	//fmt.Println(userCookieId)
+
 	json.NewEncoder(response).Encode(claims)
 
 }
@@ -197,4 +199,41 @@ func SignUp(response http.ResponseWriter, request *http.Request) {
 func EncodePassword(income_password string) string {
 	password_token, _ := bcrypt.GenerateFromPassword([]byte(income_password), 7)
 	return string(password_token)
+}
+
+func GetUserInformation(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	history_collection := client.Database(database).Collection("history")
+	user_collection := client.Database(database).Collection("user")
+
+	var get_data models.UserInformation
+	json.NewDecoder(request.Body).Decode(&get_data)
+	//var information_struct models.UserInformation
+	var user_struct models.User
+	var history_struct []models.History
+	//find user history
+
+	cursor, err := history_collection.Find(ctx, bson.M{"user.user_id": userCookieId})
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer cursor.Close(ctx)
+	for cursor.Next(ctx) {
+		var temp models.History
+		cursor.Decode(&temp)
+		history_struct = append(history_struct, temp)
+	}
+
+	user_collection.FindOne(ctx, bson.M{"user_id": get_data.User.User_id}).Decode(&user_struct)
+
+	fmt.Println("HEEEEEE")
+	message := bson.M{
+		"user_object":    user_struct,
+		"history_object": history_struct,
+	}
+
+	json.NewEncoder(response).Encode(message)
+	//json.NewEncoder(response).Encode(history_struct)
+
 }
