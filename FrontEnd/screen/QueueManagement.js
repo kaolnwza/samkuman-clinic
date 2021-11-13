@@ -2,19 +2,22 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
-const Appointment = () => {
+
+
+const PassQueue = () => {
     return (
         <View style={styles.container}>
-            <Bg Text1='Appointment' />
+            <Bg Text1='Queue Management' />
             <View style={styles.position}>
-                <Text>asfaf</Text>
+                <Text>
+                    FUCK U BITCH
+                </Text>
             </View>
         </View>
     )
 }
 
-export default Appointment
+export default PassQueue
 
 const styles = StyleSheet.create({
     container: {
@@ -26,6 +29,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignSelf: 'center',
         position: 'absolute',
-        transform: [{ translateY: RFPercentage(25) }]
+        transform: [{ translateY: RFPercentage(20) }]
     },
 })

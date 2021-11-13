@@ -1,0 +1,29 @@
+import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { RFPercentage } from 'react-native-responsive-fontsize';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+
+
+const GridInformation = (props) => {
+    return (
+        <View style={{ ...styles.contentItem, ...{ backgroundColor: props.color } }}>
+            <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>{props.title}</Text>
+            <KeyboardAwareScrollView>
+                <Text style={{ fontFamily: 'Poppins', marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(2) }}>{props.info}</Text>
+            </KeyboardAwareScrollView>
+        </View >
+
+    )
+}
+
+export default GridInformation
+
+const styles = StyleSheet.create({
+    contentItem: {
+        height: hp('25%'),
+        marginVertical: hp('3%'),
+        borderRadius: RFPercentage(5),
+    }
+})

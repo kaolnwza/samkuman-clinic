@@ -88,20 +88,17 @@ func GetUser(response http.ResponseWriter, request *http.Request) {
 		response.Write([]byte(`{"message": "` + err.Error() + `"}`))
 		return
 	}
-	//count := 0
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
 		var getModel_2 models.User
 		cursor.Decode(&getModel_2)
 		getModel = append(getModel, getModel_2)
-		//count++
 	}
 	if err := cursor.Err(); err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
 		response.Write([]byte(`{"message": "` + err.Error() + `"}`))
 		return
 	}
-
 	json.NewEncoder(response).Encode(getModel)
 }
 

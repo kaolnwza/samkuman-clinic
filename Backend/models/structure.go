@@ -8,11 +8,10 @@ import (
 
 type User struct {
 	ID              primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	User_id         int                `json:"user_id" bson:"user_id"`
 	Identity_number string             `json:"identity_number" bson:"identity_number"`
 	Firstname       string             `json:"firstname" bson:"firstname"`
 	Lastname        string             `json:"lastname" bson:"lastname"`
-	Gender          string             `json:"gender" bson:"gender"`
+	Gender          bool               `json:"gender" bson:"gender"`
 	Height          int                `json:"height" bson:"height"`
 	Weight          float32            `json:"weight" bson:"weight"`
 	Dob             string             `json:"dob" bson:"dob"`

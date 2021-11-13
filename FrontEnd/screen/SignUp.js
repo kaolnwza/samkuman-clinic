@@ -4,6 +4,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { RadioButton } from 'react-native-paper';
+import * as Device from 'expo-device';
+import { RFPercentage } from 'react-native-responsive-fontsize';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Btn from '../components/Button';
 
 const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
@@ -13,16 +17,32 @@ const SignUp = ({ navigation }) => {
         setDate(currentDate);
     };
 
+    const [identityNumber, setIdentityNumber] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [height, setHeight] = useState(0);
+    const [weight, setWeight] = useState(0);
+    const [allergic, setAllergic] = useState('');
+    const [disease, setDisease] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <View style={styles.im3Ipad}>
+                <View style={[Device.osName === 'iPadOS' ? styles.im3Ipad : styles.im3]}>
                     <Image source={require('../assets/normal_u1.png')} />
                 </View>
-                <View style={styles.im2Ipad}>
+                <View style={[Device.osName === 'iPadOS' ? styles.im2Ipad : styles.im2]}>
                     <Image source={require('../assets/normal_u2.png')} />
                 </View>
-                <View style={styles.imageIpad}>
+                <View style={[Device.osName === 'iPadOS' ? styles.imageIpad : styles.image]}>
                     <Image source={require('../assets/normal_u3.png')} />
                 </View>
                 <Text style={styles.headerText}>SIGN UP
@@ -83,16 +103,12 @@ const SignUp = ({ navigation }) => {
                 <TextInput style={styles.input} placeholder="Username" />
                 <Text style={styles.label}>Password</Text>
                 <TextInput style={styles.input} placeholder="Password" />
-                <Text style={styles.label}>Confrim Password</Text>
-                <TextInput style={styles.input} placeholder="Confrim Password" />
+                <Text style={styles.label}>Confirm Password</Text>
+                <TextInput style={styles.input} placeholder="Confirm Password" />
+                <Btn navigation={navigation} label='SIGN UP' color='#f9be7c' to='login' />
+
             </KeyboardAwareScrollView >
-            <View style={{ flex: 1, position: 'absolute', alignSelf: "center", bottom: 0, paddingBottom: "20%" }}>
-                <TouchableOpacity style={styles.btn} onPress={() => {
-                    navigation.navigate("login")
-                }}>
-                    <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#333333' }}>SIGN UP</Text>
-                </TouchableOpacity>
-            </View>
+
         </View >
     )
 }
@@ -106,7 +122,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF9EC',
     },
     containerInput: {
-        position: 'absolute', alignSelf: 'center', transform: [{ translateY: 250 }], width: '80%', height: '54%'
+        position: 'absolute', alignSelf: 'center', transform: [{ translateY: 250 }], width: wp('80%'), height: hp('53%')
     },
     input: {
         color: '#FFF9EC',
@@ -169,22 +185,12 @@ const styles = StyleSheet.create({
     },
     headerText: {
         position: "absolute",
-        fontSize: 50,
+        fontSize: RFPercentage(5),
         top: 100,
         color: '#0d253f',
         fontFamily: 'Poppins',
         fontWeight: 'bold',
-        marginLeft: 10
+        marginLeft: wp('8%')
     },
-    btn: {
-        fontFamily: 'Poppins',
-        backgroundColor: '#f9be7c',
-        paddingHorizontal: 70,
-        paddingVertical: 10,
-        borderRadius: 40,
-        shadowColor: "#000",
-        shadowOffset: { height: 7, width: 0 }, // IOS
-        shadowOpacity: 0.2, // IOS
-        shadowRadius: 3,
-    }
+
 })

@@ -1,9 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import * as Device from 'expo-device';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 
 const Pagebg = (props) => {
@@ -17,7 +15,6 @@ const Pagebg = (props) => {
             </View>
             <View style={styles.Name}>
                 <Text style={styles.FN}>{props.Text1}</Text>
-                <Text style={styles.LN}>{props.Text2}</Text>
                 <Text>
                     {Device.osName}
                 </Text>
@@ -34,12 +31,12 @@ const styles = StyleSheet.create({
     },
     image: {
         justifyContent: "center",
-        transform: [{ translateX: "-50%" }, { translateY: "-20%" }],
+        transform: [{ translateX: "-50%" }, { translateY: "-20%" }, { rotate: '-5deg' }, { scale: 1.11 }],
         position: 'absolute'
     },
     imageIpad: {
         justifyContent: "center",
-        transform: [{ translateX: "200%" }, { translateY: "-20%" }, { scale: 1.89 }],
+        transform: [{ translateX: "200%" }, { translateY: "-20%" }, { scale: 1.92 }, { rotate: '-5deg' }],
         position: 'absolute'
     },
     im2: {
@@ -54,20 +51,16 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         paddingTop: 30,
-        paddingRight: 20
+        paddingRight: 20,
     },
     FN: {
-        fontSize: 25,
+        fontSize: RFPercentage(5),
         fontFamily: 'Poppins',
         fontWeight: 'bold',
         color: '#0d253f',
+        lineHeight: RFPercentage(5.7)
 
     },
-    LN: {
-        fontSize: 25,
-        color: '#0d253f',
-        fontFamily: 'Poppins',
-        fontWeight: 'bold',
-    },
+
 
 })

@@ -25,9 +25,6 @@ func Router() *mux.Router {
 	router.HandleFunc("/register", services.Register).Methods("POST")
 	router.HandleFunc("/login", services.Login).Methods("POST")
 	router.HandleFunc("/getcookie", services.GetCookie).Methods("GET")
-	router.HandleFunc("/finduser", services.FindUser).Methods("GET")
-	router.HandleFunc("/signup", services.SignUp).Methods("POST")
-	router.HandleFunc("/logout", services.Logout).Methods("GET")
 
 	//queye
 	router.HandleFunc("/addqueue", services.AddQueue).Methods("POST")
