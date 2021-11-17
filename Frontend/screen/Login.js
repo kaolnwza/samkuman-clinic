@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
@@ -11,7 +11,8 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 const login = ({ navigation }) => {
     const [usernameLogin, setUsernameLogin] = useState("12345678912346")
-    const [passwordLogin, setPasswordLogin] = useState("12345")
+    const [passwordLogin, setPasswordLogin] = useState("1234")
+    const [authen, setAuthen] = useState('')
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
         postData()
@@ -46,6 +47,7 @@ const login = ({ navigation }) => {
             .post(global.local + "/login", data)
             .then((res) => {
                 console.log(res.data)
+                setAuthen(res.data)
             }
             )
         await instance.get(global.local + "/getcookie")
@@ -107,11 +109,14 @@ const login = ({ navigation }) => {
                         <Text style={{ color: '#007AFF' }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
+
             </KeyboardAwareScrollView>
-            {/* <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' /> */}
+            <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text>
+
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
-                navigation.replace('main')
+
+                // navigation.replace('main')
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
             </TouchableOpacity>
