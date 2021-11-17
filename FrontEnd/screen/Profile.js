@@ -18,18 +18,16 @@ const Profile = ({ navigation }) => {
 
     })
     useEffect(() => {
-        console.log("use eff");
         const getUserInfo = async () => {
-            console.log("in");
             if (isMount) {
-                console.log("getting");
+                console.log("profile");
                 const instance = axios.create({
                     withCredentials: true
                 })
-                const local = "http://172.20.10.3:12345"
-                await instance.get(local + "/getuserinformation")
+
+                await instance.get(global.local + "/finduser")
                     .then(res => {
-                        setUserinfo(res.data.user_object)
+                        setUserinfo(res.data)
 
                     })
                 isMount = false
@@ -50,8 +48,8 @@ const Profile = ({ navigation }) => {
                     <InfoHalfBox titleL='Birthday' infoL={userinfo.dob} colorL='#309397' titleR='Sex' infoR={userinfo.gender} colorR='#e46472' iconL='birthday-cake' iconR='transgender' />
                     <InfoHalfBox titleL='Address' infoL={userinfo.address} colorL='#f9be7c' titleR='Phone' infoR={userinfo.phone_number} colorR='#309397' iconL='address-book' iconR='phone' />
                     <InfoHalfBox titleL='Height' infoL={userinfo.height} colorL='#e46472' titleR='Weight' infoR={userinfo.weight} colorR='#f9be7c' iconL='arrows-alt-h' iconR='arrows-alt-v' />
-                    <InfoHalfBox titleL='Allergic' infoL={userinfo.allergic} colorL='#309397' iconL='allergies' titleR='Congenital Disease' infoR={userinfo.disease} colorR='#e46472' iconR='disease' />
-                    <InfoBox titleTop='ID' titleMid='Email' titleBot='Password' f={userinfo.identity_number} m={userinfo.email} l='FUCKU' icon='alternate-email' />
+                    <InfoHalfBox titleL='Allergic' infoL={userinfo.allergic === null ? userinfo.allergic : '-'} colorL='#309397' iconL='allergies' titleR='Congenital Disease' infoR={userinfo.disease === null ? userinfo.disease : '-'} colorR='#e46472' iconR='disease' />
+                    <InfoBox titleTop='ID' titleMid='Email' f={userinfo.identity_number} m={userinfo.email} icon='alternate-email' />
                     <Btn navigation={navigation} label='EDIT' color='#f9be7c' />
                 </KeyboardAwareScrollView>
             </View>

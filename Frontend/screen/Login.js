@@ -16,7 +16,7 @@ const login = ({ navigation }) => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    const local = "http://192.168.1.32:12345"
+    global.local = "http://172.20.10.3:12345"
 
     const instance = axios.create({
         withCredentials: true
@@ -28,7 +28,7 @@ const login = ({ navigation }) => {
             user_id: 0
         }
 
-        await axios.get(`${local}/gethistory`, data)
+        await axios.get(`${global.local}/gethistory`, data)
             .then((res) => {
                 console.log('sdf')
             })
@@ -38,24 +38,21 @@ const login = ({ navigation }) => {
         const headers = {
             "Content-Type": "application/json",
         };
-        console.log("prayuth");
-        console.log("prayuth");
-        console.log("send");
         const data = {
             identity_number: usernameLogin,
             password: passwordLogin
         }
         await instance
-            .post(local + "/login", data)
+            .post(global.local + "/login", data)
             .then((res) => {
                 console.log(res.data)
             }
             )
-        await instance.get(local + "/getcookie")
+        await instance.get(global.local + "/getcookie")
             .then(res =>
                 console.log(res.data)
             )
-        await instance.get(local + "/getuserinformation")
+        await instance.get(global.local + "/getuserinformation")
             .then(res => {
 
             })
@@ -64,7 +61,7 @@ const login = ({ navigation }) => {
 
     const Logout = async () => {
         await instance
-            .get(local + "/logout")
+            .get(global.local + "/logout")
             .then((res) => {
                 console.log(res.data);
             })
@@ -113,8 +110,8 @@ const login = ({ navigation }) => {
             </KeyboardAwareScrollView>
             {/* <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' /> */}
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
+                postData()
                 navigation.replace('main')
-                // postData()
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
             </TouchableOpacity>

@@ -48,16 +48,13 @@ const History = () => {
     let isMount = true
     const [userHistory, setuserHistory] = useState([])
     useEffect(() => {
-        console.log("use eff");
         const getUserInfo = async () => {
-            console.log("in");
             if (isMount) {
-                console.log("getting");
+                console.log("history");
                 const instance = axios.create({
                     withCredentials: true
                 })
-                const local = "http://172.20.10.3:12345"
-                await instance.get(local + "/gethistory")
+                await instance.get(global.local + "/gethistory")
                     .then(res => {
                         setuserHistory(res.data)
                         // console.log(res.data)

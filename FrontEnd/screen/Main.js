@@ -17,16 +17,13 @@ const Main = ({ navigation }) => {
     const [relation, setRelation] = useState([])
 
     useEffect(() => {
-        console.log("use eff");
         const getInformation = async () => {
-            console.log("in");
             if (isMount) {
-                console.log("getting");
+                console.log("info");
                 const instance = axios.create({
                     withCredentials: true
                 })
-                const local = "http://172.20.10.3:12345"
-                await instance.get(local + "/getinformation")
+                await instance.get(global.local + "/getinformation")
                     .then(res => {
                         setNews(res.data)
                         // console.log(res.data)
@@ -41,16 +38,14 @@ const Main = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        console.log("use eff");
         const getPublicRelation = async () => {
-            console.log("in");
             if (isMount) {
-                console.log("getting");
+                console.log("public");
+
                 const instance = axios.create({
                     withCredentials: true
                 })
-                const local = "http://172.20.10.3:12345"
-                await instance.get(local + "/getpublicrelation")
+                await instance.get(global.local + "/getpublicrelation")
                     .then(res => {
                         setRelation(res.data)
                         // console.log(res.data)
