@@ -12,7 +12,6 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 const login = ({ navigation }) => {
     const [usernameLogin, setUsernameLogin] = useState("12345678912346")
     const [passwordLogin, setPasswordLogin] = useState("12345")
-
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
         postData()
@@ -73,6 +72,7 @@ const login = ({ navigation }) => {
 
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
+        Kanit: require('../assets/fonts/Kanit-SemiBold.ttf')
     });
     if (!loaded) {
         return null;

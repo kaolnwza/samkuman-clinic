@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     info: {
         margin: RFPercentage(1),
-        fontFamily: 'Poppins',
-        fontSize: RFPercentage(2)
+        fontFamily: 'Kanit',
+        fontSize: RFPercentage(2),
     },
 })

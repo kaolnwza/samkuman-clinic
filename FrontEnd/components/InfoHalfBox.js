@@ -31,7 +31,7 @@ export default InfoHalfBox
 
 const styles = StyleSheet.create({
     infoH: {
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         fontSize: RFPercentage(2),
 
     },

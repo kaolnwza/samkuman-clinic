@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         transform: [{ translateY: RFPercentage(20) }]
     },
     input: {
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         color: 'white',
         fontSize: 18,
         height: hp('9%'),
