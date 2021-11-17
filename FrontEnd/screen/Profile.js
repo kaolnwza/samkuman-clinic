@@ -28,6 +28,8 @@ const Profile = ({ navigation }) => {
                 await instance.get(global.local + "/finduser")
                     .then(res => {
                         setUserinfo(res.data)
+                        console.log(res.data);
+
 
                     })
                 isMount = false

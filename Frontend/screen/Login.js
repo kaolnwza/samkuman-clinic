@@ -11,7 +11,7 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 const login = ({ navigation }) => {
     const [usernameLogin, setUsernameLogin] = useState("12345678912346")
-    const [passwordLogin, setPasswordLogin] = useState("1234")
+    const [passwordLogin, setPasswordLogin] = useState("12345")
     const [authen, setAuthen] = useState('')
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
@@ -35,7 +35,11 @@ const login = ({ navigation }) => {
             })
     }
 
+
+
+
     const postData = async () => {
+
         const headers = {
             "Content-Type": "application/json",
         };
@@ -47,7 +51,13 @@ const login = ({ navigation }) => {
             .post(global.local + "/login", data)
             .then((res) => {
                 console.log(res.data)
-                setAuthen(res.data)
+                if (res.data == 'User not found') {
+                    setAuthen(res.data)
+                } else if (res.data == 'Incorrect Password') {
+                    setAuthen(res.data)
+                } else {
+                    navigation.replace('main')
+                }
             }
             )
         await instance.get(global.local + "/getcookie")
@@ -97,9 +107,9 @@ const login = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Email</Text>
-                <TextInput style={styles.input} placeholder="username" value={usernameLogin} />
+                <TextInput style={styles.input} placeholder="username" value={usernameLogin} onChangeText={usernameLogin => setUsernameLogin(usernameLogin)} />
                 <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="password" value={passwordLogin} secureTextEntry={true} />
+                <TextInput style={styles.input} placeholder="password" value={passwordLogin} onChangeText={passwordLogin => setPasswordLogin(passwordLogin)} secureTextEntry={true} />
                 <View style={{ marginTop: 20 }}>
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
                         onPress={() => {
@@ -115,8 +125,6 @@ const login = ({ navigation }) => {
 
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
-
-                // navigation.replace('main')
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
             </TouchableOpacity>
