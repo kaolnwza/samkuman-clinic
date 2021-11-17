@@ -9,7 +9,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 const GridInformation = (props) => {
     return (
         <View style={{ ...styles.contentItem, ...{ backgroundColor: props.color } }}>
-            <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>{props.title}</Text>
+            <KeyboardAwareScrollView>
+                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>{props.title}</Text>
+            </KeyboardAwareScrollView>
+
             <KeyboardAwareScrollView>
                 <Text style={{ fontFamily: 'Poppins', marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(2) }}>{props.info}</Text>
             </KeyboardAwareScrollView>

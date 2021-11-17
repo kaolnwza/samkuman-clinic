@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native'
 import GridInformation from './GridInformation'
 import Carousel from 'react-native-snap-carousel';
@@ -7,8 +7,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 
 const Information = (props) => {
+    const [bg, setBg] = useState(["#f9be7c", "#e46472", "#309397"])
     const renderItem = ({ item }) => (
-        <GridInformation title={item.title} color={item.color} info={item.info} />
+        <GridInformation title={item.title} color={bg[Math.floor(Math.random() * bg.length)]} info={item.detail} />
 
     );
     return (
