@@ -96,7 +96,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 		})
 	fmt.Println("Login success token: ", token)
 
-	response.Header().Set("Access-Control-Allow-Origin", "http://http://192.168.1.32:19000")
+	response.Header().Set("Access-Control-Allow-Origin", "http://192.168.1.43:19000")
 
 	json.NewEncoder(response).Encode(token)
 }

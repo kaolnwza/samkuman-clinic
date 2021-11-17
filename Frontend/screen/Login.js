@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
@@ -12,12 +12,13 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 const login = ({ navigation }) => {
     const [usernameLogin, setUsernameLogin] = useState("12345678912346")
     const [passwordLogin, setPasswordLogin] = useState("12345")
+    const [fuck, setFuck] = useState()
 
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    const local = "http://192.168.1.32:12345"
+    const local = "http://192.168.1.43:12345"
 
     const instance = axios.create({
         withCredentials: true
@@ -35,6 +36,11 @@ const login = ({ navigation }) => {
             })
     }
 
+    const sadd = (kuy) => {
+        setFuck(kuy)
+
+    }
+
     const postData = async () => {
         const headers = {
             "Content-Type": "application/json",
@@ -49,19 +55,27 @@ const login = ({ navigation }) => {
         await instance
             .post(local + "/login", data)
             .then((res) => {
+
                 console.log(res.data)
             }
             )
         await instance.get(local + "/getcookie")
-            .then(res =>
-                console.log(res.data)
-            )
-        await instance.get(local + "/getuserinformation")
-            .then(res => {
+        //         await instance.get(local + "/getuserinformation")
+        //             .then(res => {
+        //                 //console.log(res.data.user_object);
 
-            })
+        //                 // sadd("kuyasdasd")
+        //                 // setFuck(res.data.user_object.firstname);
+        //                 console.log(fuck);
+        // // 
+        //             })
+
+        //console.log(fuck);
 
     }
+
+
+
 
     const Logout = async () => {
         await instance
@@ -113,10 +127,13 @@ const login = ({ navigation }) => {
             </KeyboardAwareScrollView>
             {/* <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' /> */}
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
-                //navigation.replace('main')
                 postData()
+                navigation.replace('main')
+
+                //console.log(fuck);
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
+                <Text>{fuck}</Text>
             </TouchableOpacity>
         </View >
     )
