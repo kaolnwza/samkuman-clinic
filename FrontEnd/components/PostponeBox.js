@@ -89,7 +89,12 @@ const styles = StyleSheet.create({
         width: wp('80%'),
         backgroundColor: '#309397',
         borderRadius: RFPercentage(5),
-        marginVertical: RFPercentage(1)
+        marginVertical: RFPercentage(1),
+        shadowColor: "black",
+        shadowOpacity: RFPercentage(0.1),
+        shadowOffset: { width: 0, height: 3 },
+        shadowRadius: RFPercentage(0.5),
+        elevation: 3,
     },
     detail: {
         fontFamily: 'Poppins',

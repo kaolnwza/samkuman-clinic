@@ -12,7 +12,7 @@ import (
 var client *mongo.Client
 
 func main() {
-	fmt.Println("sdf")
+	fmt.Println("Start GO")
 
 	r := router.Router()
 	credentials := handlers.AllowCredentials()

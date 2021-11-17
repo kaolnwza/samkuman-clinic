@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, FlatList, Alert, Modal, Pressable } from 'react-native'
 import Bg from '../components/Pagebg'
 import HistoryGridTile from '../components/HistoryGridTile';
@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import axios from "axios"
 
 
 const DATA1 = [
@@ -43,12 +44,39 @@ const DATA1 = [
 ];
 
 const History = () => {
+
+    let isMount = true
+    const [userHistory, setuserHistory] = useState([])
+    useEffect(() => {
+        console.log("use eff");
+        const getUserInfo = async () => {
+            console.log("in");
+            if (isMount) {
+                console.log("getting");
+                const instance = axios.create({
+                    withCredentials: true
+                })
+                const local = "http://172.20.10.3:12345"
+                await instance.get(local + "/gethistory")
+                    .then(res => {
+                        setuserHistory(res.data)
+                        console.log(res.data)
+
+                    })
+                isMount = false
+            }
+        }
+        return (
+            getUserInfo()
+        )
+    }, [])
     const renderGridItem = (itemData) => {
         return (
             <HistoryGridTile
                 date={itemData.item.date}
-                title={itemData.item.title}
-                
+                title={itemData.item.symptom}
+                detail={itemData.item}
+
             // color={itemData.item.color}
             // onSelect={() => {
             //   // เขียนโค้ดเพิ่ม
@@ -62,7 +90,7 @@ const History = () => {
         <View style={styles.container}>
             <Bg Text1='History' />
             <View style={styles.position}>
-                <FlatList data={DATA1} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} />
+                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} />
             </View>
         </View>
     )

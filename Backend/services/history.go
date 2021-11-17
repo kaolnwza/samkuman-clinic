@@ -64,6 +64,6 @@ func GetHistory(response http.ResponseWriter, request *http.Request) {
 		cursor.Decode(&temp)
 		history_struct = append(history_struct, temp)
 	}
-	fmt.Println("HEEEEEE")
+	fmt.Println("History")
 	json.NewEncoder(response).Encode(history_struct)
 }

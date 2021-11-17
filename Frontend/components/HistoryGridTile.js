@@ -4,6 +4,8 @@ import { useFonts } from 'expo-font';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Moment from 'moment';
+
 const DATA1 = [
   {
     title: 'Puad Hua',
@@ -55,30 +57,30 @@ const HistoryGridTile = (props) => {
 
         <View style={styles.centeredView}>
 
-          <View style={styles.modalView}>         
-            <Text style={styles.boxTop}>Doctor Name :   Samart Srisawat</Text> 
-            <View style={{flexDirection:'row', marginLeft:RFPercentage(7.3)}}>
-                <Text style={styles.dateTime}>Date : 12/1/2021</Text> 
-                <Text style={[styles.dateTime, {marginLeft:RFPercentage(6)}]}>Time : 13.00</Text> 
-            </View>  
+          <View style={styles.modalView}>
+            <Text style={styles.boxTop}>Doctor Name :   Samart Srisawat</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+              <Text style={styles.dateTime}>Date : {Moment(props.date).format('L')}</Text>
+              <Text style={[styles.dateTime,]}>Time : {Moment(props.date).format('HH.mm A')}</Text>
+            </View>
 
             <KeyboardAwareScrollView style={{ height: hp('70%'), marginTop: RFPercentage(3) }}>
-            <View style={styles.box}>             
-            <Text style={styles.boxHeader}>Symptom :</Text> 
-            <Text style={styles.boxInfo} > loremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwoo</Text>
-            <Text style={styles.boxHeader}>Diagnose :</Text> 
-            <Text style={styles.boxInfo} > loremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwoo</Text>
-            <Text style={styles.boxHeader}>Docter Advice : </Text> 
-            <Text style={styles.boxInfo} > loremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwoo</Text>
-            <Text style={styles.boxHeader}>Medicine:</Text> 
-            <Text style={styles.boxInfo} > loremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwoo</Text>
-            <Text style={styles.boxHeader}>How to use:</Text> 
-            <Text style={styles.boxInfo} > loremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwooloremkolermoperterwoo</Text>
-            </View> 
-            </KeyboardAwareScrollView> 
+              <View style={styles.box}>
+                <Text style={styles.boxHeader}>Symptom :</Text>
+                <Text style={styles.boxInfo} > {props.detail.symptom}</Text>
+                <Text style={styles.boxHeader}>Diagnose :</Text>
+                <Text style={styles.boxInfo} > {props.detail.diagnose}</Text>
+                <Text style={styles.boxHeader}>Docter Advice : </Text>
+                <Text style={styles.boxInfo} > {props.detail.doctor_advice}</Text>
+                <Text style={styles.boxHeader}>Medicine:</Text>
+                <Text style={styles.boxInfo} > {props.detail.medicine}</Text>
+                <Text style={styles.boxHeader}>How to use:</Text>
+                <Text style={styles.boxInfo} > {props.detail.usage}</Text>
+              </View>
+            </KeyboardAwareScrollView>
 
             <Pressable
-              style={[styles.button, styles.buttonClose, {flexDirection: "column" ,justifyContent: "flex-end"}]}
+              style={[styles.button, styles.buttonClose, { flexDirection: "column", justifyContent: "flex-end" }]}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text style={styles.textStyle}>CLOSE</Text>
@@ -103,7 +105,10 @@ const HistoryGridTile = (props) => {
         >
           {/* <Text>{itemData.item.title}</Text> */}
           <Text style={styles.title} numberOfLines={1}>
-            {props.date}
+            {Moment(props.date).format('LL')}
+          </Text>
+          <Text style={styles.title} numberOfLines={1}>
+            {Moment(props.date).format('HH.mm A')}
           </Text>
           <Text style={styles.date} >
             {props.title}
@@ -120,13 +125,13 @@ const styles = StyleSheet.create({
     width: wp('80%'),
   },
   container: {
-    borderRadius: RFPercentage(1),
+    borderRadius: RFPercentage(5),
     shadowColor: "black",
     shadowOpacity: RFPercentage(1),
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: RFPercentage(0.5),
     elevation: 3,
-    padding: RFPercentage(1.2),
+    padding: RFPercentage(2),
     backgroundColor: '#6488e4',
   },
 
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
   date: {
     fontFamily: 'Poppins',
     fontSize: RFPercentage(1.8),
-    paddingLeft:RFPercentage(1.8),
+    paddingLeft: RFPercentage(1.8),
   },
 
   centeredView: {
@@ -172,9 +177,9 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     alignSelf: "center",
-        marginTop: RFPercentage(1.6)
-  
-   
+    marginTop: RFPercentage(1.6)
+
+
 
   },
   buttonOpen: {
@@ -193,13 +198,13 @@ const styles = StyleSheet.create({
   boxTop: {
     marginBottom: RFPercentage(1.3),
     fontFamily: 'Poppins',
-    fontSize: RFPercentage(2),
-    marginLeft: RFPercentage(7),  
+    fontSize: RFPercentage(2.2),
+    alignSelf: 'center'
   },
 
-  dateTime:{
+  dateTime: {
     fontFamily: 'Poppins',
-    fontSize: RFPercentage(1.3),
+    fontSize: RFPercentage(1.8),
   },
   box: {
     backgroundColor: 'rgba(239, 216, 147, 0.8)',
@@ -210,19 +215,19 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: RFPercentage(2),
     paddingLeft: RFPercentage(2.5),
-    
+
   },
   boxHeader: {
     // margin: RFPercentage(1),
     fontFamily: 'Poppins',
-    fontSize: RFPercentage(1.4),
+    fontSize: RFPercentage(2),
     // textAlign: 'left'
-    marginTop: RFPercentage(3),  
   },
   boxInfo: {
-   fontFamily: 'Poppins',
-   fontSize: RFPercentage(1),
-   marginLeft: RFPercentage(2.5),
+    fontFamily: 'Poppins',
+    fontSize: RFPercentage(1.7),
+    marginLeft: RFPercentage(2),
+    marginBottom: RFPercentage(2)
 
   }
 });

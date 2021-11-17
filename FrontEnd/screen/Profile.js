@@ -47,11 +47,11 @@ const Profile = ({ navigation }) => {
             <View style={styles.position}>
                 <InfoBox f={userinfo.firstname} m={userinfo.lastname} icon='person' titleTop='First Name ' titleMid='Last Name ' />
                 <KeyboardAwareScrollView style={{ marginTop: RFPercentage(1), height: hp('42%') }}>
-                    <InfoHalfBox titleL='Birthday' infoL='04/07/2544' colorL='#309397' titleR='Sex' infoR='Male' colorR='#e46472' iconL='birthday-cake' iconR='transgender' />
-                    <InfoHalfBox titleL='Address' infoL='653/1, RNP, Chalongkrung1, Ladkrabang BKK' colorL='#f9be7c' titleR='Phone' infoR='0954035514' colorR='#309397' iconL='address-book' iconR='phone' />
-                    <InfoHalfBox titleL='Height' infoL='171' colorL='#e46472' titleR='Weight' infoR='62' colorR='#f9be7c' iconL='arrows-alt-h' iconR='arrows-alt-v' />
-                    <InfoHalfBox titleL='Allergic' infoL='Peanut Butter' colorL='#309397' iconL='allergies' titleR='Congenital Disease' infoR='Diabetes' colorR='#e46472' iconR='disease' />
-                    <InfoBox titleTop='ID' titleMid='Email' titleBot='Password' f='1100600434386' m='farrocker@outlook.co.th' l='FUCKU' icon='alternate-email' />
+                    <InfoHalfBox titleL='Birthday' infoL={userinfo.dob} colorL='#309397' titleR='Sex' infoR={userinfo.gender} colorR='#e46472' iconL='birthday-cake' iconR='transgender' />
+                    <InfoHalfBox titleL='Address' infoL={userinfo.address} colorL='#f9be7c' titleR='Phone' infoR={userinfo.phone_number} colorR='#309397' iconL='address-book' iconR='phone' />
+                    <InfoHalfBox titleL='Height' infoL={userinfo.height} colorL='#e46472' titleR='Weight' infoR={userinfo.weight} colorR='#f9be7c' iconL='arrows-alt-h' iconR='arrows-alt-v' />
+                    <InfoHalfBox titleL='Allergic' infoL={userinfo.allergic} colorL='#309397' iconL='allergies' titleR='Congenital Disease' infoR={userinfo.disease} colorR='#e46472' iconR='disease' />
+                    <InfoBox titleTop='ID' titleMid='Email' titleBot='Password' f={userinfo.identity_number} m={userinfo.email} l='FUCKU' icon='alternate-email' />
                     <Btn navigation={navigation} label='EDIT' color='#f9be7c' />
                 </KeyboardAwareScrollView>
             </View>

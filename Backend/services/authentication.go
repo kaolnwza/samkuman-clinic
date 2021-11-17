@@ -227,7 +227,7 @@ func GetUserInformation(response http.ResponseWriter, request *http.Request) {
 
 	user_collection.FindOne(ctx, bson.M{"user_id": get_data.User.User_id}).Decode(&user_struct)
 
-	fmt.Println("HEEEEEE")
+	fmt.Println("Profile")
 	message := bson.M{
 		"user_object":    user_struct,
 		"history_object": history_struct,
