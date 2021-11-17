@@ -52,7 +52,7 @@ type Appointment struct {
 }
 
 type History struct {
-	History_id int `json:"history_id " bson:"history_id "`
+	History_id int `json:"history_id" bson:"history_id"`
 	User
 	Doctor
 	Date          time.Time `json:"date" bson:"date"`
