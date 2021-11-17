@@ -53,9 +53,11 @@ const Main = ({ navigation }) => {
     const [Select, setSelect] = useState(true);
     let isMount = true
     const [news, setNews] = useState([])
+    const [relation, setRelation] = useState([])
+
     useEffect(() => {
         console.log("use eff");
-        const getUserInfo = async () => {
+        const getInformation = async () => {
             console.log("in");
             if (isMount) {
                 console.log("getting");
@@ -73,7 +75,31 @@ const Main = ({ navigation }) => {
             }
         }
         return (
-            getUserInfo()
+            getInformation()
+        )
+    }, [])
+
+    useEffect(() => {
+        console.log("use eff");
+        const getPublicRelation = async () => {
+            console.log("in");
+            if (isMount) {
+                console.log("getting");
+                const instance = axios.create({
+                    withCredentials: true
+                })
+                const local = "http://172.20.10.3:12345"
+                await instance.get(local + "/getpublicrelation")
+                    .then(res => {
+                        setRelation(res.data)
+                        // console.log(res.data)
+
+                    })
+                isMount = false
+            }
+        }
+        return (
+            getPublicRelation()
         )
     }, [])
 
@@ -102,7 +128,7 @@ const Main = ({ navigation }) => {
                 </View>
 
                 <SafeAreaView style={styles.content}>
-                    <Information datalist={DATA1} />
+                    <Information datalist={relation} />
                 </SafeAreaView>
 
 

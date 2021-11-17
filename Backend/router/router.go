@@ -42,6 +42,8 @@ func Router() *mux.Router {
 	router.HandleFunc("/prayuth", services.Lnwza).Methods("GET")
 	router.HandleFunc("/getuserinformation", services.GetUserInformation).Methods("GET")
 	router.HandleFunc("/getinformation", services.GetInformation).Methods("GET")
+	router.HandleFunc("/getpublicrelation", services.GetPublic).Methods("GET")
+
 
 	return router
 }

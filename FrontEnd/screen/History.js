@@ -60,7 +60,7 @@ const History = () => {
                 await instance.get(local + "/gethistory")
                     .then(res => {
                         setuserHistory(res.data)
-                        console.log(res.data)
+                        // console.log(res.data)
 
                     })
                 isMount = false
@@ -90,7 +90,7 @@ const History = () => {
         <View style={styles.container}>
             <Bg Text1='History' />
             <View style={styles.position}>
-                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item.i} numColumns={1} />
+                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item.date} numColumns={1} />
             </View>
         </View>
     )
