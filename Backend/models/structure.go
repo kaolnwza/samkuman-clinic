@@ -63,6 +63,12 @@ type History struct {
 	Usage         string    `json:"usage" bson:"usage"`
 }
 
+type Informaion struct {
+	Info_id int    `json:"info_id " bson:"info_id "`
+	Title   string `json:"title" bson:"title"`
+	Detail  string `json:"detail" bson:"detail"`
+}
+
 type Notification struct {
 	ID              primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Notification_id int                `json:"notification_id" bson:"notification_id "`

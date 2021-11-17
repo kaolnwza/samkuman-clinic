@@ -58,7 +58,7 @@ const HistoryGridTile = (props) => {
         <View style={styles.centeredView}>
 
           <View style={styles.modalView}>
-            <Text style={styles.boxTop}>Doctor Name :   Samart Srisawat</Text>
+            <Text style={styles.boxTop}>Doctor Name :   {props.detail.doctor_firstname} {props.detail.doctor_lastname}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
               <Text style={styles.dateTime}>Date : {Moment(props.date).format('L')}</Text>
               <Text style={[styles.dateTime,]}>Time : {Moment(props.date).format('HH.mm A')}</Text>
