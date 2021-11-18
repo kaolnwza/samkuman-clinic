@@ -21,10 +21,10 @@ const PostponeBox = (props) => {
             <View style={styles.box}>
                 <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>Next Appontment </Text>
                 <View style={{ marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(1) }}>
-                    <Text style={styles.detail}>Name : {item.name}</Text>
-                    <Text style={styles.detail}>Doctor : {item.doctor}</Text>
-                    <Text style={styles.detail}>Date : {Moment(date).format('LL')}</Text>
-                    <Text style={styles.detail}>Time : {Moment(date).format('HH.mm A')}</Text>
+                    <Text style={styles.detail}>Name : {item.firstname} {item.lastname}</Text>
+                    <Text style={styles.detail}>Doctor : {item.doctor_firstname}</Text>
+                    <Text style={styles.detail}>Date : {Moment(item.date).format('LL')}</Text>
+                    <Text style={styles.detail}>Time : {Moment(item.date).format('HH.mm A')}</Text>
 
                     <TouchableOpacity onPress={() => {
                         setModalVisible(true)

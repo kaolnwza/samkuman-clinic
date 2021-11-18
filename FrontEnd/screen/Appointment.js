@@ -31,7 +31,7 @@ const APPOINT = [
 const Appointment = () => {
 
     let isMount = true
-    const [userAppointment, setUserAppointment] = useState([])
+    const [userAppointment, setUserAppointment] = useState({})
     useEffect(() => {
         console.log("use eff");
         const getUserInfo = async () => {
@@ -41,8 +41,8 @@ const Appointment = () => {
                 const instance = axios.create({
                     withCredentials: true
                 })
-                const local = "http://192.168.43.247:12345"
-                await instance.get(local + "/getappointment")
+               
+                await instance.get(global.local + "/getappointment")
                     .then(res => {
                         setUserAppointment(res.data)
                         console.log(res.data)
