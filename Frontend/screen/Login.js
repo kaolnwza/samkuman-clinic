@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useFonts } from 'expo-font';
@@ -12,12 +12,12 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 const login = ({ navigation }) => {
     const [usernameLogin, setUsernameLogin] = useState("12345678912346")
     const [passwordLogin, setPasswordLogin] = useState("12345")
-
+    const [authen, setAuthen] = useState('')
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    const local = "http://192.168.1.32:12345"
+    global.local = "http://172.20.10.3:12345"
 
     const instance = axios.create({
         withCredentials: true
@@ -29,34 +29,42 @@ const login = ({ navigation }) => {
             user_id: 0
         }
 
-        await axios.get(`${local}/gethistory`, data)
+        await axios.get(`${global.local}/gethistory`, data)
             .then((res) => {
                 console.log('sdf')
             })
     }
 
+
+
+
     const postData = async () => {
+
         const headers = {
             "Content-Type": "application/json",
         };
-        console.log("prayuth");
-        console.log("prayuth");
-        console.log("send");
         const data = {
             identity_number: usernameLogin,
             password: passwordLogin
         }
         await instance
-            .post(local + "/login", data)
+            .post(global.local + "/login", data)
             .then((res) => {
                 console.log(res.data)
+                if (res.data == 'User not found') {
+                    setAuthen(res.data)
+                } else if (res.data == 'Incorrect Password') {
+                    setAuthen(res.data)
+                } else {
+                    navigation.replace('main')
+                }
             }
             )
-        await instance.get(local + "/getcookie")
+        await instance.get(global.local + "/getcookie")
             .then(res =>
                 console.log(res.data)
             )
-        await instance.get(local + "/getuserinformation")
+        await instance.get(global.local + "/getuserinformation")
             .then(res => {
 
             })
@@ -65,7 +73,7 @@ const login = ({ navigation }) => {
 
     const Logout = async () => {
         await instance
-            .get(local + "/logout")
+            .get(global.local + "/logout")
             .then((res) => {
                 console.log(res.data);
             })
@@ -73,6 +81,7 @@ const login = ({ navigation }) => {
 
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
+        Kanit: require('../assets/fonts/Kanit-SemiBold.ttf')
     });
     if (!loaded) {
         return null;
@@ -98,9 +107,9 @@ const login = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Email</Text>
-                <TextInput style={styles.input} placeholder="username" value={usernameLogin} />
+                <TextInput style={styles.input} placeholder="username" value={usernameLogin} onChangeText={usernameLogin => setUsernameLogin(usernameLogin)} />
                 <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="password" value={passwordLogin} secureTextEntry={true} />
+                <TextInput style={styles.input} placeholder="password" value={passwordLogin} onChangeText={passwordLogin => setPasswordLogin(passwordLogin)} secureTextEntry={true} />
                 <View style={{ marginTop: 20 }}>
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
                         onPress={() => {
@@ -110,11 +119,12 @@ const login = ({ navigation }) => {
                         <Text style={{ color: '#007AFF' }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
+
             </KeyboardAwareScrollView>
-            {/* <Btn navigation={navigation} label='LOGIN' color='#f9be7c' to='main' /> */}
+            <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text>
+
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
-                navigation.replace('main')
-                // postData()
+                postData()
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
             </TouchableOpacity>

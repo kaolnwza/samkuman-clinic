@@ -14,14 +14,7 @@ const InfoBox = (props) => {
             <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
                 <Text style={styles.info}>{props.titleTop}: {props.f}</Text>
                 {props.m != null ? <Text style={styles.info}>{props.titleMid}: {props.m}</Text> : null}
-                {props.l != null ? <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={styles.info}>{props.titleBot}:</Text>
-
-                    <TextInput editable={false} style={styles.info} secureTextEntry={hide}>{props.l}</TextInput>
-                    {hide ? <FontAwesome5 onPress={() => { setHide(false) }} name="eye" size={24} color="black" /> :
-                        <FontAwesome5 onPress={() => { setHide(true) }} name="eye-slash" size={24} color="black" />}
-
-                </View> : null}
+                
             </View>
 
         </View>
@@ -49,7 +42,7 @@ const styles = StyleSheet.create({
     },
     info: {
         margin: RFPercentage(1),
-        fontFamily: 'Poppins',
-        fontSize: RFPercentage(2)
+        fontFamily: 'Kanit',
+        fontSize: RFPercentage(2),
     },
 })

@@ -26,11 +26,11 @@ const Reserve = ({ navigation }) => {
                     >
                         <Picker.Item label="Normal" value="1" />
                         {Day === 'M' || 'TH' || 'W' ? <Picker.Item label="Eye" value="2" /> : null}
-                        {Day === 'T' ? <Picker.Item label="Leg" value="2" /> : null}
-                        {Day === 'W' ? <Picker.Item label="Testical" value="2" /> : null}
-                        {Day === 'TH' ? <Picker.Item label="AssHole" value="2" /> : null}
+                        {Day === 'T' ? <Picker.Item label="Leg" value="3" /> : null}
+                        {Day === 'W' ? <Picker.Item label="Testical" value="4" /> : null}
+                        {Day === 'TH' ? <Picker.Item label="AssHole" value="5" /> : null}
 
-                        {Day === 'F' ? <Picker.Item label="Dick" value="2" /> : null}
+                        {Day === 'F' ? <Picker.Item label="Dick" value="6" /> : null}
 
 
 
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         transform: [{ translateY: RFPercentage(20) }]
     },
     input: {
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         color: 'white',
         fontSize: 18,
         height: hp('9%'),

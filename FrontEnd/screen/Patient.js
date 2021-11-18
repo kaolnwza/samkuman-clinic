@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
 
     },
     input: {
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         color: 'white',
         fontSize: 18,
         height: hp('9%'),
