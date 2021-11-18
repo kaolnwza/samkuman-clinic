@@ -46,9 +46,14 @@ type Doctor_schedule struct {
 }
 
 type Appointment struct {
-	Appointment_id int    `json:"appointment_id " bson:"appointment_id "`
-	Date           string `json:"date" bson:"date"`
-	Time           string `json:"time" bson:"time"`
+	Appointment_id 		int    `json:"appointment_id" bson:"appointment_id"`
+	User_id           	int `json:"user_id" bson:"user_id"`
+	Firstname       	string             `json:"firstname" bson:"firstname"`
+	Lastname        	string             `json:"lastname" bson:"lastname"`
+	Doctor_id           int    `json:"doctor_id" bson:"doctor_id"`
+	Doctor_Firstname    string `json:"doctor_firstname" bson:"doctor_firstname"`
+	Doctor_Lastname     string `json:"doctor_lastname" bson:"doctor_lastname"`
+	Date           		time.Time `json:"date" bson:"date"`
 }
 
 type History struct {
