@@ -33,7 +33,10 @@ func Router() *mux.Router {
 	router.HandleFunc("/addqueue", services.AddQueue).Methods("POST")
 	router.HandleFunc("/usercanclequeue", services.UserCancelQueue).Methods("DELETE")
 	router.HandleFunc("/reachqueue", services.ReachQueue).Methods("DELETE")
+	router.HandleFunc("/dropallqueue", services.DropAllQueue).Methods("DELETE")
 	router.HandleFunc("/getuserqueue", services.GetUserQueue).Methods("GET")
+	router.HandleFunc("/getallqueue", services.GetAllQueue).Methods("GET")
+	//router.HandleFunc("/findtype", services.FindType).Methods("GET")
 
 	//history
 	router.HandleFunc("/addhistory", services.AddHistory).Methods("POST")
@@ -44,14 +47,11 @@ func Router() *mux.Router {
 	router.HandleFunc("/getinformation", services.GetInformation).Methods("GET")
 	router.HandleFunc("/getpublicrelation", services.GetPublic).Methods("GET")
 
-
-
 	//Appointment
 	router.HandleFunc("/addappointment", services.AddAppointment).Methods("POST")
 	router.HandleFunc("/getappointment", services.GetAppointment).Methods("GET")
 	router.HandleFunc("/updateappointment", services.UpdateAppointment).Methods("GET")
 	router.HandleFunc("/deleteappointment", services.DeleteAppointment).Methods("DELETE")
-	
 
 	return router
 }

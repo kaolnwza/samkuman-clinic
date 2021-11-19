@@ -46,14 +46,14 @@ type Doctor_schedule struct {
 }
 
 type Appointment struct {
-	Appointment_id 		int    `json:"appointment_id" bson:"appointment_id"`
-	User_id           	int `json:"user_id" bson:"user_id"`
-	Firstname       	string             `json:"firstname" bson:"firstname"`
-	Lastname        	string             `json:"lastname" bson:"lastname"`
-	Doctor_id           int    `json:"doctor_id" bson:"doctor_id"`
-	Doctor_Firstname    string `json:"doctor_firstname" bson:"doctor_firstname"`
-	Doctor_Lastname     string `json:"doctor_lastname" bson:"doctor_lastname"`
-	Date           		time.Time `json:"date" bson:"date"`
+	Appointment_id   int       `json:"appointment_id" bson:"appointment_id"`
+	User_id          int       `json:"user_id" bson:"user_id"`
+	Firstname        string    `json:"firstname" bson:"firstname"`
+	Lastname         string    `json:"lastname" bson:"lastname"`
+	Doctor_id        int       `json:"doctor_id" bson:"doctor_id"`
+	Doctor_Firstname string    `json:"doctor_firstname" bson:"doctor_firstname"`
+	Doctor_Lastname  string    `json:"doctor_lastname" bson:"doctor_lastname"`
+	Date             time.Time `json:"date" bson:"date"`
 }
 
 type History struct {
@@ -98,8 +98,10 @@ type Announce struct {
 
 type Queue struct {
 	ID           primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	Queue_id     int                `json:"queue_id" bson:"queue_id"`
 	User_id      int                `json:"user_id" bson:"user_id"`
-	Queue_number int                `json:"queue_number" bson:"queue_number"`
+	Queue_remain int                `json:"queue_remain" bson:"queue_remain"`
+	Type         string             `json:"type" bson:"type"`
 	Status       bool               `json:"status" bson:"status"`
 }
 
