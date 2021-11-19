@@ -34,7 +34,7 @@ func Router() *mux.Router {
 	router.HandleFunc("/usercanclequeue", services.UserCancelQueue).Methods("DELETE")
 	router.HandleFunc("/reachqueue", services.ReachQueue).Methods("DELETE")
 	router.HandleFunc("/dropallqueue", services.DropAllQueue).Methods("DELETE")
-	router.HandleFunc("/getuserqueue", services.GetUserQueue).Methods("GET")
+	router.HandleFunc("/getuserqueue", services.GetUserQueue).Methods("POST")
 	router.HandleFunc("/getallqueue", services.GetAllQueue).Methods("GET")
 	//router.HandleFunc("/findtype", services.FindType).Methods("GET")
 

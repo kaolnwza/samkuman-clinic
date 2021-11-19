@@ -1,15 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import axios from 'axios'
+
 
 import Bg from '../components/Pagebg'
 
 const Queue = ({ navigation }) => {
     const [currentQueue, setCurrentQueue] = useState();
-    const [yourQueue, setYourQueue] = useState();
-    const [moreQueue, setMoreQueue] = useState();
+    const [remainQueue, setRemainQueue] = useState();
+    const [userQueue, setUserQueue] = useState();
+
+
+    const data = JSON.stringify({
+        user_id: 1,
+        type: "kuy"
+    })
+
+    //let isMount = true
+
+    useEffect(() => {
+        const getQueue = async () => {
+            console.log(data);
+            console.log("queue");
+            const instance = axios.create({
+                withCredentials: true
+            })
+
+            await instance.post(global.local + "/getuserqueue", data)
+                .then(res => {
+                    setCurrentQueue(res.data.current_queue)
+                    setRemainQueue(res.data.remain_queue)
+                    setUserQueue(res.data.user_queue)
+                    console.log(res.data);
+
+                })
+            //isMount = false
+
+        }
+        return (
+            getQueue()
+
+        )
+    }, [])
+
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
     });
@@ -20,12 +56,13 @@ const Queue = ({ navigation }) => {
 
 
 
+
     return (
         <View style={styles.container}>
             <Bg Text1='Queue' />
             <View style={styles.position}>
                 <View style={styles.queueBorder}>
-                    <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>5</Text>
+                    <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>{currentQueue}</Text>
                 </View>
                 <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
 
@@ -33,11 +70,12 @@ const Queue = ({ navigation }) => {
                 <Text style={[styles.font1, { fontSize: RFPercentage(5), marginTop: 50 }]}>Your Queue</Text>
                 <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>Is</Text>
                 <View style={styles.queueBorder2}>
-                    <Text style={[styles.font1, { fontSize: RFPercentage(7) }]}>6</Text>
+                    <Text style={[styles.font1, { fontSize: RFPercentage(7) }]}>{userQueue}</Text>
                 </View>
-                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>1 more queue</Text>
+                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>{remainQueue} more queue</Text>
                 <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                     // navigation.replace(props.to)
+
                 }}>
                     <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>CANCEL</Text>
                 </TouchableOpacity>

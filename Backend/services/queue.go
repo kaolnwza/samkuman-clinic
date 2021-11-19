@@ -26,7 +26,7 @@ func AddQueue(response http.ResponseWriter, request *http.Request) {
 
 	//get queue range
 	queue_id := 1
-	queue_remain := 1
+	queue_remain := 0
 	cursor, _ := queue_collection.Find(ctx, bson.M{"type": queue_struct.Type})
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
@@ -213,12 +213,12 @@ func ReachQueue(response http.ResponseWriter, request *http.Request) {
 	json.NewDecoder(request.Body).Decode(&queue_struct)
 
 	queue_collection.UpdateOne(ctx,
-		bson.M{"type": queue_struct.Type, "queue_remain": 1, "status": true},
+		bson.M{"type": queue_struct.Type, "queue_remain": 0, "status": true},
 		bson.D{
 			{"$set", bson.D{{"status", false}, {"queue_remain", -1}}},
 		})
 
-	cursor, _ := queue_collection.Find(ctx, bson.D{{"type", queue_struct.Type}, {"queue_remain", bson.D{{"$gt", 1}}}})
+	cursor, _ := queue_collection.Find(ctx, bson.D{{"type", queue_struct.Type}, {"queue_remain", bson.D{{"$gt", 0}}}})
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
 		var temp models.Queue
@@ -261,18 +261,20 @@ func ReachQueue(response http.ResponseWriter, request *http.Request) {
 // }
 
 func GetUserQueue(response http.ResponseWriter, request *http.Request) {
-	response.Header().Add("content-type", "application/json")
+	response.Header().Add("Content-Type", "application/json")
 	queue_collection := client.Database(database).Collection("queue")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-
+	fmt.Println("in queue")
 	var user_queue models.Queue
+	//var hee bson.M
 	json.NewDecoder(request.Body).Decode(&user_queue)
+
+	fmt.Println("type = ", user_queue)
+	//fmt.Println("req = ", request)
 	queue_collection.FindOne(ctx, bson.M{"status": true, "type": user_queue.Type, "user_id": user_queue.User_id}).Decode(&user_queue)
 
-	fmt.Println(user_queue)
-
 	var current_queue models.Queue
-	queue_collection.FindOne(ctx, bson.M{"status": true, "type": user_queue.Type, "queue_remain": 1}).Decode(&current_queue)
+	queue_collection.FindOne(ctx, bson.M{"status": true, "type": user_queue.Type, "queue_remain": 0}).Decode(&current_queue)
 
 	jsonRes := bson.M{
 		"user_queue":    user_queue.Queue_id,
