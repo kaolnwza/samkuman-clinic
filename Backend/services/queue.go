@@ -43,10 +43,12 @@ func AddQueue(response http.ResponseWriter, request *http.Request) {
 			return
 		}
 
-		if temp.Status == true {
-			queue_remain++
+		if temp.Type == queue_struct.Type {
+			queue_id = temp.Queue_id + 1
+			if temp.Status == true {
+				queue_remain++
+			}
 		}
-		queue_id++
 
 	}
 
