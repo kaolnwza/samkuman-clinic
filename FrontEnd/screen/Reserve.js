@@ -50,7 +50,7 @@ const Reserve = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Bg Text1='การจองคิว' />
+            <Bg Text1='ระบบการจองคิว' />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
                 <View style={styles.position}>
