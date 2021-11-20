@@ -81,7 +81,7 @@ const Custom = props => {
                     <TouchableOpacity style={styles.logout}>
                         <Text style={{
                             fontFamily: 'Poppins'
-                        }}>Log Out</Text>
+                        }}>ออกจากระบบ</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -127,7 +127,7 @@ const Menu = () => {
 
             <Drawer.Screen name="home" component={BottomTab}
                 options={{
-                    drawerLabel: "Main",
+                    drawerLabel: "หน้าหลัก",
                     drawerIcon: ({ focused, size }) => (
                         <Ionicons
                             name="md-home"
@@ -138,21 +138,21 @@ const Menu = () => {
                 }} />
             <Drawer.Screen name="appoint" component={Appointment}
                 options={{
-                    drawerLabel: "Appointment",
+                    drawerLabel: "การนัดหมาย",
                     drawerIcon: ({ focused, size }) => (
                         <FontAwesome name="pencil-square-o" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),
                 }} />
             <Drawer.Screen name="history" component={History}
                 options={{
-                    drawerLabel: "History",
+                    drawerLabel: "ประวัติการรักษา",
                     drawerIcon: ({ focused, size }) => (
                         <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),
                 }} />
             {Role === 'Doctor' ? <Drawer.Screen name="pass" component={PassQueue}
                 options={{
-                    drawerLabel: "Pass Queue",
+                    drawerLabel: "การจัดการคิว",
                     drawerIcon: ({ focused, size }) => (
                         <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),
@@ -160,7 +160,7 @@ const Menu = () => {
 
             {Role === 'Doctor' ? <Drawer.Screen name="AandH" component={Patient}
                 options={{
-                    drawerLabel: "Patient appointment and history",
+                    drawerLabel: "ผลการรักษาและการนัดหมาย",
                     drawerIcon: ({ focused, size }) => (
                         <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),

@@ -58,24 +58,24 @@ const HistoryGridTile = (props) => {
         <View style={styles.centeredView}>
 
           <View style={styles.modalView}>
-            <Text style={styles.boxTop}>Doctor Name :   {props.detail.doctor_firstname} {props.detail.doctor_lastname}</Text>
+            <Text style={styles.boxTop}>ชื่อแพทย์ :   {props.detail.doctor_firstname} {props.detail.doctor_lastname}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              <Text style={styles.dateTime}>Date : {Moment(props.date).format('L')}</Text>
-              <Text style={[styles.dateTime,]}>Time : {Moment(props.date).format('HH.mm A')}</Text>
+              <Text style={styles.dateTime}>วัน : {Moment(props.date).format('L')}</Text>
+              <Text style={[styles.dateTime,]}>เวลา : {Moment(props.date).format('HH.mm A')}</Text>
             </View>
 
             <KeyboardAwareScrollView style={{ height: hp('70%'), marginTop: RFPercentage(3) }}>
               <View style={styles.box}>
-                <Text style={styles.boxHeader}>Symptom :</Text>
+                <Text style={styles.boxHeader}>อาการ :</Text>
                 <Text style={styles.boxInfo} > {props.detail.symptom}</Text>
-                <Text style={styles.boxHeader}>Diagnose :</Text>
+                <Text style={styles.boxHeader}>ผลวินิจฉัย :</Text>
                 <Text style={styles.boxInfo} > {props.detail.diagnose}</Text>
-                <Text style={styles.boxHeader}>Docter Advice : </Text>
+                <Text style={styles.boxHeader}>คำแนะนำแพทย์ : </Text>
                 <Text style={styles.boxInfo} > {props.detail.doctor_advice}</Text>
-                <Text style={styles.boxHeader}>Medicine:</Text>
+                <Text style={styles.boxHeader}>ยา และการใช้:</Text>
                 <Text style={styles.boxInfo} > {props.detail.medicine}</Text>
-                <Text style={styles.boxHeader}>How to use:</Text>
-                <Text style={styles.boxInfo} > {props.detail.usage}</Text>
+                {/* <Text style={styles.boxHeader}>How to use:</Text> */}
+                {/* <Text style={styles.boxInfo} > {props.detail.usage}</Text> */}
               </View>
             </KeyboardAwareScrollView>
 
@@ -83,7 +83,7 @@ const HistoryGridTile = (props) => {
               style={[styles.button, styles.buttonClose, { flexDirection: "column", justifyContent: "flex-end" }]}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>CLOSE</Text>
+              <Text style={styles.textStyle}>ปิด</Text>
             </Pressable>
 
           </View>
@@ -193,7 +193,8 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: RFPercentage(1.8),
   },
   boxTop: {
     marginBottom: RFPercentage(1.3),

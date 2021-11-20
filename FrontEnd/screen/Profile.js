@@ -43,7 +43,7 @@ const Profile = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            <Bg Text1='Profile' />
+            <Bg Text1='ข้อมูลผู้ใช้' />
             <View style={styles.position}>
                 <InfoBox f={userinfo.firstname} m={userinfo.lastname} icon='person' titleTop='ชื่อ' titleMid='นามสกุล' />
                 <KeyboardAwareScrollView style={{ marginTop: RFPercentage(1), height: hp('42%') }}>

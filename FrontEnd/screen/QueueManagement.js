@@ -46,7 +46,7 @@ const PassQueue = () => {
 
     return (
         <View style={styles.container}>
-            <Bg Text1='Queue Management' />
+            <Bg Text1='การจัดการคิว' />
             <View style={styles.position}>
 
                 <Picker
@@ -73,12 +73,12 @@ const PassQueue = () => {
                     <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>{currentQueue}</Text>
                 </View>
 
-                <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
+                <Text style={[styles.font1, { fontSize: 20 }]}>คิวปัจจุบัน</Text>
                 <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                     // navigation.replace(props.to)
                     queueDelete()
                 }}>
-                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>NEXT</Text>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>คิวต่อไป</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -85,7 +85,7 @@ const History = () => {
     };
     return (
         <View style={styles.container}>
-            <Bg Text1='History' />
+            <Bg Text1='ประวัติการรักษา' />
             <View style={styles.position}>
                 <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item.date} numColumns={1} />
             </View>
