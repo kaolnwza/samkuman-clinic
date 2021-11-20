@@ -62,25 +62,25 @@ const Main = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Bg Text1='Home' />
+            <Bg Text1='หน้าหลัก' />
             <View style={styles.contentContainer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity onPress={() => {
                         setSelect(true)
                     }} style={{ ...styles.tabSelect, backgroundColor: Select === true ? '#309397' : '#e46472' }} >
-                        <Text style={styles.tabFont}>INFORMATION</Text>
+                        <Text style={styles.tabFont}>ข้อมูลข่าวสาร</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
                         setSelect(false)
                     }} style={{ ...styles.tabSelect, backgroundColor: Select === false ? '#309397' : '#e46472' }} >
-                        <Text style={styles.tabFont}>Doctor Schedule</Text>
+                        <Text style={styles.tabFont}>ตารางแพทย์</Text>
                     </TouchableOpacity>
                 </View>
                 {Select === true ? <SafeAreaView style={styles.content}>
                     <Information datalist={news} />
                 </SafeAreaView> : null}
                 <View style={{ ...styles.tabSelect }} >
-                    <Text style={styles.tabFont}>PUBLIC RELATION</Text>
+                    <Text style={styles.tabFont}>ข่าวสารสุขภาพ</Text>
                 </View>
 
                 <SafeAreaView style={styles.content}>
