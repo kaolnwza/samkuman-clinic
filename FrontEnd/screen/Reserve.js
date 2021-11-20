@@ -1,14 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Picker } from '@react-native-picker/picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Btn from '../components/Button';
+import axios from 'axios'
 
 const Reserve = ({ navigation }) => {
-    const [selectedValue, setSelectedValue] = useState("1");
-    const [Day, setDay] = useState('W')
+    const [selectedValue, setSelectedValue] = useState("normal");
+    const [Day, setDay] = useState('Monday')
+    const [currentQueue, setCurrentQueue] = useState()
+    const [symtomInput, setSymtomInput] = useState("")
+    const [fetching, letFetching] = useState()
+
+    useEffect(() => {
+        const getQueue = async () => {
+            await axios.get(global.local + "/getallqueue")
+                .then(res => {
+                    var res_length = (res.data).filter(x => x.type == selectedValue).length
+                    setCurrentQueue(res_length)
+                    letFetching(res.data)
+
+                })
+        }
+
+        return (
+            getQueue()
+        )
+    })
+
+    const postQueue = async () => {
+        var data = {
+            type: selectedValue,
+            symtom: symtomInput
+        }
+        await axios.post(global.local + "/addqueue", data)
+            .then(res => {
+                if (res.data == "cannot queue") {
+                    alert("cannot queue more than 1 or cancel ur other queue")
+                }
+                else {
+                    console.log(res.data);
+                }
+            })
+    }
+
+
+
     return (
         <View style={styles.container}>
             <Bg Text1='Reservation' />
@@ -24,13 +63,15 @@ const Reserve = ({ navigation }) => {
                         itemStyle={{ color: 'white', fontFamily: 'Poppins' }}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     >
-                        <Picker.Item label="Normal" value="1" />
-                        {Day === 'M' || 'TH' || 'W' ? <Picker.Item label="Eye" value="2" /> : null}
-                        {Day === 'T' ? <Picker.Item label="Leg" value="3" /> : null}
-                        {Day === 'W' ? <Picker.Item label="Testical" value="4" /> : null}
-                        {Day === 'TH' ? <Picker.Item label="AssHole" value="5" /> : null}
-
-                        {Day === 'F' ? <Picker.Item label="Dick" value="6" /> : null}
+                        <Picker.Item label="แผนกทั่วไป" value="normal" />
+                        {Day === 'Monday' || 'Thursday' ? <Picker.Item label="จิตแพทย์" value="psychiatrist" /> : null}
+                        {Day === 'Monday' ? <Picker.Item label="สูตินารีเวช" value="obstetrician" /> : null}
+                        {Day === 'Tuesday' ? <Picker.Item label="ระบบทางเดินอาหาร" value="gastro-enterologist" /> : null}
+                        {Day === 'Wednesday' ? <Picker.Item label="กายภาพบำบัด" value="physiatrist" /> : null}
+                        {Day === 'Wednesday' ? <Picker.Item label="สมองและเส้นประสาท" value="neurologist " /> : null}
+                        {Day === 'Thursday' ? <Picker.Item label="หู คอ จมูก" value="oto-rhino-laryngologist" /> : null}
+                        {Day === 'Friday' ? <Picker.Item label="โรคผิวหนัง" value="dermatologist" /> : null}
+                        {Day === 'Friday' ? <Picker.Item label="จักษุ" value="ophthalmologist " /> : null}
 
 
 
@@ -40,18 +81,20 @@ const Reserve = ({ navigation }) => {
 
 
                     <View >
-                        <Text style={styles.label}>Symtom</Text>
+                        <Text style={styles.label} >Symtom</Text>
 
                         <TextInput style={styles.input} placeholder="Please Elaborate" multiline
-                            numberOfLines={4} />
+                            numberOfLines={4}
+                            onChangeText={x => { setSymtomInput(x) }} />
                     </View>
                     <View style={styles.queueBorder}>
-                        <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>5</Text>
+                        <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>{currentQueue}</Text>
                     </View>
                     <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
                     {/* <Btn navigation={navigation} label='CONFIRM' color='#309397' /> */}
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                         // navigation.replace(props.to)
+                        postQueue()
                     }}>
                         <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>CONFIRM</Text>
                     </TouchableOpacity>

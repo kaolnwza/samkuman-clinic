@@ -103,6 +103,7 @@ type Queue struct {
 	Queue_remain int                `json:"queue_remain" bson:"queue_remain"`
 	Type         string             `json:"type" bson:"type"`
 	Status       bool               `json:"status" bson:"status"`
+	Symtom       string             `json:"symtom" bson:"symtom"`
 }
 
 type UserInformation struct {

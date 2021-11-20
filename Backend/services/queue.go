@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"go-mongo/models"
 	"net/http"
 	"time"
@@ -19,7 +18,13 @@ func init() {
 func AddQueue(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("content-type", "application/json")
 	var queue_struct models.Queue
+	queue_struct.User_id = -1
+
 	json.NewDecoder(request.Body).Decode(&queue_struct)
+
+	if queue_struct.User_id == -1 {
+		queue_struct.User_id = userCookieId
+	}
 
 	queue_collection := client.Database(database).Collection("queue")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
@@ -27,14 +32,14 @@ func AddQueue(response http.ResponseWriter, request *http.Request) {
 	//get queue range
 	queue_id := 1
 	queue_remain := 0
-	cursor, _ := queue_collection.Find(ctx, bson.M{"type": queue_struct.Type})
+	cursor, _ := queue_collection.Find(ctx, bson.M{})
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
 		//equal them
 		var temp models.Queue
 		cursor.Decode(&temp)
 		if temp.User_id == queue_struct.User_id && temp.Status == true {
-			json.NewEncoder(response).Encode("Cannot queue more than 1 time")
+			json.NewEncoder(response).Encode("cannot queue")
 			return
 		}
 
@@ -108,14 +113,19 @@ func UserCancelQueue(response http.ResponseWriter, request *http.Request) {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
 	var queue_struct models.Queue
+	queue_struct.User_id = -1
+
 	json.NewDecoder(request.Body).Decode(&queue_struct)
 
-	err := queue_collection.FindOne(ctx, bson.M{"user_id": queue_struct.User_id, "type": queue_struct.Type, "status": true}).Decode(&queue_struct)
+	if queue_struct.User_id == -1 {
+		queue_struct.User_id = userCookieId
+	}
+
+	err := queue_collection.FindOne(ctx, bson.M{"user_id": queue_struct.User_id, "status": true}).Decode(&queue_struct)
 	if err != nil {
 		json.NewEncoder(response).Encode("no_queue")
 		return
 	}
-	fmt.Println(queue_struct)
 
 	//set false status
 	queue_collection.UpdateOne(ctx,
@@ -218,7 +228,7 @@ func ReachQueue(response http.ResponseWriter, request *http.Request) {
 			{"$set", bson.D{{"status", false}, {"queue_remain", -1}}},
 		})
 
-	cursor, _ := queue_collection.Find(ctx, bson.D{{"type", queue_struct.Type}, {"queue_remain", bson.D{{"$gt", 0}}}})
+	cursor, _ := queue_collection.Find(ctx, bson.D{{"type", queue_struct.Type}, {"queue_remain", bson.D{{"$gt", 0}}}, {"status", true}})
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
 		var temp models.Queue
@@ -264,14 +274,20 @@ func GetUserQueue(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("Content-Type", "application/json")
 	queue_collection := client.Database(database).Collection("queue")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	fmt.Println("in queue")
+	//fmt.Println("in queue")
 	var user_queue models.Queue
-	//var hee bson.M
+	user_queue.User_id = -1
+
 	json.NewDecoder(request.Body).Decode(&user_queue)
 
-	fmt.Println("type = ", user_queue)
+	if user_queue.User_id == -1 {
+		user_queue.User_id = userCookieId
+	}
+	//var hee bson.M
+
+	//fmt.Println("type = ", user_queue)
 	//fmt.Println("req = ", request)
-	queue_collection.FindOne(ctx, bson.M{"status": true, "type": user_queue.Type, "user_id": user_queue.User_id}).Decode(&user_queue)
+	queue_collection.FindOne(ctx, bson.M{"status": true, "user_id": user_queue.User_id}).Decode(&user_queue)
 
 	var current_queue models.Queue
 	queue_collection.FindOne(ctx, bson.M{"status": true, "type": user_queue.Type, "queue_remain": 0}).Decode(&current_queue)

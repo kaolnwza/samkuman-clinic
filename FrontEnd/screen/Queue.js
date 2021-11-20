@@ -12,10 +12,10 @@ const Queue = ({ navigation }) => {
     const [currentQueue, setCurrentQueue] = useState();
     const [remainQueue, setRemainQueue] = useState();
     const [userQueue, setUserQueue] = useState();
-
+    const [_, runFetching] = useState()
 
     const data = JSON.stringify({
-        user_id: 1,
+        user_id: 15,
         type: "kuy"
     })
 
@@ -23,28 +23,26 @@ const Queue = ({ navigation }) => {
 
     useEffect(() => {
         const getQueue = async () => {
-            console.log(data);
-            console.log("queue");
-            const instance = axios.create({
-                withCredentials: true
-            })
-
-            await instance.post(global.local + "/getuserqueue", data)
+            await axios.get(global.local + "/getuserqueue")
                 .then(res => {
+                    runFetching(res.data)
                     setCurrentQueue(res.data.current_queue)
                     setRemainQueue(res.data.remain_queue)
                     setUserQueue(res.data.user_queue)
-                    console.log(res.data);
-
                 })
-            //isMount = false
-
         }
+
         return (
             getQueue()
-
         )
-    }, [])
+    })
+
+    const cancelQueue = async () => {
+        await axios.delete(global.local + "/usercanclequeue")
+            .then(
+                res => alert(res.data)
+            )
+    }
 
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
@@ -75,6 +73,7 @@ const Queue = ({ navigation }) => {
                 <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>{remainQueue} more queue</Text>
                 <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                     // navigation.replace(props.to)
+                    cancelQueue()
 
                 }}>
                     <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>CANCEL</Text>
