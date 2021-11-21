@@ -106,8 +106,13 @@ const SignUp = ({ navigation }) => {
                 <Text style={styles.label}>ยืนยันรหัสผ่าน</Text>
                 <TextInput style={styles.input} placeholder="ยืนยันรหัสผ่าน" />
 
-                <Btn navigation={navigation} label='ลงทะเบียน' color='#f9be7c' to='login' />
 
+                <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
+                    // postData()
+                    console.log("ok")
+                }}>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>SIGN UP</Text>
+                </TouchableOpacity>
 
             </KeyboardAwareScrollView >
 
@@ -154,6 +159,21 @@ const styles = StyleSheet.create({
         color: '#FFF9EC',
         fontSize: 15,
         marginTop: 20
+    },
+    btn: {
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+
+        fontFamily: 'Poppins',
+        alignSelf: 'center',
+        backgroundColor: '#f9be7c',
+        width: wp('80%'),
+        paddingVertical: 10,
+        borderRadius: 40,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
     },
 
     header: {

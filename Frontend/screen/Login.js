@@ -10,14 +10,14 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("12345678912346")
+    const [usernameLogin, setUsernameLogin] = useState("boonmanee@gmail.com")
     const [passwordLogin, setPasswordLogin] = useState("12345")
     const [authen, setAuthen] = useState('')
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    global.local = "http://192.168.43.247:12345"
+    global.local = "http://172.20.10.3:12345"
 
     const instance = axios.create({
         withCredentials: true
@@ -44,7 +44,7 @@ const login = ({ navigation }) => {
             "Content-Type": "application/json",
         };
         const data = {
-            identity_number: usernameLogin,
+            email: usernameLogin,
             password: passwordLogin
         }
         await instance
