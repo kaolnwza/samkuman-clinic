@@ -30,6 +30,7 @@ const SignUp = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [gender, setGender] = useState("ชาย")
 
 
 
@@ -73,9 +74,9 @@ const SignUp = ({ navigation }) => {
                     </View>
                     <View style={{ flex: 1 }}>
                         <Text style={styles.label}>เพศ</Text>
-                        <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
-                            <RadioButton.Item label="ผู้ชาย" labelStyle={{ color: "#FFF9EC" }} value="first" />
-                            <RadioButton.Item label="ผู้หญิง" labelStyle={{ color: "#FFF9EC" }} value="second" />
+                        <RadioButton.Group onValueChange={x => setGender(x)} value={gender}>
+                            <RadioButton.Item label="ผู้ชาย" labelStyle={{ color: "#FFF9EC" }} value="ชาย" />
+                            <RadioButton.Item label="ผู้หญิง" labelStyle={{ color: "#FFF9EC" }} value="หญิง" />
                         </RadioButton.Group>
                     </View>
                 </View>
@@ -104,7 +105,9 @@ const SignUp = ({ navigation }) => {
                 <TextInput style={styles.input} placeholder="รหัสผ่าน" />
                 <Text style={styles.label}>ยืนยันรหัสผ่าน</Text>
                 <TextInput style={styles.input} placeholder="ยืนยันรหัสผ่าน" />
+
                 <Btn navigation={navigation} label='ลงทะเบียน' color='#f9be7c' to='login' />
+
 
             </KeyboardAwareScrollView >
 
