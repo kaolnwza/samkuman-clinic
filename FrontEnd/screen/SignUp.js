@@ -109,7 +109,7 @@ const SignUp = ({ navigation }) => {
 
                 <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                     // postData()
-                    console.log("ok")
+                    console.log(date)
                 }}>
                     <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>SIGN UP</Text>
                 </TouchableOpacity>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     input: {
         color: '#FFF9EC',
-        fontSize: 18,
+        fontSize: RFPercentage(2.2),
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#FFF9EC',
@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 7, width: 0 }, // IOS
         shadowOpacity: 0.2, // IOS
         shadowRadius: 3,
+        fontFamily: 'Kanit'
     },
     inputH: {
         color: '#FFF9EC',
@@ -157,8 +158,9 @@ const styles = StyleSheet.create({
     },
     label: {
         color: '#FFF9EC',
-        fontSize: 15,
-        marginTop: 20
+        fontSize: RFPercentage(2),
+        marginTop: 20,
+        fontFamily: 'Kanit'
     },
     btn: {
         marginBottom: hp('5%'),
