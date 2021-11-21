@@ -10,7 +10,7 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("boonmanee@gmail.com")
+    const [usernameLogin, setUsernameLogin] = useState("earn@hotmail.com")
     const [passwordLogin, setPasswordLogin] = useState("12345")
     const [authen, setAuthen] = useState('')
     const testLogin = () => {

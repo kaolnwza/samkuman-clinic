@@ -7,7 +7,7 @@ import { RadioButton } from 'react-native-paper';
 import * as Device from 'expo-device';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Btn from '../components/Button';
+import { useValidation } from 'react-native-form-validator';
 
 const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
@@ -32,7 +32,25 @@ const SignUp = ({ navigation }) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [gender, setGender] = useState("ชาย")
 
-
+    const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+        useValidation({
+            state: {
+                identityNumber,
+                firstname,
+                lastname,
+                address,
+                phone,
+                email,
+                height,
+                weight,
+                allergic,
+                disease,
+                username,
+                password,
+                confirmPassword,
+                gender
+            },
+        });
 
     return (
         <View style={styles.container}>
@@ -75,8 +93,8 @@ const SignUp = ({ navigation }) => {
                     <View style={{ flex: 1 }}>
                         <Text style={styles.label}>เพศ</Text>
                         <RadioButton.Group onValueChange={x => setGender(x)} value={gender}>
-                            <RadioButton.Item label="ผู้ชาย" labelStyle={{ color: "#FFF9EC" }} value="ชาย" />
-                            <RadioButton.Item label="ผู้หญิง" labelStyle={{ color: "#FFF9EC" }} value="หญิง" />
+                            <RadioButton.Item label="ผู้ชาย" labelStyle={{ color: "#FFF9EC", fontFamily: 'Kanit' }} value="ชาย" />
+                            <RadioButton.Item label="ผู้หญิง" labelStyle={{ color: "#FFF9EC", fontFamily: 'Kanit' }} value="หญิง" />
                         </RadioButton.Group>
                     </View>
                 </View>
@@ -109,7 +127,7 @@ const SignUp = ({ navigation }) => {
 
                 <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                     // postData()
-                    console.log("ok")
+                    console.log(date)
                 }}>
                     <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>SIGN UP</Text>
                 </TouchableOpacity>
@@ -133,7 +151,7 @@ const styles = StyleSheet.create({
     },
     input: {
         color: '#FFF9EC',
-        fontSize: 18,
+        fontSize: RFPercentage(2.2),
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#FFF9EC',
@@ -141,6 +159,7 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 7, width: 0 }, // IOS
         shadowOpacity: 0.2, // IOS
         shadowRadius: 3,
+        fontFamily: 'Kanit'
     },
     inputH: {
         color: '#FFF9EC',
@@ -157,8 +176,9 @@ const styles = StyleSheet.create({
     },
     label: {
         color: '#FFF9EC',
-        fontSize: 15,
-        marginTop: 20
+        fontSize: RFPercentage(2),
+        marginTop: 20,
+        fontFamily: 'Kanit'
     },
     btn: {
         marginBottom: hp('5%'),

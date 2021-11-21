@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import * as Device from 'expo-device';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
 
 
 const Pagebg = (props) => {
@@ -49,13 +50,16 @@ const styles = StyleSheet.create({
         right: 0,
         paddingTop: 30,
         paddingRight: 20,
+        width: widthPercentageToDP("80%"),
+        alignItems: 'flex-end',
+
     },
     FN: {
         fontSize: RFPercentage(5),
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         fontWeight: 'bold',
         color: '#0d253f',
-        lineHeight: RFPercentage(5.7)
+        lineHeight: RFPercentage(5.7),
 
     },
 

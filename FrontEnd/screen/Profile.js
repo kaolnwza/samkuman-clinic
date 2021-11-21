@@ -50,7 +50,7 @@ const Profile = ({ navigation }) => {
                     <InfoHalfBox titleL='วันเกิด' infoL={userinfo.dob} colorL='#309397' titleR='เพศ' infoR={userinfo.gender} colorR='#e46472' iconL='birthday-cake' iconR='transgender' />
                     <InfoHalfBox titleL='ที่อยู่' infoL={userinfo.address} colorL='#f9be7c' titleR='เบอร์โทรศัพท์' infoR={userinfo.phone_number} colorR='#309397' iconL='address-book' iconR='phone' />
                     <InfoHalfBox titleL='ส่วนสูง' infoL={userinfo.height} colorL='#e46472' titleR='น้ำหนัก' infoR={userinfo.weight} colorR='#f9be7c' iconL='arrows-alt-h' iconR='arrows-alt-v' />
-                    <InfoHalfBox titleL='การแพ้' infoL={userinfo.allergic === null ? userinfo.allergic : '-'} colorL='#309397' iconL='allergies' titleR='โรคประจำตัว' infoR={userinfo.disease === null ? userinfo.disease : '-'} colorR='#e46472' iconR='disease' />
+                    <InfoHalfBox titleL='การแพ้' infoL={userinfo.allergic !== null ? userinfo.allergic : '-'} colorL='#309397' iconL='allergies' titleR='โรคประจำตัว' infoR={userinfo.disease !== null ? userinfo.disease : '-'} colorR='#e46472' iconR='disease' />
                     <InfoBox titleTop='ID' titleMid='อีเมล' f={userinfo.identity_number} m={userinfo.email} icon='alternate-email' />
                     <Btn navigation={navigation} label='แก้ไข' color='#f9be7c' />
                 </KeyboardAwareScrollView>
