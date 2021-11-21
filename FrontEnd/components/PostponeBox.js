@@ -62,7 +62,7 @@ const PostponeBox = (props) => {
                     >
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <Text style={styles.modalText}>Select your Date and Time</Text>
+                                <Text style={styles.modalText}>โปรดเลือกวันและเวลาที่จะเลื่อน</Text>
                                 <DateTimePicker
                                     style={{ marginRight: Device.osName === 'iPadOS' ? wp('30%') : null, width: wp('57%'), marginBottom: RFPercentage(2), }}
                                     testID="dateTimePicker"
@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
 
     },
     modalView: {
-        margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
@@ -169,8 +168,8 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: RFPercentage(2),
         textAlign: "center",
-        fontFamily: 'Poppins',
-        fontSize: RFPercentage(2)
+        fontFamily: 'Kanit',
+        fontSize: RFPercentage(2.5)
 
     }
 })

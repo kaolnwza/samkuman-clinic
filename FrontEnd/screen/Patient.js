@@ -28,7 +28,7 @@ const Patient = () => {
                     <TouchableOpacity onPress={() => {
                         setModalVisible(true)
                     }} style={{ backgroundColor: '#f9be7c', borderRadius: RFPercentage(5), alignSelf: 'center', paddingHorizontal: RFPercentage(2), paddingVertical: RFPercentage(1) }}>
-                        <Text style={{ fontFamily: 'Kanit', padding: RFPercentage(1), alignSelf: 'center' }}>การนัดหมายครั้งถัดไป</Text>
+                        <Text style={{ fontFamily: 'Kanit', padding: RFPercentage(1), alignSelf: 'center', fontSize: RFPercentage(2) }}>การนัดหมายครั้งถัดไป</Text>
                     </TouchableOpacity>
                     <Modal
                         animationType="slide"
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     label: {
         color: 'white',
         fontSize: RFPercentage(2.5),
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         marginTop: RFPercentage(2)
     },
     btn: {

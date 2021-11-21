@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-
     backgroundColor: '#e46472',
     width: wp('40%'),
   },
@@ -161,16 +160,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     fontSize: RFPercentage(1.8),
+    fontFamily: 'Kanit'
   },
   boxTop: {
     marginBottom: RFPercentage(1.3),
-    fontFamily: 'Poppins',
+    fontFamily: 'Kanit',
     fontSize: RFPercentage(2.2),
     alignSelf: 'center'
   },
 
   dateTime: {
-    fontFamily: 'Poppins',
+    fontFamily: 'Kanit',
     fontSize: RFPercentage(1.8),
   },
   box: {
@@ -186,12 +186,12 @@ const styles = StyleSheet.create({
   },
   boxHeader: {
     // margin: RFPercentage(1),
-    fontFamily: 'Poppins',
+    fontFamily: 'Kanit',
     fontSize: RFPercentage(2),
     // textAlign: 'left'
   },
   boxInfo: {
-    fontFamily: 'Poppins',
+    fontFamily: 'Kanit',
     fontSize: RFPercentage(1.7),
     marginLeft: RFPercentage(2),
     marginBottom: RFPercentage(2)
