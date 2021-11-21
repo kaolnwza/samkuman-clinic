@@ -45,24 +45,22 @@ const DATA1 = [
 
 const History = () => {
 
-    let isMount = true
+
     const [userHistory, setuserHistory] = useState([])
     useEffect(() => {
         const getUserInfo = async () => {
-            if (isMount) {
-                console.log("history");
-                const instance = axios.create({
-                    withCredentials: true
-                })
-                await instance.get(global.local + "/gethistory")
-                    .then(res => {
-                        setuserHistory(res.data)
-                        // console.log(res.data)
 
-                    })
-                isMount = false
-            }
+            console.log("history");
+
+            await axios.get(global.local + "/gethistory")
+                .then(res => {
+                    setuserHistory(res.data)
+                    console.log(res.data)
+
+                })
+
         }
+
         return (
             getUserInfo()
         )
@@ -73,6 +71,7 @@ const History = () => {
                 date={itemData.item.date}
                 title={itemData.item.symptom}
                 detail={itemData.item}
+                keyExtractor={itemData.history_id}
 
             // color={itemData.item.color}
             // onSelect={() => {
@@ -87,7 +86,7 @@ const History = () => {
         <View style={styles.container}>
             <Bg Text1='ประวัติการรักษา' />
             <View style={styles.position}>
-                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item.date} numColumns={1} />
+                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item.history_id} numColumns={1} />
             </View>
         </View>
     )
