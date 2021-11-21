@@ -49,14 +49,9 @@ const History = () => {
     const [userHistory, setuserHistory] = useState([])
     useEffect(() => {
         const getUserInfo = async () => {
-
-            console.log("history");
-
             await axios.get(global.local + "/gethistory")
                 .then(res => {
                     setuserHistory(res.data)
-                    console.log(res.data)
-
                 })
 
         }
@@ -64,7 +59,7 @@ const History = () => {
         return (
             getUserInfo()
         )
-    }, [])
+    })
     const renderGridItem = (itemData) => {
         return (
             <HistoryGridTile
@@ -86,7 +81,7 @@ const History = () => {
         <View style={styles.container}>
             <Bg Text1='ประวัติการรักษา' />
             <View style={styles.position}>
-                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item.history_id} numColumns={1} />
+                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item._id} numColumns={1} />
             </View>
         </View>
     )

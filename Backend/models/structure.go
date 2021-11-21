@@ -58,8 +58,9 @@ type Appointment struct {
 }
 
 type History struct {
-	History_id int `json:"history_id " bson:"history_id "`
-	User_id    int `json:"user_id" bson:"user_id"`
+	ID         primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	History_id int                `json:"history_id " bson:"history_id "`
+	User_id    int                `json:"user_id" bson:"user_id"`
 	Doctor
 	Date          time.Time `json:"date" bson:"date"`
 	Symptom       string    `json:"symptom" bson:"symptom"`
