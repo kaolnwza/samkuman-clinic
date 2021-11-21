@@ -74,17 +74,21 @@ func UpdateAppointment(response http.ResponseWriter, request *http.Request) {
 	var appointment_struct models.Appointment                 //กำหนดตัวแปลที่จะเข้าถึงใน structure
 	json.NewDecoder(request.Body).Decode(&appointment_struct) // รับข้อมูลจาก PM ลงมาใน structure
 
-	_, err := appointment_collection.UpdateOne(
+	fmt.Println(appointment_struct.Date)
+	rr, _ := appointment_collection.UpdateOne(
 		ctx,
 		bson.M{"appointment_id": appointment_struct.Appointment_id},
 		bson.D{
 			{"$set", bson.D{{"date", appointment_struct.Date}}},
 		},
 	)
-	if err != nil {
-		fmt.Println(err)
-	}
+	// if err != nil {
+	// 	// fmt.Println(rr)
+	// }
+
+	fmt.Println(rr)
 	json.NewEncoder(response).Encode("Update") //แสดงใน PM
+
 }
 
 func DeleteAppointment(response http.ResponseWriter, request *http.Request) {
