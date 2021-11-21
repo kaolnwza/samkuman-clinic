@@ -47,6 +47,7 @@ type Doctor_schedule struct {
 }
 
 type Appointment struct {
+	ID         		primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	Appointment_id   int       `json:"appointment_id" bson:"appointment_id"`
 	User_id          int       `json:"user_id" bson:"user_id"`
 	Firstname        string    `json:"firstname" bson:"firstname"`
