@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import Login from '../screen/Login'
 import SignUp from '../screen/SignUp'
@@ -65,6 +65,32 @@ const Navigation = () => {
 }
 
 const Custom = props => {
+    let isMount = true
+
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        const getUser = async () => {
+            if (isMount) {
+                console.log("profile");
+                const instance = axios.create({
+                    withCredentials: true
+                })
+
+                await instance.get(global.local + "/finduser")
+                    .then(res => {
+                        setUser(res.data)
+                        console.log(res.data);
+
+
+                    })
+                isMount = false
+            }
+        }
+        return (
+            getUser()
+        )
+    }, [])
     const logOut = async () => {
         const instance = axios.create({
             withCredentials: true
@@ -81,7 +107,7 @@ const Custom = props => {
     return (
         <DrawerContentScrollView style={{ backgroundColor: '#fff9ec' }} {...props}>
             <TouchableOpacity style={{ flexDirection: 'row', flex: 1, }} onPress={() => {
-                props.navigation.navigate('profile');
+                props.navigation.navigate('profile', { userInfo: user });
 
             }}>
 
@@ -90,11 +116,12 @@ const Custom = props => {
                 </View>
                 <View style={{ flexDirection: 'column', marginTop: 10 }}>
                     <Text style={{ fontFamily: 'Poppins' }}>
-                        Pawaris
+                        {user.firstname}
                     </Text>
                     <Text style={{ fontFamily: 'Poppins' }}>
-                        Wongsaied
+                        {user.lastname}
                     </Text>
+
                     <TouchableOpacity style={styles.logout} onPress={() => {
                         logOut()
                         props.navigation.replace('login');

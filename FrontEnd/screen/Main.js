@@ -15,6 +15,7 @@ const Main = ({ navigation }) => {
     let isMount = true
     const [news, setNews] = useState([])
     const [relation, setRelation] = useState([])
+    
 
     useEffect(() => {
         const getInformation = async () => {
