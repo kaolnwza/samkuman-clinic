@@ -15,7 +15,7 @@ type User struct {
 	Gender          string             `json:"gender" bson:"gender"`
 	Height          int                `json:"height" bson:"height"`
 	Weight          float32            `json:"weight" bson:"weight"`
-	Dob             string             `json:"dob" bson:"dob"`
+	Dob             time.Time          `json:"dob" bson:"dob"`
 	Age             int                `json:"age" bson:"age"`
 	Address         string             `json:"address" bson:"address"`
 	Phone_number    string             `json:"phone_number" bson:"phone_number"`
@@ -47,15 +47,15 @@ type Doctor_schedule struct {
 }
 
 type Appointment struct {
-	ID         		primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Appointment_id   int       `json:"appointment_id" bson:"appointment_id"`
-	User_id          int       `json:"user_id" bson:"user_id"`
-	Firstname        string    `json:"firstname" bson:"firstname"`
-	Lastname         string    `json:"lastname" bson:"lastname"`
-	Doctor_id        int       `json:"doctor_id" bson:"doctor_id"`
-	Doctor_Firstname string    `json:"doctor_firstname" bson:"doctor_firstname"`
-	Doctor_Lastname  string    `json:"doctor_lastname" bson:"doctor_lastname"`
-	Date             time.Time `json:"date" bson:"date"`
+	ID               primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	Appointment_id   int                `json:"appointment_id" bson:"appointment_id"`
+	User_id          int                `json:"user_id" bson:"user_id"`
+	Firstname        string             `json:"firstname" bson:"firstname"`
+	Lastname         string             `json:"lastname" bson:"lastname"`
+	Doctor_id        int                `json:"doctor_id" bson:"doctor_id"`
+	Doctor_Firstname string             `json:"doctor_firstname" bson:"doctor_firstname"`
+	Doctor_Lastname  string             `json:"doctor_lastname" bson:"doctor_lastname"`
+	Date             time.Time          `json:"date" bson:"date"`
 }
 
 type History struct {

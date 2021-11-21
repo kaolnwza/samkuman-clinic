@@ -10,11 +10,11 @@ const InfoBox = (props) => {
 
     return (
         <View style={styles.box}>
-            <MaterialIcons name={props.icon} style={styles.profile} size={wp('15%')} color="#0d253f" />
+            <MaterialIcons name={props.icon} style={styles.profile} size={wp('18%')} color="#0d253f" />
             <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
                 <Text style={styles.info}>{props.titleTop}: {props.f}</Text>
                 {props.m != null ? <Text style={styles.info}>{props.titleMid}: {props.m}</Text> : null}
-                
+
             </View>
 
         </View>
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9be7c',
         flexDirection: 'row',
         borderRadius: RFPercentage(4.5),
+        height: hp('18%'),
         width: wp('80%'),
         justifyContent: 'center',
         padding: RFPercentage(2),
@@ -43,6 +44,6 @@ const styles = StyleSheet.create({
     info: {
         margin: RFPercentage(1),
         fontFamily: 'Kanit',
-        fontSize: RFPercentage(2),
+        fontSize: RFPercentage(2.2),
     },
 })

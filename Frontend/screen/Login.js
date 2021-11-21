@@ -17,7 +17,7 @@ const login = ({ navigation }) => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    global.local = "http://192.168.43.247:12345"
+    global.local = "http://172.20.10.3:12345"
 
     const instance = axios.create({
         withCredentials: true
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         position: "absolute",
-        fontSize: RFPercentage(4),
+        fontSize: RFPercentage(6),
         top: hp('20%'),
         color: '#FFF9EC',
         fontFamily: 'Kanit',

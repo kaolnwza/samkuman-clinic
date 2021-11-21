@@ -50,19 +50,17 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	}
 
 	// Edit BirthDay
-	if user_struct.Dob != "" {
-		_, err := user_collection.UpdateOne(
-			ctx,
-			bson.M{"user_id": user_struct.User_id},
-			bson.D{
-				{"$set", bson.D{{"dob", user_struct.Dob}}},
-			},
-		)
-		if err != nil {
-			fmt.Println(err)
-		}
-		json.NewEncoder(response).Encode("birthday") //แสดงใน PM
+	_, err := user_collection.UpdateOne(
+		ctx,
+		bson.M{"user_id": user_struct.User_id},
+		bson.D{
+			{"$set", bson.D{{"dob", user_struct.Dob}}},
+		},
+	)
+	if err != nil {
+		fmt.Println(err)
 	}
+	json.NewEncoder(response).Encode("birthday") //แสดงใน PM
 
 	// Edit Gender
 	if user_struct.Gender != "" {
