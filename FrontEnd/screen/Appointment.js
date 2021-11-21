@@ -7,26 +7,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import PostponeBox from '../components/PostponeBox';
 import axios from "axios"
 
-const APPOINT = [
-    {
-        name: 'Pawaris Wongsaied',
-        doctor: 'Sinlapawit Namwow',
-        date: '04/04/2622',
-        time: '12.00'
-    },
-    {
-        name: 'Pawaris Wongsaied',
-        doctor: 'Sinlapawit Namwow',
-        date: '04/04/2623',
-        time: '12.00'
-    },
-    {
-        name: 'Pawaris Wongsaied',
-        doctor: 'Sinlapawit Namwow',
-        date: '04/04/2624',
-        time: '12.00'
-    },
-]
 
 const Appointment = () => {
 

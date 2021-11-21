@@ -6,40 +6,6 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Moment from 'moment';
 
-const DATA1 = [
-  {
-    title: 'Puad Hua',
-    date: "10/11/2020",
-    symptom: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    diagnose: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    doctorAdvice: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    medicine: ["1", "2", "3"],
-    howToUse: ["HTU1", "HTU2", "HTU3"],
-
-  },
-
-  {
-    title: 'Jeb Korrr',
-    date: "10/11/2020",
-    symptom: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    diagnose: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    doctorAdvice: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    medicine: ["1", "2", "3"],
-    howToUse: ["HTU1", "HTU2", "HTU3"],
-
-  },
-
-  {
-    title: 'Puad Tong',
-    date: "10/11/2020",
-    symptom: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    diagnose: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    doctorAdvice: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-    medicine: ["1", "2", "3"],
-    howToUse: ["HTU1", "HTU2", "HTU3"],
-  }]
-
-
 
 const HistoryGridTile = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
