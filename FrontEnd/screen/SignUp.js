@@ -24,14 +24,14 @@ const SignUp = ({ navigation }) => {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [height, setHeight] = useState(0);
-    const [weight, setWeight] = useState(0);
+    const [height, setHeight] = useState();
+    const [weight, setWeight] = useState();
     const [allergic, setAllergic] = useState('');
     const [disease, setDisease] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+    const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
         useValidation({
             state: {
                 identityNumber,
@@ -48,26 +48,29 @@ const SignUp = ({ navigation }) => {
                 confirmPassword,
                 gender
             },
+
         });
+
     const _onPressButton = () => {
         validate({
             identityNumber: { required: true, numbers: true, minlength: 13, maxlength: 13 },
             firstname: { required: true },
             lastname: { required: true },
             address: { required: true },
-            phone: { required: true, numbers: true },
+            phone: { required: true, numbers: true, minlength: 10, maxlength: 10 },
             height: { required: true, numbers: true },
             weight: { required: true, numbers: true },
-            allergic: { required: true },
-
-
-
-            email: { email: true },
+            email: { required: true, email: true, },
             date: { required: true },
-            password: { required: true },
-            confirmPassword: { equalPassword: password, required: true },
+            password: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
+            confirmPassword: { required: true, equalPassword: password },
             gender: { required: true }
         });
+        if (isFormValid()) {
+            navigation.replace('login')
+        } else {
+            console.log(isFormValid())
+        }
     };
 
     return (
@@ -148,23 +151,42 @@ const SignUp = ({ navigation }) => {
                     ))}
                 <View style={{ flexDirection: 'row', }}>
                     <View style={{ flex: 1, marginRight: 5 }}>
-                        <Text style={styles.label}>ส่วนสูง</Text>
+                        <Text style={styles.label}>ส่วนสูง {height}</Text>
                         <TextInput style={styles.input} placeholder="ส่วนสูง" keyboardType='decimal-pad' value={height} onChangeText={setHeight} />
+                        {isFieldInError('height') &&
+                            getErrorsInField('height').map(errorMessage => (
+                                <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                            ))}
                     </View>
                     <View style={{ flex: 1 }}>
                         <Text style={styles.label}>น้ำหนัก</Text>
                         <TextInput style={styles.input} placeholder="น้ำหนัก" keyboardType='decimal-pad' value={weight} onChangeText={setWeight} />
+                        {isFieldInError('weight') &&
+                            getErrorsInField('weight').map(errorMessage => (
+                                <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                            ))}
                     </View>
                 </View>
-                <Text style={styles.label}>ยา และอาหารที่แพ้</Text>
+                <Text style={styles.label}>ยา และอาหารที่แพ้ (ถ้าไม่มีไม่ต้องใส่)</Text>
                 <TextInput style={styles.input} placeholder="ยา และอาหารที่แพ้" value={allergic} onChangeText={setAllergic} />
-                <Text style={styles.label}>โรคประจำตัว</Text>
+                {isFieldInError('allergic') &&
+                    getErrorsInField('allergic').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
+                <Text style={styles.label}>โรคประจำตัว (ถ้าไม่มีไม่ต้องใส่)</Text>
                 <TextInput style={styles.input} placeholder="โรคประจำตัว" value={disease} onChangeText={setDisease} />
                 <Text style={styles.label}>อีเมล</Text>
                 <TextInput style={styles.input} placeholder="อีเมล" keyboardType='email-address' value={email} onChangeText={setEmail} />
+                {isFieldInError('email') &&
+                    getErrorsInField('email').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
                 <Text style={styles.label}>รหัสผ่าน</Text>
                 <TextInput style={styles.input} placeholder="รหัสผ่าน" value={password} onChangeText={setPassword} />
-
+                {isFieldInError('password') &&
+                    getErrorsInField('password').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
                 <Text style={styles.label}>ยืนยันรหัสผ่าน</Text>
                 <TextInput style={styles.input} placeholder="ยืนยันรหัสผ่าน" value={confirmPassword} onChangeText={setConfirmPassword} />
                 {isFieldInError('confirmPassword') &&
@@ -174,7 +196,6 @@ const SignUp = ({ navigation }) => {
 
                 <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
 
-                    // console.log(date)
                     _onPressButton()
                 }}>
                     <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>SIGN UP</Text>

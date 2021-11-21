@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
         fontWeight: 'bold',
         color: '#0d253f',
-        lineHeight: RFPercentage(5.7),
+        lineHeight: RFPercentage(6),
 
     },
 
