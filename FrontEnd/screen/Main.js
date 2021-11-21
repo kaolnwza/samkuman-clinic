@@ -63,7 +63,7 @@ const Main = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Bg Text1='หน้าหลัก' />
+            <Bg  Text1='หน้าหลัก' />
             <View style={styles.contentContainer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity onPress={() => {
@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
 
     tabFont: {
         alignSelf: 'center',
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         fontSize: RFPercentage(2)
     },
-
+    
 
 
 })
