@@ -47,18 +47,19 @@ func Register(response http.ResponseWriter, request *http.Request) {
 func Login(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("content-type", "application/json")
 
-	var data_get models.Login
+	var data_get models.User
+	//data_get.Email = "404"
 	json.NewDecoder(request.Body).Decode(&data_get)
-	fmt.Println(data_get.Identity_number)
-	fmt.Println(data_get.Password)
+	// fmt.Println(data_get.Identity_number)
+	// fmt.Println(data_get.Password)
 	collection := client.Database(database).Collection("user")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
 	var data models.User
-	_ = collection.FindOne(ctx, bson.M{"identity_number": data_get.Identity_number}).Decode(&data)
+	_ = collection.FindOne(ctx, bson.M{"email": data_get.Email}).Decode(&data)
 
-	if data.Identity_number == "" {
-		fmt.Println(data.Identity_number)
+	if data.Email == "" {
+		// fmt.Println(data.Identity_number)
 		fmt.Println("User not found")
 		json.NewEncoder(response).Encode("User not found")
 
