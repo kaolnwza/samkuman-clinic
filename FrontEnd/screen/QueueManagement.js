@@ -52,7 +52,7 @@ const PassQueue = () => {
                 <Picker
                     selectedValue={selectedValue}
                     style={{ width: wp('80%'), }}
-                    itemStyle={{ color: 'white', fontFamily: 'Poppins' }}
+                    itemStyle={{ color: 'white', fontFamily: 'Kanit' }}
                     onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                 >
                     <Picker.Item label="แผนกทั่วไป" value="normal" />
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     font1: {
         alignSelf: 'center',
 
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         color: '#fff9ec',
     }
 })

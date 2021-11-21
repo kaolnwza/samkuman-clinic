@@ -76,7 +76,7 @@ const Queue = ({ navigation }) => {
                     cancelQueue()
 
                 }}>
-                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>ยกเลิกคิว</Text>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยกเลิกคิว</Text>
                 </TouchableOpacity>
 
 
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     font1: {
         alignSelf: 'center',
 
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         color: '#fff9ec',
     }
 
