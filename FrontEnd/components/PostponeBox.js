@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, FlatList, Modal } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Moment from 'moment';
 import * as Device from 'expo-device';
+import axios from 'axios'
 
 const PostponeBox = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -14,12 +15,38 @@ const PostponeBox = (props) => {
         setDate(currentDate);
     };
 
+    const [appointmentTitle, setAppointmentTitle] = useState();
+
+        useEffect(() => {
+        const getAppointment = async () => {
+            await axios.get(global.local + "/addappointment")
+                .then(res => {
+                    runFetching(res.data)
+                    setAppointmentTitle(res.data.date)
+                 
+                })
+        }
+
+        return (
+            getAppointment()
+        )
+    })
+
+
+
+
+
+
+
+
+
+
     const renderItem = ({ item }) => {
 
         return (
 
             <View style={styles.box}>
-                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>Next Appontment </Text>
+                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>การนัดหมายวันที่ {Moment(appointmentTitle).format('d MMM')}</Text>
                 <View style={{ marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(1) }}>
                     <Text style={styles.detail}>Name : {item.firstname} {item.lastname}</Text>
                     <Text style={styles.detail}>Doctor : {item.doctor_firstname}</Text>

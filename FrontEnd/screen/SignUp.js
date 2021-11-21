@@ -10,7 +10,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { useValidation } from 'react-native-form-validator';
 
 const SignUp = ({ navigation }) => {
-    const [date, setDate] = useState(new Date());
     const [value, setValue] = React.useState('first');
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -20,6 +19,8 @@ const SignUp = ({ navigation }) => {
     const [identityNumber, setIdentityNumber] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
+    const [date, setDate] = useState(new Date());
+    const [gender, setGender] = useState("")
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
@@ -27,10 +28,8 @@ const SignUp = ({ navigation }) => {
     const [weight, setWeight] = useState(0);
     const [allergic, setAllergic] = useState('');
     const [disease, setDisease] = useState('');
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [gender, setGender] = useState("ชาย")
 
     const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
         useValidation({
@@ -45,12 +44,31 @@ const SignUp = ({ navigation }) => {
                 weight,
                 allergic,
                 disease,
-                username,
                 password,
                 confirmPassword,
                 gender
             },
         });
+    const _onPressButton = () => {
+        validate({
+            identityNumber: { required: true, numbers: true, minlength: 13, maxlength: 13 },
+            firstname: { required: true },
+            lastname: { required: true },
+            address: { required: true },
+            phone: { required: true, numbers: true },
+            height: { required: true, numbers: true },
+            weight: { required: true, numbers: true },
+            allergic: { required: true },
+
+
+
+            email: { email: true },
+            date: { required: true },
+            password: { required: true },
+            confirmPassword: { equalPassword: password, required: true },
+            gender: { required: true }
+        });
+    };
 
     return (
         <View style={styles.container}>
@@ -70,10 +88,24 @@ const SignUp = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerInput}
                 viewIsInsideTabBar={false} extraScrollHeight={-130}>
-                <Text style={styles.label}>ชื่อ</Text>
-                <TextInput style={styles.input} placeholder="ชื่อ" />
+                <Text style={styles.label}>รหัสประจำตัวประชาชน </Text>
+                <TextInput style={styles.input} placeholder="รหัสประจำตัวประชาชน" value={identityNumber} onChangeText={setIdentityNumber} />
+                {isFieldInError('identityNumber') &&
+                    getErrorsInField('identityNumber').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
+                <Text style={styles.label}>ชื่อ </Text>
+                <TextInput style={styles.input} placeholder="ชื่อ" value={firstname} onChangeText={setFirstname} />
+                {isFieldInError('firstname') &&
+                    getErrorsInField('firstname').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
                 <Text style={styles.label}>นามสกุล</Text>
-                <TextInput style={styles.input} placeholder="นามสกุล" />
+                <TextInput style={styles.input} placeholder="นามสกุล" value={lastname} onChangeText={setLastname} />
+                {isFieldInError('lastname') &&
+                    getErrorsInField('lastname').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
                 <View style={{
                     flexDirection: 'row', flex: 1, alignContent: 'space-between', borderBottomWidth: 1, borderBottomColor: '#FFF9EC',
                 }}>
@@ -98,36 +130,52 @@ const SignUp = ({ navigation }) => {
                         </RadioButton.Group>
                     </View>
                 </View>
+                {isFieldInError('gender') &&
+                    getErrorsInField('gender').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
                 <Text style={styles.label}>ที่อยู่</Text>
-                <TextInput style={styles.input} placeholder="ที่อยู่" />
+                <TextInput style={styles.input} placeholder="ที่อยู่" value={address} onChangeText={setAddress} />
+                {isFieldInError('address') &&
+                    getErrorsInField('address').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
                 <Text style={styles.label}>เบอร์โทรศัพท์</Text>
-                <TextInput style={styles.input} placeholder="เบอร์โทรศัพท์" keyboardType='phone-pad' />
-
+                <TextInput style={styles.input} placeholder="เบอร์โทรศัพท์" keyboardType='phone-pad' value={phone} onChangeText={setPhone} />
+                {isFieldInError('phone') &&
+                    getErrorsInField('phone').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
                 <View style={{ flexDirection: 'row', }}>
                     <View style={{ flex: 1, marginRight: 5 }}>
                         <Text style={styles.label}>ส่วนสูง</Text>
-                        <TextInput style={styles.input} placeholder="ส่วนสูง" keyboardType='decimal-pad' />
+                        <TextInput style={styles.input} placeholder="ส่วนสูง" keyboardType='decimal-pad' value={height} onChangeText={setHeight} />
                     </View>
                     <View style={{ flex: 1 }}>
                         <Text style={styles.label}>น้ำหนัก</Text>
-                        <TextInput style={styles.input} placeholder="น้ำหนัก" keyboardType='decimal-pad' />
+                        <TextInput style={styles.input} placeholder="น้ำหนัก" keyboardType='decimal-pad' value={weight} onChangeText={setWeight} />
                     </View>
                 </View>
                 <Text style={styles.label}>ยา และอาหารที่แพ้</Text>
-                <TextInput style={styles.input} placeholder="ยา และอาหารที่แพ้" />
+                <TextInput style={styles.input} placeholder="ยา และอาหารที่แพ้" value={allergic} onChangeText={setAllergic} />
                 <Text style={styles.label}>โรคประจำตัว</Text>
-                <TextInput style={styles.input} placeholder="ยา และอาหารที่แพ้" />
+                <TextInput style={styles.input} placeholder="โรคประจำตัว" value={disease} onChangeText={setDisease} />
                 <Text style={styles.label}>อีเมล</Text>
-                <TextInput style={styles.input} placeholder="อีเมล" keyboardType='email-address' />
+                <TextInput style={styles.input} placeholder="อีเมล" keyboardType='email-address' value={email} onChangeText={setEmail} />
                 <Text style={styles.label}>รหัสผ่าน</Text>
-                <TextInput style={styles.input} placeholder="รหัสผ่าน" />
-                <Text style={styles.label}>ยืนยันรหัสผ่าน</Text>
-                <TextInput style={styles.input} placeholder="ยืนยันรหัสผ่าน" />
+                <TextInput style={styles.input} placeholder="รหัสผ่าน" value={password} onChangeText={setPassword} />
 
+                <Text style={styles.label}>ยืนยันรหัสผ่าน</Text>
+                <TextInput style={styles.input} placeholder="ยืนยันรหัสผ่าน" value={confirmPassword} onChangeText={setConfirmPassword} />
+                {isFieldInError('confirmPassword') &&
+                    getErrorsInField('confirmPassword').map(errorMessage => (
+                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                    ))}
 
                 <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
-                    // postData()
-                    console.log(date)
+
+                    // console.log(date)
+                    _onPressButton()
                 }}>
                     <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>SIGN UP</Text>
                 </TouchableOpacity>
@@ -234,5 +282,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: wp('8%')
     },
+    warn: {
+        color: 'red',
+        fontFamily: 'Poppins'
+    }
 
 })
