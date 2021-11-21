@@ -78,7 +78,7 @@ const PassQueue = () => {
                     // navigation.replace(props.to)
                     queueDelete()
                 }}>
-                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>คิวต่อไป</Text>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>คิวต่อไป</Text>
                 </TouchableOpacity>
             </View>
         </View>
