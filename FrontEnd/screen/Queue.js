@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
     btn: {
         marginBottom: hp('5%'),
         marginTop: hp('3%'),
-        fontFamily: 'Poppins',
         alignSelf: 'center',
         backgroundColor: '#e46472',
         width: wp('80%'),

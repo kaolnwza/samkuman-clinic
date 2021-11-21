@@ -49,7 +49,7 @@ const PostponeBox = (props) => {
                     <TouchableOpacity onPress={() => {
                         setModalVisible(true)
                     }} style={{ backgroundColor: '#f9be7c', width: wp('30%'), borderRadius: RFPercentage(5), justifyContent: 'center' }}>
-                        <Text style={{ fontFamily: 'Poppins', padding: RFPercentage(1), alignSelf: 'center' }}>Postpone</Text>
+                        <Text style={{ fontFamily: 'Kanit', padding: RFPercentage(1), alignSelf: 'center', fontSize: RFPercentage(2) }}>เลื่อน</Text>
                     </TouchableOpacity>
                     <Modal
                         animationType="slide"
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
         marginBottom: RFPercentage(2),
         lineHeight: RFPercentage(2),
-        fontSize: RFPercentage(2)
+        fontSize: RFPercentage(1.8)
     },
     centeredView: {
         flex: 1,
