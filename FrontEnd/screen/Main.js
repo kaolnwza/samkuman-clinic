@@ -15,7 +15,7 @@ const Main = ({ navigation }) => {
     let isMount = true
     const [news, setNews] = useState([])
     const [relation, setRelation] = useState([])
-    
+
 
     useEffect(() => {
         const getInformation = async () => {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 
     tabFont: {
         alignSelf: 'center',
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         fontSize: RFPercentage(2)
     },
 

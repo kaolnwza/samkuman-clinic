@@ -28,7 +28,7 @@ const Patient = () => {
                     <TouchableOpacity onPress={() => {
                         setModalVisible(true)
                     }} style={{ backgroundColor: '#f9be7c', borderRadius: RFPercentage(5), alignSelf: 'center', paddingHorizontal: RFPercentage(2), paddingVertical: RFPercentage(1) }}>
-                        <Text style={{ fontFamily: 'Poppins', padding: RFPercentage(1), alignSelf: 'center' }}>การนัดหมายครั้งถัดไป</Text>
+                        <Text style={{ fontFamily: 'Kanit', padding: RFPercentage(1), alignSelf: 'center' }}>การนัดหมายครั้งถัดไป</Text>
                     </TouchableOpacity>
                     <Modal
                         animationType="slide"
@@ -94,10 +94,11 @@ const Patient = () => {
                             numberOfLines={4} /> */}
                     </KeyboardAwareScrollView>
 
-                    <TouchableOpacity onPress={() => {
-                       
-                    }} style={{ backgroundColor: '#309397', borderRadius: RFPercentage(5), alignSelf: 'center', paddingHorizontal: RFPercentage(10), paddingVertical: RFPercentage(1) }}>
-                        <Text style={{ fontFamily: 'Poppins', alignSelf: 'center',  fontSize: RFPercentage(2)}}>ยืนยัน</Text>
+                    <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
+
+
+                    }}>
+                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยืนยัน</Text>
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback >
@@ -192,5 +193,19 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(2.5),
         fontFamily: 'Poppins',
         marginTop: RFPercentage(2)
+    },
+    btn: {
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+        fontFamily: 'Poppins',
+        alignSelf: 'center',
+        backgroundColor: '#309397',
+        width: wp('80%'),
+        paddingVertical: 10,
+        borderRadius: 40,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
     },
 })

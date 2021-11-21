@@ -115,10 +115,10 @@ const Custom = props => {
                     <AntDesign name="user" style={styles.profile} size={80} color="#309397" />
                 </View>
                 <View style={{ flexDirection: 'column', marginTop: 10 }}>
-                    <Text style={{ fontFamily: 'Poppins' }}>
+                    <Text style={{ fontFamily: 'Poppins', fontSize: RFPercentage(1.8) }}>
                         {user.firstname}
                     </Text>
-                    <Text style={{ fontFamily: 'Poppins' }}>
+                    <Text style={{ fontFamily: 'Poppins', fontSize: RFPercentage(1.8) }}>
                         {user.lastname}
                     </Text>
 
@@ -127,7 +127,7 @@ const Custom = props => {
                         props.navigation.replace('login');
                     }}>
                         <Text style={{
-                            fontFamily: 'Poppins'
+                            fontFamily: 'Kanit'
                         }}>ออกจากระบบ</Text>
                     </TouchableOpacity>
                 </View>
@@ -167,7 +167,7 @@ const Menu = () => {
                 headerTransparent: true,
                 title: null,
                 headerTintColor: 'black',
-                drawerLabelStyle: { fontFamily: 'Poppins' }
+                drawerLabelStyle: { fontFamily: 'Kanit', fontSize: RFPercentage(2) }
 
             }} >
 

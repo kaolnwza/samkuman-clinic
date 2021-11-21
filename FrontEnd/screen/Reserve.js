@@ -60,7 +60,7 @@ const Reserve = ({ navigation }) => {
                     <Picker
                         selectedValue={selectedValue}
                         style={{ width: wp('80%'), }}
-                        itemStyle={{ color: 'white', fontFamily: 'Poppins' }}
+                        itemStyle={{ color: 'white', fontFamily: 'Kanit' }}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     >
                         <Picker.Item label="แผนกทั่วไป" value="normal" />
@@ -96,7 +96,7 @@ const Reserve = ({ navigation }) => {
                         // navigation.replace(props.to)
                         postQueue()
                     }}>
-                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>ยืนยัน</Text>
+                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>ยืนยัน</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     label: {
         color: 'white',
         fontSize: RFPercentage(2.5),
-        fontFamily: 'Poppins'
+        fontFamily: 'Kanit'
     },
     queueBorder: {
         borderColor: "#309397",

@@ -17,7 +17,7 @@ const login = ({ navigation }) => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    global.local = "http://192.168.43.247:12345"
+    global.local = "http://172.20.10.3:12345"
 
     const instance = axios.create({
         withCredentials: true
@@ -121,12 +121,12 @@ const login = ({ navigation }) => {
                 </View>
 
             </KeyboardAwareScrollView>
-            <Text style={{ color: 'red',  fontFamily: 'Kanit', alignSelf: 'center' }}>{authen}</Text>
+            <Text style={{ color: 'red', fontFamily: 'Kanit', alignSelf: 'center' }}>{authen}</Text>
 
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
             }}>
-                <Text style={{ fontSize: RFPercentage(3),  fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
+                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
             </TouchableOpacity>
         </View >
     )
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     containerinput: {
         flex: 1,
         paddingHorizontal: "12%",
-         fontFamily: 'Kanit',
+        fontFamily: 'Kanit',
     },
     input: {
         fontSize: 18,
@@ -182,19 +182,19 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(4),
         top: hp('20%'),
         color: '#FFF9EC',
-         fontFamily: 'Kanit',
+        fontFamily: 'Kanit',
         fontWeight: 'bold',
         marginLeft: 10
 
-        
-        
-     
+
+
+
     },
     btn: {
         marginBottom: hp('5%'),
         marginTop: hp('3%'),
 
-         fontFamily: 'Kanit',
+        fontFamily: 'Kanit',
         alignSelf: 'center',
         backgroundColor: '#f9be7c',
         width: wp('80%'),
