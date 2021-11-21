@@ -135,7 +135,7 @@ func Logout(response http.ResponseWriter, request *http.Request) {
 			Expires:  time.Now().Add(-time.Hour),
 			HttpOnly: true,
 		})
-
+	userCookieId = -1
 	json.NewEncoder(response).Encode("Logout success")
 }
 
@@ -237,4 +237,10 @@ func GetUserInformation(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(message)
 	//json.NewEncoder(response).Encode(history_struct)
 
+}
+
+func GetCurrentUser(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+
+	json.NewEncoder(response).Encode(userCookieId)
 }
