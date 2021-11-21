@@ -106,6 +106,5 @@ func GetHistory(response http.ResponseWriter, request *http.Request) {
 	// doctor_collection := client.Database(database).Collection("doctor")
 	// doctor_collection.FindOne()
 
-	fmt.Println("History")
 	json.NewEncoder(response).Encode(history_struct)
 }
