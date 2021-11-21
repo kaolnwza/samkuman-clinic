@@ -96,13 +96,13 @@ const Reserve = ({ navigation }) => {
                         // navigation.replace(props.to)
                         postQueue()
                     }}>
-                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>ยืนยัน</Text>
+                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยืนยัน</Text>
                     </TouchableOpacity>
 
                 </View>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback >
 
-        </View>
+        </View >
     )
 }
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     font1: {
         alignSelf: 'center',
 
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         color: '#fff9ec',
     },
     btn: {
