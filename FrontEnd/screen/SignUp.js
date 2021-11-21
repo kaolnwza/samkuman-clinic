@@ -7,7 +7,7 @@ import { RadioButton } from 'react-native-paper';
 import * as Device from 'expo-device';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Btn from '../components/Button';
+import { useValidation } from 'react-native-form-validator';
 
 const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
@@ -32,7 +32,25 @@ const SignUp = ({ navigation }) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [gender, setGender] = useState("ชาย")
 
-
+    const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+        useValidation({
+            state: {
+                identityNumber,
+                firstname,
+                lastname,
+                address,
+                phone,
+                email,
+                height,
+                weight,
+                allergic,
+                disease,
+                username,
+                password,
+                confirmPassword,
+                gender
+            },
+        });
 
     return (
         <View style={styles.container}>
@@ -75,8 +93,8 @@ const SignUp = ({ navigation }) => {
                     <View style={{ flex: 1 }}>
                         <Text style={styles.label}>เพศ</Text>
                         <RadioButton.Group onValueChange={x => setGender(x)} value={gender}>
-                            <RadioButton.Item label="ผู้ชาย" labelStyle={{ color: "#FFF9EC" }} value="ชาย" />
-                            <RadioButton.Item label="ผู้หญิง" labelStyle={{ color: "#FFF9EC" }} value="หญิง" />
+                            <RadioButton.Item label="ผู้ชาย" labelStyle={{ color: "#FFF9EC", fontFamily: 'Kanit' }} value="ชาย" />
+                            <RadioButton.Item label="ผู้หญิง" labelStyle={{ color: "#FFF9EC", fontFamily: 'Kanit' }} value="หญิง" />
                         </RadioButton.Group>
                     </View>
                 </View>

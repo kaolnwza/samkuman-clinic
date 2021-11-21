@@ -74,6 +74,7 @@ const Custom = props => {
             .then(
                 res => {
                     console.log(res.data);
+
                 }
             )
     }
@@ -94,7 +95,10 @@ const Custom = props => {
                     <Text style={{ fontFamily: 'Poppins' }}>
                         Wongsaied
                     </Text>
-                    <TouchableOpacity style={styles.logout} onPress={() => logOut()}>
+                    <TouchableOpacity style={styles.logout} onPress={() => {
+                        logOut()
+                        props.navigation.replace('login');
+                    }}>
                         <Text style={{
                             fontFamily: 'Poppins'
                         }}>ออกจากระบบ</Text>
