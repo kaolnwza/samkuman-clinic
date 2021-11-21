@@ -30,26 +30,29 @@ const APPOINT = [
 
 const Appointment = () => {
 
-    let isMount = true
-    const [userAppointment, setUserAppointment] = useState({})
+
+    const [userAppointment, setUserAppointment] = useState()
     useEffect(() => {
         console.log("use eff");
         const getUserInfo = async () => {
             console.log("in");
-            if (isMount) {
-                console.log("getting");
-                const instance = axios.create({
-                    withCredentials: true
-                })
-               
+
+            console.log("getting");
+            const instance = axios.create({
+                withCredentials: true
+            })
+            try {
                 await instance.get(global.local + "/getappointment")
                     .then(res => {
                         setUserAppointment(res.data)
                         console.log(res.data)
 
                     })
-                isMount = false
+            } catch (error) {
+                console.log(error);
             }
+
+
         }
         return (
             getUserInfo()
