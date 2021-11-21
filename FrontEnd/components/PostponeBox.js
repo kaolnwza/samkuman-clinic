@@ -20,11 +20,12 @@ const PostponeBox = (props) => {
 
 
 
-    const getAppointment = async () => {
-        await axios.get(global.local + "/addappointment")
+    const updateAppointment = async () => {
+        await axios.get(global.local + "/updateappointment")
             .then(res => {
                 //runFetching(res.data)
-                setAppointmentTitle(res.data.date)
+                setAppointmentTitle(date)
+                console.log("update" + date)
 
             })
     }
@@ -84,7 +85,7 @@ const PostponeBox = (props) => {
                                         style={[styles.button, styles.buttonSave]}
                                         onPress={() => setModalVisible(!modalVisible)}
                                     >
-                                        <Text style={styles.textStyle}>Save</Text>
+                                        <Text style={styles.textStyle} onPress={() => updateAppointment()}>Save</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
