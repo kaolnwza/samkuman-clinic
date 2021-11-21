@@ -68,7 +68,7 @@ const Notify = ({ navigation }) => {
 
 
         <View style={styles.container}>
-            <Bg Text1='Notification' />
+            <Bg Text1='การแจ้งเตือน' />
             <View style={styles.position}>
                 <FlatList data={DATA1} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} />
             </View>

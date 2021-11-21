@@ -57,26 +57,26 @@ const Queue = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Bg Text1='Queue' />
+            <Bg Text1='คิวการรักษา' />
             <View style={styles.position}>
                 <View style={styles.queueBorder}>
                     <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>{currentQueue}</Text>
                 </View>
-                <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
+                <Text style={[styles.font1, { fontSize: 20 }]}>คิวปัจจุบัน</Text>
 
 
-                <Text style={[styles.font1, { fontSize: RFPercentage(5), marginTop: 50 }]}>Your Queue</Text>
-                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>Is</Text>
+                <Text style={[styles.font1, { fontSize: RFPercentage(5), marginTop: 65 }]}>คิวของคุณ</Text>
+                {/* <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>คือ</Text> */}
                 <View style={styles.queueBorder2}>
                     <Text style={[styles.font1, { fontSize: RFPercentage(7) }]}>{userQueue}</Text>
                 </View>
-                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>{remainQueue} more queue</Text>
+                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>{remainQueue}  คิวก่อนหน้าคุณ</Text>
                 <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                     // navigation.replace(props.to)
                     cancelQueue()
 
                 }}>
-                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>CANCEL</Text>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', alignSelf: 'center' }}>ยกเลิกคิว</Text>
                 </TouchableOpacity>
 
 

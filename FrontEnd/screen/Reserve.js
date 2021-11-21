@@ -50,12 +50,12 @@ const Reserve = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Bg Text1='Reservation' />
+            <Bg Text1='ระบบการจองคิว' />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
                 <View style={styles.position}>
 
-                    <Text style={styles.label}>Doctor</Text>
+                    <Text style={styles.label}>แผนกการรักษา</Text>
 
                     <Picker
                         selectedValue={selectedValue}
@@ -81,22 +81,22 @@ const Reserve = ({ navigation }) => {
 
 
                     <View >
-                        <Text style={styles.label} >Symtom</Text>
+                        <Text style={styles.label} >อาการ</Text>
 
-                        <TextInput style={styles.input} placeholder="Please Elaborate" multiline
+                        <TextInput style={styles.input} placeholder="โปรดระบุ+" multiline
                             numberOfLines={4}
                             onChangeText={x => { setSymtomInput(x) }} />
                     </View>
                     <View style={styles.queueBorder}>
                         <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>{currentQueue}</Text>
                     </View>
-                    <Text style={[styles.font1, { fontSize: 20 }]}>Current Queue</Text>
+                    <Text style={[styles.font1, { fontSize: 20 }]}>คิวปัจจุบัน</Text>
                     {/* <Btn navigation={navigation} label='CONFIRM' color='#309397' /> */}
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                         // navigation.replace(props.to)
                         postQueue()
                     }}>
-                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>CONFIRM</Text>
+                        <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>ยืนยัน</Text>
                     </TouchableOpacity>
 
                 </View>

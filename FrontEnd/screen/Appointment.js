@@ -57,7 +57,7 @@ const Appointment = () => {
     }, [])
     return (
         <View style={styles.container}>
-            <Bg Text1='Appointment' />
+            <Bg Text1='การนัดหมาย' />
             <View style={styles.position}>
                 <View style={{ marginTop: RFPercentage(1), height: hp('62%') }}>
                     <PostponeBox appintList={userAppointment} />

@@ -21,14 +21,14 @@ const Patient = () => {
     };
     return (
         <View style={styles.container}>
-            <Bg Text1='Patient Managemant' />
+            <Bg Text1='ผลการรักษาและการนัดหมาย' />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
                 <View style={styles.position}>
                     <TouchableOpacity onPress={() => {
                         setModalVisible(true)
                     }} style={{ backgroundColor: '#f9be7c', borderRadius: RFPercentage(5), alignSelf: 'center', paddingHorizontal: RFPercentage(2), paddingVertical: RFPercentage(1) }}>
-                        <Text style={{ fontFamily: 'Poppins', padding: RFPercentage(1), alignSelf: 'center' }}>Next Appontment</Text>
+                        <Text style={{ fontFamily: 'Poppins', padding: RFPercentage(1), alignSelf: 'center' }}>การนัดหมายครั้งถัดไป</Text>
                     </TouchableOpacity>
                     <Modal
                         animationType="slide"
@@ -72,28 +72,33 @@ const Patient = () => {
                     </Modal>
                     <Text style={{ ...styles.label, alignSelf: 'center' }}>{moment(date).format('LLL')}</Text>
                     <KeyboardAwareScrollView style={{ height: hp('44%'), marginTop: RFPercentage(5) }}>
-                        <Text style={styles.label}>Symtom</Text>
+                        <Text style={styles.label}>อาการผู้ป่วย</Text>
 
-                        <TextInput style={styles.input} placeholder="Petient Symtom" multiline
+                        <TextInput style={styles.input} placeholder="อาการผู้ป่วย" multiline
                             numberOfLines={4} />
-                        <Text style={styles.label}>Diagnose</Text>
+                        <Text style={styles.label}>ผลวินิจฉัย</Text>
 
-                        <TextInput style={styles.input} placeholder="Petient Diagnose" multiline
+                        <TextInput style={styles.input} placeholder="ผลวินิจฉัย" multiline
                             numberOfLines={4} />
-                        <Text style={styles.label}>Doctor Advice</Text>
+                        <Text style={styles.label}>คำแนะนำแพทย์</Text>
 
-                        <TextInput style={styles.input} placeholder="Advice" multiline
+                        <TextInput style={styles.input} placeholder="คำแนะนำแพทย์" multiline
                             numberOfLines={4} />
-                        <Text style={styles.label}>Medicine</Text>
+                        <Text style={styles.label}>ยา และการใช้</Text>
 
-                        <TextInput style={styles.input} placeholder="Medicine" multiline
+                        <TextInput style={styles.input} placeholder="ยา และการใช้" multiline
                             numberOfLines={4} />
-                        <Text style={styles.label}>How to use</Text>
+                        {/* <Text style={styles.label}>How to use</Text>
 
                         <TextInput style={styles.input} placeholder="How to use Medicine" multiline
-                            numberOfLines={4} />
+                            numberOfLines={4} /> */}
                     </KeyboardAwareScrollView>
 
+                    <TouchableOpacity onPress={() => {
+                       
+                    }} style={{ backgroundColor: '#309397', borderRadius: RFPercentage(5), alignSelf: 'center', paddingHorizontal: RFPercentage(10), paddingVertical: RFPercentage(1) }}>
+                        <Text style={{ fontFamily: 'Poppins', alignSelf: 'center',  fontSize: RFPercentage(2)}}>ยืนยัน</Text>
+                    </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback >
 

@@ -30,6 +30,7 @@ const SignUp = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [gender, setGender] = useState("ชาย")
 
 
 
@@ -51,15 +52,15 @@ const SignUp = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerInput}
                 viewIsInsideTabBar={false} extraScrollHeight={-130}>
-                <Text style={styles.label}>First Name</Text>
-                <TextInput style={styles.input} placeholder="First Name" />
-                <Text style={styles.label}>Last Name</Text>
-                <TextInput style={styles.input} placeholder="Last Name" />
+                <Text style={styles.label}>ชื่อ</Text>
+                <TextInput style={styles.input} placeholder="ชื่อ" />
+                <Text style={styles.label}>นามสกุล</Text>
+                <TextInput style={styles.input} placeholder="นามสกุล" />
                 <View style={{
                     flexDirection: 'row', flex: 1, alignContent: 'space-between', borderBottomWidth: 1, borderBottomColor: '#FFF9EC',
                 }}>
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.label}>Day of Birth</Text>
+                        <Text style={styles.label}>วันเกิด</Text>
                         <DateTimePicker
                             style={{ marginRight: 15, marginTop: 10 }}
                             testID="dateTimePicker"
@@ -72,39 +73,46 @@ const SignUp = ({ navigation }) => {
                         />
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.label}>Sex</Text>
-                        <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
-                            <RadioButton.Item label="Male" labelStyle={{ color: "#FFF9EC" }} value="first" />
-                            <RadioButton.Item label="Female" labelStyle={{ color: "#FFF9EC" }} value="second" />
+                        <Text style={styles.label}>เพศ</Text>
+                        <RadioButton.Group onValueChange={x => setGender(x)} value={gender}>
+                            <RadioButton.Item label="ผู้ชาย" labelStyle={{ color: "#FFF9EC" }} value="ชาย" />
+                            <RadioButton.Item label="ผู้หญิง" labelStyle={{ color: "#FFF9EC" }} value="หญิง" />
                         </RadioButton.Group>
                     </View>
                 </View>
-                <Text style={styles.label}>Address</Text>
-                <TextInput style={styles.input} placeholder="address" />
-                <Text style={styles.label}>Phone</Text>
-                <TextInput style={styles.input} placeholder="Phone" keyboardType='phone-pad' />
+                <Text style={styles.label}>ที่อยู่</Text>
+                <TextInput style={styles.input} placeholder="ที่อยู่" />
+                <Text style={styles.label}>เบอร์โทรศัพท์</Text>
+                <TextInput style={styles.input} placeholder="เบอร์โทรศัพท์" keyboardType='phone-pad' />
 
                 <View style={{ flexDirection: 'row', }}>
                     <View style={{ flex: 1, marginRight: 5 }}>
-                        <Text style={styles.label}>Height</Text>
-                        <TextInput style={styles.input} placeholder="Height" keyboardType='decimal-pad' />
+                        <Text style={styles.label}>ส่วนสูง</Text>
+                        <TextInput style={styles.input} placeholder="ส่วนสูง" keyboardType='decimal-pad' />
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.label}>Weight</Text>
-                        <TextInput style={styles.input} placeholder="Weight" keyboardType='decimal-pad' />
+                        <Text style={styles.label}>น้ำหนัก</Text>
+                        <TextInput style={styles.input} placeholder="น้ำหนัก" keyboardType='decimal-pad' />
                     </View>
                 </View>
-                <Text style={styles.label}>Allergic</Text>
-                <TextInput style={styles.input} placeholder="Allergic" />
-                <Text style={styles.label}>Congenital disease</Text>
-                <TextInput style={styles.input} placeholder="Congenital disease" />
-                <Text style={styles.label}>Email</Text>
-                <TextInput style={styles.input} placeholder="Email" keyboardType='email-address' />
-                <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="Password" />
-                <Text style={styles.label}>Confirm Password</Text>
-                <TextInput style={styles.input} placeholder="Confirm Password" />
-                <Btn navigation={navigation} label='SIGN UP' color='#f9be7c' to='login' />
+                <Text style={styles.label}>ยา และอาหารที่แพ้</Text>
+                <TextInput style={styles.input} placeholder="ยา และอาหารที่แพ้" />
+                <Text style={styles.label}>โรคประจำตัว</Text>
+                <TextInput style={styles.input} placeholder="ยา และอาหารที่แพ้" />
+                <Text style={styles.label}>อีเมล</Text>
+                <TextInput style={styles.input} placeholder="อีเมล" keyboardType='email-address' />
+                <Text style={styles.label}>รหัสผ่าน</Text>
+                <TextInput style={styles.input} placeholder="รหัสผ่าน" />
+                <Text style={styles.label}>ยืนยันรหัสผ่าน</Text>
+                <TextInput style={styles.input} placeholder="ยืนยันรหัสผ่าน" />
+
+
+                <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
+                    // postData()
+                    console.log("ok")
+                }}>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>SIGN UP</Text>
+                </TouchableOpacity>
 
             </KeyboardAwareScrollView >
 
@@ -151,6 +159,21 @@ const styles = StyleSheet.create({
         color: '#FFF9EC',
         fontSize: 15,
         marginTop: 20
+    },
+    btn: {
+        marginBottom: hp('5%'),
+        marginTop: hp('3%'),
+
+        fontFamily: 'Poppins',
+        alignSelf: 'center',
+        backgroundColor: '#f9be7c',
+        width: wp('80%'),
+        paddingVertical: 10,
+        borderRadius: 40,
+        shadowColor: "#000",
+        shadowOffset: { height: 7, width: 0 }, // IOS
+        shadowOpacity: 0.2, // IOS
+        shadowRadius: 3,
     },
 
     header: {
