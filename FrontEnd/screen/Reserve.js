@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     input: {
         fontFamily: 'Kanit',
         color: 'white',
-        fontSize: 18,
+        fontSize: RFPercentage(2),
         height: hp('9%'),
         padding: 10,
         borderBottomWidth: 1,

@@ -39,7 +39,7 @@ const PostponeBox = (props) => {
         return (
 
             <View style={styles.box}>
-                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>การนัดหมายวันที่ {Moment(item.date).format('d MMM')}</Text>
+                <Text style={{ margin: RFPercentage(2), fontFamily: 'Poppins', fontSize: RFPercentage(3) }}>การนัดหมายวันที่ {Moment(item.date).format('LL')}</Text>
                 <View style={{ marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(1) }}>
                     <Text style={styles.detail}>Name : {item.firstname} {item.lastname}</Text>
                     <Text style={styles.detail}>Doctor : {item.doctor_firstname}</Text>
