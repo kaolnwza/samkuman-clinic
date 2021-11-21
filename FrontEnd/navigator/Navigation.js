@@ -24,6 +24,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { AntDesign } from '@expo/vector-icons';
 import PassQueue from '../screen/QueueManagement'
 import Patient from '../screen/Patient'
+import axios from 'axios'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,6 +32,9 @@ const Drawer = createDrawerNavigator();
 
 
 const Navigation = () => {
+
+
+
     return (
 
         <NavigationContainer>
@@ -61,6 +65,18 @@ const Navigation = () => {
 }
 
 const Custom = props => {
+    const logOut = async () => {
+        const instance = axios.create({
+            withCredentials: true
+        })
+
+        await instance(global.local + "/logout")
+            .then(
+                res => {
+                    console.log(res.data);
+                }
+            )
+    }
     return (
         <DrawerContentScrollView style={{ backgroundColor: '#fff9ec' }} {...props}>
             <TouchableOpacity style={{ flexDirection: 'row', flex: 1, }} onPress={() => {
@@ -78,7 +94,7 @@ const Custom = props => {
                     <Text style={{ fontFamily: 'Poppins' }}>
                         Wongsaied
                     </Text>
-                    <TouchableOpacity style={styles.logout}>
+                    <TouchableOpacity style={styles.logout} onPress={() => logOut()}>
                         <Text style={{
                             fontFamily: 'Poppins'
                         }}>ออกจากระบบ</Text>
