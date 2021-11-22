@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    fontFamily: 'Poppins',
+    fontFamily: 'Kanit',
     fontSize: RFPercentage(1.8),
     paddingLeft: RFPercentage(1.8),
   },
