@@ -52,7 +52,7 @@ const login = ({ navigation }) => {
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
             }}>
-                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
+                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
             </TouchableOpacity>
         </View >
     )
