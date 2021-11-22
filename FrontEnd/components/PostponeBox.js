@@ -14,29 +14,24 @@ const PostponeBox = (props) => {
         const currentDate = selectedDate || date;
         setDate(currentDate);
     };
+    const [currentId, setCurrentId] = useState(-1)
 
     const [appointmentTitle, setAppointmentTitle] = useState();
 
-
-
-
-
-
-
-
-
-
     const renderItem = ({ item }) => {
-        const updateAppointment = async () => {
-            const data = {
+        const updateAppointment = async (ap_id) => {
+            console.log(ap_id);
+            var data = {
 
                 date: Moment(date).format(),
-                appointment_id: item.appointment_id
+                appointment_id: ap_id
             }
 
             await axios.post(global.local + "/updateappointment", data)
                 .then(res => {
-                    //runFetching(res.data)
+                    // console.log(res.data);
+                    // console.log(item.appointment_id + " has changed");
+                    // runFetching(res.data)
                     // setAppointmentTitle(date)
                     // console.log("update" + date)
                     //console.log("update2" + "2021-11-20T13:02:10.463+00:00")
@@ -55,7 +50,7 @@ const PostponeBox = (props) => {
                     <Text style={styles.detail}>Time : {Moment(item.date).format('HH.mm A')}</Text>
 
                     <TouchableOpacity onPress={() => {
-                        setModalVisible(true)
+                        [setModalVisible(true), setCurrentId(item.appointment_id)]
                     }} style={{ backgroundColor: '#f9be7c', width: wp('30%'), borderRadius: RFPercentage(5), justifyContent: 'center' }}>
                         <Text style={{ fontFamily: 'Kanit', padding: RFPercentage(1), alignSelf: 'center', fontSize: RFPercentage(2) }}>เลื่อน</Text>
                     </TouchableOpacity>
@@ -91,21 +86,21 @@ const PostponeBox = (props) => {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.button, styles.buttonSave]}
-                                        onPress={() => setModalVisible(!modalVisible)}
+                                        onPress={() => [setModalVisible(!modalVisible), updateAppointment(currentId)]}
                                     >
-                                        <Text style={styles.textStyle} onPress={() => updateAppointment()}>Save</Text>
+                                        <Text style={styles.textStyle} >Save</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
                     </Modal>
                 </View>
-            </View>
+            </View >
 
         );
     };
     return (
-        <FlatList data={props.appintList} renderItem={renderItem} keyExtractor={item => item.date} numColumns={1} />
+        <FlatList data={props.appintList} renderItem={renderItem} keyExtractor={item => item.appointment_id} numColumns={1} />
 
     )
 }
