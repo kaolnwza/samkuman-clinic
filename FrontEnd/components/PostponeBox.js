@@ -28,17 +28,18 @@ const PostponeBox = (props) => {
 
     const renderItem = ({ item }) => {
         const updateAppointment = async () => {
-            const data = JSON.stringify({
+            const data = {
 
-                date: Moment(item.date).format(),
+                date: Moment(date).format(),
                 appointment_id: item.appointment_id
-            })
+            }
 
             await axios.post(global.local + "/updateappointment", data)
                 .then(res => {
                     //runFetching(res.data)
-                    setAppointmentTitle(date)
-                    console.log("update" + item.date)
+                    // setAppointmentTitle(date)
+                    // console.log("update" + date)
+                    //console.log("update2" + "2021-11-20T13:02:10.463+00:00")
 
                 })
         }
