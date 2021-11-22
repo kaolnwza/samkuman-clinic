@@ -37,11 +37,15 @@ const Reserve = ({ navigation }) => {
         }
         await axios.post(global.local + "/addqueue", data)
             .then(res => {
-                if (res.data == "cannot queue") {
+                if (res.data == 'limit') {
                     alert("cannot queue more than 1 or cancel ur other queue")
+                }
+                else if (res.data == 'cannot queue') {
+                    alert("You've already in Queue")
                 }
                 else {
                     console.log(res.data);
+                    navigation.navigate('Queue')
                 }
             })
     }

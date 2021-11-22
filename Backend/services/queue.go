@@ -40,7 +40,7 @@ func AddQueue(response http.ResponseWriter, request *http.Request) {
 		var temp models.Queue
 		cursor.Decode(&temp)
 
-		if get_limit >= 5 {
+		if get_limit >= 20 {
 			json.NewEncoder(response).Encode("limit")
 			return
 		}
