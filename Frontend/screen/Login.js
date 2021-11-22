@@ -17,32 +17,15 @@ const login = ({ navigation }) => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    global.local = "http://172.20.10.3:12345"
+    global.local = "http://192.168.1.4:12345"
 
     const instance = axios.create({
         withCredentials: true
     })
 
-
-    const getTest = async () => {
-        const data = {
-            user_id: 0
-        }
-
-        await axios.get(`${global.local}/gethistory`, data)
-            .then((res) => {
-                console.log('sdf')
-            })
-    }
-
-
-
-
     const postData = async () => {
 
-        const headers = {
-            "Content-Type": "application/json",
-        };
+
         const data = {
             email: usernameLogin,
             password: passwordLogin
@@ -64,20 +47,11 @@ const login = ({ navigation }) => {
             .then(res =>
                 console.log(res.data)
             )
-        await instance.get(global.local + "/getuserinformation")
-            .then(res => {
 
-            })
 
     }
 
-    const Logout = async () => {
-        await instance
-            .get(global.local + "/logout")
-            .then((res) => {
-                console.log(res.data);
-            })
-    }
+
 
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
@@ -101,7 +75,7 @@ const login = ({ navigation }) => {
                 <View style={styles.image}>
                     <Image source={require('../assets/normal_u15.png')} />
                 </View>
-                <Text style={styles.headerText}>เข้าสู่ระบบ
+                <Text style={styles.headerText}>SIGN IN
                     <FontAwesome name="sign-in" size={50} color="white" />
                 </Text>
             </View>
@@ -121,12 +95,12 @@ const login = ({ navigation }) => {
                 </View>
 
             </KeyboardAwareScrollView>
-            <Text style={{ color: 'red', fontFamily: 'Kanit', alignSelf: 'center' }}>{authen}</Text>
+            <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text>
 
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
             }}>
-                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
+                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
             </TouchableOpacity>
         </View >
     )
@@ -143,7 +117,7 @@ const styles = StyleSheet.create({
     containerinput: {
         flex: 1,
         paddingHorizontal: "12%",
-        fontFamily: 'Kanit',
+        fontFamily: 'Poppins',
     },
     input: {
         fontSize: 18,
@@ -154,12 +128,12 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 7, width: 0 }, // IOS
         shadowOpacity: 0.2, // IOS
         shadowRadius: 3,
-        fontFamily: 'Kanit',
+        fontFamily: 'Poppins'
     },
     label: {
         fontSize: RFPercentage(2),
         marginTop: 20,
-        fontFamily: 'Kanit',
+        fontFamily: 'Poppins'
     },
     header: {
         transform: [{ translateY: "20%" }]
@@ -179,22 +153,18 @@ const styles = StyleSheet.create({
     },
     headerText: {
         position: "absolute",
-        fontSize: RFPercentage(6),
+        fontSize: 50,
         top: hp('20%'),
         color: '#FFF9EC',
-        fontFamily: 'Kanit',
+        fontFamily: 'Poppins',
         fontWeight: 'bold',
         marginLeft: 10
-
-
-
-
     },
     btn: {
         marginBottom: hp('5%'),
         marginTop: hp('3%'),
 
-        fontFamily: 'Kanit',
+        fontFamily: 'Poppins',
         alignSelf: 'center',
         backgroundColor: '#f9be7c',
         width: wp('80%'),
