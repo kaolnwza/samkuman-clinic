@@ -32,6 +32,7 @@ type Doctor struct {
 	Doctor_Gender       string `json:"doctor_gender" bson:"doctor_gender"`
 	Doctor_Phone_number string `json:"doctor_phone_number" bson:"doctor_phone_number"`
 	Doctor_Password     string `json:"doctor_password" bson:"doctor_password"`
+	Doctor_Email     	string `json:"doctor_email" bson:"doctor_email"`
 }
 
 type Department struct {
