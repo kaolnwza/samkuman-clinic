@@ -81,7 +81,7 @@ const Patient = () => {
                         </View>
                     </Modal>
                     <Text style={{ ...styles.label, alignSelf: 'center' }}>{moment(date).format('LLL')}</Text>
-                    <KeyboardAwareScrollView style={{ height: hp('44%'), marginTop: RFPercentage(5) }}>
+                    <KeyboardAwareScrollView style={{ height: hp('44%'), marginTop: RFPercentage(5) }} extraScrollHeight={hp('37%')}>
                         <Text style={styles.label}>ผู้ป่วย</Text>
 
                         <Picker
