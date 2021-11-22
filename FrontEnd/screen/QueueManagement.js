@@ -10,33 +10,93 @@ import axios from 'axios'
 const PassQueue = () => {
     const [selectedValue, setSelectedValue] = useState("normal");
     const [Day, setDay] = useState('Monday')
-    const [currentQueue, setCurrentQueue] = useState();
+    const [currentQueue, setCurrentQueue] = useState(555);
     const [remainQueue, setRemainQueue] = useState();
     const [_, runFetching] = useState()
 
     useEffect(() => {
         const getQueue = async () => {
-
-            await axios.get(global.local + "/getallqueue")
+            var data = {
+                "type": selectedValue
+            }
+            await axios.post(global.local + "/getremainqueue", data)
                 .then(res => {
-                    runFetching(res.data)
-                    try {
-                        var res_filter = (res.data).filter(x => x.type == selectedValue && x.queue_remain == 0)
-                        setCurrentQueue(res_filter[0].queue_id)
 
-                        var res_length = (res.data).filter(x => x.type == selectedValue).length
-                        setRemainQueue(res_length)
+                    //console.log(res.data.Current);
+                    // if (res.data == "-") {
+                    //     runFetching(res.data)
+                    //     setCurrentQueue(res.data)
+
+                    //     console.log("null");
+                    // }
+                    // else {
+                    //console.log("nut null");
+                    //console.log(res.data.cursor.Current);
+
+                    //here
+                    // if (res.data.cursor.Current != null) {
+                    //     var array = res.data.struct
+
+                    //     var ar2 = array.filter(x => x.queue_remain == 0)
+
+                    //     if (ar2[0].type === selectedValue) {
+                    //         setCurrentQueue(ar2[0].queue_id)
+                    //     }
+                    //     else {
+
+                    //         setCurrentQueue('-')
+                    //     }
+
+                    // var count = 0
+                    // array.forEach(x => {
+                    //     if (x.type == selectedValue && x.queue_remain == 0) {
+                    //         setCurrentQueue(x.queue_id);
+                    //         count++;
+                    //     }
+                    // })
+                    // if (count == 0) setCurrentQueue('-')
+
+                    // }
+                    // else if (res.data.cursor.Current == null) {
+                    //     setCurrentQueue('-')
+                    // }
+
+                    if (res.data.cursor.Current != null) {
+                        setCurrentQueue(res.data.struct[0].queue_id)
                     }
-                    catch (err) {
-                        setCurrentQueue("-")
-                        setRemainQueue(0)
+                    else if (res.data.cursor.Current == null) {
+                        setCurrentQueue('-')
                     }
+
+
+                    // if (res_filter == undefined) {
+                    //     console.log("und");
+                    // }
+                    // else {
+                    //     console.log("not un");
+                    // }
+                    //console.log(res_filter);
+                    // res_filter.forEach(x => {
+                    //     setCurrentQueue(x.queue_id);
+                    // });
+
+
+                    //setCurrentQueue(res_filter[0].queue_id)
+                    //}
+
+
+                    // var res_length = (res.data).filter(x => x.type == selectedValue).length
+                    // setRemainQueue(res_length)
+                    runFetching(res.data)
+
+
                 })
         }
 
         return (
             getQueue()
         )
+
     })
 
     const queueDelete = async () => {

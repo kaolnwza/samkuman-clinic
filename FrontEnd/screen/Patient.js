@@ -18,7 +18,7 @@ const Patient = () => {
     const [createDate, setCreateDate] = useState(new Date());
     const [date, setDate] = useState(new Date());
     const [isDate, setIsDate] = useState(false)
-    const [selectedValue, setSelectedValue] = useState("-1");
+    const [selectedValue, setSelectedValue] = useState(0);
     const [symptom, setSymptom] = useState('')
     const [result, setResult] = useState('')
     const [advice, setAdvice] = useState('')
