@@ -68,7 +68,6 @@ type History struct {
 	Diagnose      string    `json:"diagnose" bson:"diagnose"`
 	Doctor_advice string    `json:"doctor_advice" bson:"doctor_advice"`
 	Medicine      string    `json:"medicine" bson:"medicine"`
-	Usage         string    `json:"usage" bson:"usage"`
 }
 
 type Informaion struct {
