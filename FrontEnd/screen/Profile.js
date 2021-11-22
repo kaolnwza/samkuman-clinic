@@ -33,6 +33,10 @@ const Profile = (props, { navigation }) => {
     const [Disease, setDisease] = React.useState(userinfo.disease);
     const [Id, setId] = React.useState(userinfo.identity_number);
     const [Email, setEmail] = React.useState(userinfo.email);
+    const [OPass, setOPass] = React.useState('');
+    const [NPass, setNPass] = React.useState('');
+    const [Cpass, setCpass] = React.useState('');
+
 
 
 
@@ -181,7 +185,19 @@ const Profile = (props, { navigation }) => {
                             </View>
                         </View>
 
+
+
                     }
+                    {!Edit ? null : <View style={{ ...styles.box, backgroundColor: '#309397' }}>
+                        <View style={{ width: '90%', }}>
+                            <Text style={styles.label}>รหัสเก่า</Text>
+                            <TextInput style={styles.input} placeholder="รหัสเก่า" value={OPass} onChangeText={setOPass} />
+                            <Text style={styles.label}>รหัสใหม่</Text>
+                            <TextInput style={styles.input} placeholder="รหัสใหม่" value={NPass} onChangeText={setNPass} />
+                            <Text style={styles.label}>ยืนยันรหัสใหม่</Text>
+                            <TextInput style={styles.input} placeholder="ยืนยันรหัสใหม่" value={Cpass} onChangeText={setCpass} />
+                        </View>
+                    </View>}
 
 
                 </KeyboardAwareScrollView>
@@ -195,6 +211,7 @@ const Profile = (props, { navigation }) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
                         <TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#e46472' } }} onPress={() => {
                             setEdit(false)
+
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยกเลิก</Text>
                         </TouchableOpacity><TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
@@ -265,7 +282,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9be7c',
         flexDirection: 'row',
         borderRadius: RFPercentage(4.5),
-        height: hp('18%'),
         width: wp('80%'),
         justifyContent: 'center',
         paddingHorizontal: RFPercentage(2),
