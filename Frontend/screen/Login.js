@@ -18,6 +18,7 @@ const login = ({ navigation }) => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
+    const [loginStatus, setLoginStatus] = useState(false)
 
     global.local = "http://192.168.43.39:12345"
 
@@ -35,20 +36,24 @@ const login = ({ navigation }) => {
         await instance
             .post(global.local + "/login", data)
             .then((res) => {
-                console.log(res.data)
+                //console.log(res.data)
                 if (res.data == 'User not found') {
                     setAuthen(res.data)
                 } else if (res.data == 'Incorrect Password') {
                     setAuthen(res.data)
                 } else {
-                    navigation.replace('main', { role: 'User' })
+                    setLoginStatus(true)
+
                 }
             }
             )
-        await instance.get(global.local + "/getcookie")
-            .then(res =>
-                console.log(res.data)
-            )
+        if (loginStatus) {
+            await instance.get(global.local + "/getcookie")
+                .then(res =>
+                    //console.log(res.data)
+                    navigation.replace('main', { role: 'User' })
+                )
+        }
 
 
     }
