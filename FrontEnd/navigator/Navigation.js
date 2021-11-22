@@ -75,32 +75,21 @@ const Navigation = () => {
 }
 
 const Custom = props => {
-    let isMount = true
 
     const [user, setUser] = useState({})
 
     useEffect(() => {
         const getUser = async () => {
-            if (isMount) {
-                console.log("profile");
-                const instance = axios.create({
-                    withCredentials: true
+            await axios.get(global.local + "/finduser")
+                .then(res => {
+                    setUser(res.data)
                 })
-
-                await instance.get(global.local + "/finduser")
-                    .then(res => {
-                        setUser(res.data)
-                        console.log(res.data);
-
-
-                    })
-                isMount = false
-            }
         }
         return (
             getUser()
         )
-    }, [])
+    })
+
     const logOut = async () => {
         const instance = axios.create({
             withCredentials: true
