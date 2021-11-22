@@ -15,7 +15,7 @@ type User struct {
 	Gender          string             `json:"gender" bson:"gender"`
 	Height          int                `json:"height" bson:"height"`
 	Weight          float32            `json:"weight" bson:"weight"`
-	Dob             string             `json:"dob" bson:"dob"`
+	Dob             time.Time          `json:"dob" bson:"dob"`
 	Age             int                `json:"age" bson:"age"`
 	Address         string             `json:"address" bson:"address"`
 	Phone_number    string             `json:"phone_number" bson:"phone_number"`
