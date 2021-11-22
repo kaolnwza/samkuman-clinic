@@ -23,19 +23,20 @@ func CreateDoctor(response http.ResponseWriter, request *http.Request) {
 	var doctor models.Doctor
 
 	json.NewDecoder(request.Body).Decode(&doctor)
-	collection := client.Database("test").Collection("doctor")
+	collection := client.Database(database).Collection("doctor")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
 	result, _ := collection.InsertOne(ctx, doctor)
 
 	json.NewEncoder(response).Encode(result)
+
 }
 
 func GetDoctor(response http.ResponseWriter, request *http.Request) {
 	fmt.Println("GET FUNC")
 	response.Header().Add("content-type", "application/json")
 	var getModel []models.Doctor
-	collection := client.Database("test").Collection("doctor")
+	collection := client.Database(database).Collection("doctor")
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 
 	cursor, err := collection.Find(ctx, bson.M{})
