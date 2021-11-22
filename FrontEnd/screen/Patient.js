@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
@@ -15,12 +15,18 @@ import axios from 'axios';
 
 const Patient = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [createDate, setCreateDate] = useState(new Date());
     const [date, setDate] = useState(new Date());
-    const [selectedValue, setSelectedValue] = useState("user0");
+    const [isDate, setIsDate] = useState(false)
+    const [selectedValue, setSelectedValue] = useState("-1");
     const [symptom, setSymptom] = useState('')
     const [result, setResult] = useState('')
     const [advice, setAdvice] = useState('')
     const [medic, setMedic] = useState('')
+
+    const [getHistoryId, setHistoryId] = useState(-1)
+
+
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -31,16 +37,31 @@ const Patient = () => {
     const postHistory = async () => {
         var data = {
             doctor_id: 0,
-            user_id: selectedValue,
-            date: Moment(date).format(),
+            user_id: parseInt(selectedValue),
+            date: Moment(createDate).format(),
             symptom: symptom,
             diagnose: result,
             doctor_advice: advice,
             medicine: medic
         }
-        await axios.post(global.local + "/addhistory", data)
-            .then(res => console.log("post history success"))
 
+
+        await axios.post(global.local + "/addhistory", data)
+            .then(res => {
+                console.log("post history success")
+                setHistoryId(res.data.history_id)
+            })
+
+        var data2 = {
+            doctor_id: 0,
+            user_id: parseInt(selectedValue),
+            date: Moment(date).format(),
+            history_id: getHistoryId
+        }
+        if (isDate) {
+            await axios.post(global.local + "/addappointment", data2)
+                .then(res => console.log("post appointment success"))
+        }
 
     }
 
@@ -81,13 +102,13 @@ const Patient = () => {
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: wp('70%') }}>
                                     <TouchableOpacity
                                         style={[styles.button, styles.buttonCancel]}
-                                        onPress={() => setModalVisible(!modalVisible)}
+                                        onPress={() => [setIsDate(false), setModalVisible(!modalVisible)]}
                                     >
                                         <Text style={styles.textStyle}>Cancel</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.button, styles.buttonSave]}
-                                        onPress={() => setModalVisible(!modalVisible)}
+                                        onPress={() => [setIsDate(true), setModalVisible(!modalVisible)]}
                                     >
                                         <Text style={styles.textStyle}>Save</Text>
                                     </TouchableOpacity>

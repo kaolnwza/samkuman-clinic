@@ -18,7 +18,8 @@ const login = ({ navigation }) => {
         console.log(usernameLogin, passwordLogin);
         postData()
     }
-    global.local = "http://192.168.1.38:12345"
+
+    global.local = "http://192.168.43.39:12345"
 
     const instance = axios.create({
         withCredentials: true
