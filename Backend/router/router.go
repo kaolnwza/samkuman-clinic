@@ -58,6 +58,10 @@ func Router() *mux.Router {
 	//Profile
 	router.HandleFunc("/editprofile", services.EditProfile).Methods("GET")
 
+	//doctor auth
+	router.HandleFunc("/doctorlogin", services.DoctorLogin).Methods("GET")
+	router.HandleFunc("/doctorgetcookie", services.DoctorGetCookie).Methods("GET")
+	router.HandleFunc("/doctorlogout", services.DoctorLogout).Methods("GET")
 	//router.HandleFunc("/kuypp", services.Kuyprayuth).Methods("GET")
 
 	return router

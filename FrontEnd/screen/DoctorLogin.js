@@ -10,8 +10,42 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 
 const login = ({ navigation }) => {
-    const [Docmail, setDocmail] = useState('')
-    const [Docpass, setDocpass] = useState('')
+    const [Docmail, setDocmail] = useState("somchai@gmail.com")
+    const [Docpass, setDocpass] = useState("12345")
+
+    const postData = async () => {
+        const instance = axios.create({
+            withCredentials: true
+        })
+
+        const data = {
+            email: Docmail,
+            password: Docpass
+        }
+        await instance
+            .post(global.local + "/doctorlogin", data)
+            .then((res) => {
+                //console.log(res.data)
+                if (res.data == 'User not found') {
+                    setAuthen(res.data)
+                } else if (res.data == 'Incorrect Password') {
+                    setAuthen(res.data)
+                } else {
+                    setLoginStatus(true)
+
+                }
+            }
+            )
+
+        await instance.get(global.local + "/doctorgetcookie")
+            .then(res =>
+                //console.log(res.data)
+                navigation.replace('main', { role: 'Staff' })
+            )
+
+
+
+    }
 
     return (
         <View style={styles.container}>

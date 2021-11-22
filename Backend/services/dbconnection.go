@@ -22,5 +22,5 @@ func connectDB() {
 }
 
 func GetLocalIp() string {
-	return "http://192.168.43.39:19000"
+	return "http://192.168.1.47:19000"
 }

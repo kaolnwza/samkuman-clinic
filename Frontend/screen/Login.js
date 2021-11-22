@@ -20,7 +20,11 @@ const login = ({ navigation }) => {
     }
     const [loginStatus, setLoginStatus] = useState(false)
 
+<<<<<<< Updated upstream
     global.local = "http://192.168.43.39:12345"
+=======
+    global.local = "http://192.168.1.47:12345"
+>>>>>>> Stashed changes
 
     const instance = axios.create({
         withCredentials: true
@@ -47,13 +51,13 @@ const login = ({ navigation }) => {
                 }
             }
             )
-        if (loginStatus) {
-            await instance.get(global.local + "/getcookie")
-                .then(res =>
-                    //console.log(res.data)
-                    navigation.replace('main', { role: 'User' })
-                )
-        }
+
+        await instance.get(global.local + "/getcookie")
+            .then(res =>
+                //console.log(res.data)
+                navigation.replace('main', { role: 'User' })
+            )
+
 
 
     }

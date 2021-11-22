@@ -21,18 +21,17 @@ func init() {
 func DoctorLogin(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("content-type", "application/json")
 
-	var data_get models.User
+	var data_get models.Doctor
 	//data_get.Email = "404"
 	json.NewDecoder(request.Body).Decode(&data_get)
 	// fmt.Println(data_get.Identity_number)
 	// fmt.Println(data_get.Password)
-	collection := client.Database(database).Collection("user")
+	collection := client.Database(database).Collection("doctor")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
-	var data models.User
-	_ = collection.FindOne(ctx, bson.M{"email": data_get.Email}).Decode(&data)
-
-	if data.Email == "" {
+	var data models.Doctor
+	_ = collection.FindOne(ctx, bson.M{"doctor_email": data_get.Doctor_Email}).Decode(&data)
+	if data.Doctor_Email == "" {
 		// fmt.Println(data.Identity_number)
 		fmt.Println("User not found")
 		json.NewEncoder(response).Encode("User not found")
@@ -41,7 +40,7 @@ func DoctorLogin(response http.ResponseWriter, request *http.Request) {
 	}
 	//result := "Right"
 
-	if err := bcrypt.CompareHashAndPassword([]byte(data.Password), []byte(data_get.Password)); err != nil {
+	if err := bcrypt.CompareHashAndPassword([]byte(data.Doctor_Password), []byte(data_get.Doctor_Password)); err != nil {
 		// fmt.Println(data.Password)
 		// fmt.Println(data_get.Password)
 		fmt.Println("Incorrect Password")
@@ -53,7 +52,7 @@ func DoctorLogin(response http.ResponseWriter, request *http.Request) {
 	expir := time.Now().Add(time.Hour * 1)
 
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    strconv.Itoa(int(data.User_id)),
+		Issuer:    strconv.Itoa(int(data.Doctor_id)),
 		ExpiresAt: expir.Unix(),
 	})
 
@@ -105,6 +104,6 @@ func DoctorLogout(response http.ResponseWriter, request *http.Request) {
 			Expires:  time.Now().Add(-time.Hour),
 			HttpOnly: true,
 		})
-	userCookieId = -1
+	doctorCookieId = -1
 	json.NewEncoder(response).Encode("Logout success")
 }
