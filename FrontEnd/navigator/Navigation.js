@@ -206,7 +206,7 @@ const Menu = () => {
                         <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),
                 }} /> : null}
-            {global.Role === 'Doctor' ? <Drawer.Screen name="pass" component={PassQueue}
+            {global.Role === 'Staff' ? <Drawer.Screen name="pass" component={PassQueue}
                 options={{
                     drawerLabel: "การจัดการคิว",
                     drawerIcon: ({ focused, size }) => (
@@ -214,7 +214,7 @@ const Menu = () => {
                     ),
                 }} /> : null}
 
-            {global.Role === 'Doctor' ? <Drawer.Screen name="AandH" component={Patient}
+            {global.Role === 'Staff' ? <Drawer.Screen name="AandH" component={Patient}
                 options={{
                     drawerLabel: "ผลการรักษาและการนัดหมาย",
                     drawerIcon: ({ focused, size }) => (
