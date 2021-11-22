@@ -85,7 +85,7 @@ const SignUp = ({ navigation }) => {
                 <View style={[Device.osName === 'iPadOS' ? styles.imageIpad : styles.image]}>
                     <Image source={require('../assets/normal_u3.png')} />
                 </View>
-                <Text style={styles.headerText}>SIGN UP
+                <Text style={styles.headerText}>ลงทะเบียน
                     <FontAwesome name="user" size={50} color="#0d253f" />
                 </Text>
             </View>
@@ -198,7 +198,7 @@ const SignUp = ({ navigation }) => {
 
                     _onPressButton()
                 }}>
-                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>SIGN UP</Text>
+                    <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>ลงทะเบียน</Text>
                 </TouchableOpacity>
 
             </KeyboardAwareScrollView >
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(5),
         top: 100,
         color: '#0d253f',
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         fontWeight: 'bold',
         marginLeft: wp('8%')
     },

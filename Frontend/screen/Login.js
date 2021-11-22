@@ -75,14 +75,14 @@ const login = ({ navigation }) => {
                 <View style={styles.image}>
                     <Image source={require('../assets/normal_u15.png')} />
                 </View>
-                <Text style={styles.headerText}>SIGN IN
+                <Text style={styles.headerText}>เข้าสู่ระบบ
                     <FontAwesome name="sign-in" size={50} color="white" />
                 </Text>
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
-                <Text style={styles.label}>Email</Text>
+                <Text style={styles.label}>อีเมล</Text>
                 <TextInput style={styles.input} placeholder="username" value={usernameLogin} onChangeText={usernameLogin => setUsernameLogin(usernameLogin)} />
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>รหัสผ่าน</Text>
                 <TextInput style={styles.input} placeholder="password" value={passwordLogin} onChangeText={passwordLogin => setPasswordLogin(passwordLogin)} secureTextEntry={true} />
                 <View style={{ marginTop: 20 }}>
 
@@ -108,7 +108,7 @@ const login = ({ navigation }) => {
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
             }}>
-                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
+                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
             </TouchableOpacity>
         </View >
     )
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     label: {
         fontSize: RFPercentage(2),
         marginTop: 20,
-        fontFamily: 'Poppins'
+        fontFamily: 'Kanit'
     },
     header: {
         transform: [{ translateY: "20%" }]
@@ -164,9 +164,10 @@ const styles = StyleSheet.create({
         fontSize: 50,
         top: hp('20%'),
         color: '#FFF9EC',
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         fontWeight: 'bold',
-        marginLeft: 10
+        marginLeft: 10,
+       
     },
     btn: {
         marginBottom: hp('5%'),
