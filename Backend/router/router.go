@@ -56,7 +56,7 @@ func Router() *mux.Router {
 	router.HandleFunc("/deleteappointment", services.DeleteAppointment).Methods("DELETE")
 
 	//Profile
-	router.HandleFunc("/editprofile", services.EditProfile).Methods("GET")
+	router.HandleFunc("/editprofile", services.EditProfile).Methods("POST")
 
 	//router.HandleFunc("/kuypp", services.Kuyprayuth).Methods("GET")
 

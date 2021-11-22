@@ -82,6 +82,10 @@ const Profile = (props, { navigation }) => {
         if (isFormValid()) {
             setEdit(false)
         }
+        console.log(Firstname)
+        
+
+        
     };
 
     const Pass = () => {
@@ -96,12 +100,57 @@ const Profile = (props, { navigation }) => {
         }
     };
 
-
-
+    
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setDOB(currentDate);
     };
+
+
+
+    const UpdateProfile = async () => {
+        var data = {
+            user_id: 0 ,
+            identity_number: Id,
+            firstname:  Firstname,
+            lastname:  Lastname,
+            gender:  gender,
+            height: Height,
+            weight: Weight,
+            dob: DOB,
+            address: Address,
+            phone_number: Phone,
+            allergic: Alllergic,
+            disease: Disease,
+            email: Email,
+            password: NPass,
+
+        }
+        // console.log(data)
+
+
+        await axios.post(global.local + "/editprofile", data)
+            .then(res => {
+                // console.log(userinfo)
+                console.log("update profile success")
+                // setHistoryId(res.data.history_id)
+
+            })
+
+        // var data2 = {
+        //     doctor_id: 0,
+        //     user_id: parseInt(selectedValue),
+        //     date: Moment(date).format(),
+        //     history_id: getHistoryId
+        // }
+        // if (isDate) {
+        //     await axios.post(global.local + "/addappointment", data2)
+        //         .then(res => console.log("post appointment success"))
+        // }
+
+    }
+
+
     return (
         <View style={styles.container}>
 
@@ -364,8 +413,12 @@ const Profile = (props, { navigation }) => {
 
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยกเลิก</Text>
-                        </TouchableOpacity><TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
-                            Info()
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
+                           UpdateProfile()
+                            // Info()
+                            
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>บันทึก</Text>
                         </TouchableOpacity>
