@@ -42,7 +42,7 @@ const Navigation = () => {
             <StatusBar barStyle="dark-content" />
             <Stack.Navigator initialRouteName="login"
                 screenOptions={{
-                    headerShown: true,
+                    headerShown: false,
                     headerTransparent: true,
                 }}>
                 <Stack.Screen name="login" component={Login}
