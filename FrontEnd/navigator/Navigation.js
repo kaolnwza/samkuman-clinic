@@ -33,7 +33,7 @@ const Drawer = createDrawerNavigator();
 
 
 const Navigation = () => {
-
+    global.Role = ''
 
 
     return (
@@ -42,7 +42,7 @@ const Navigation = () => {
             <StatusBar barStyle="dark-content" />
             <Stack.Navigator initialRouteName="login"
                 screenOptions={{
-                    headerShown: false,
+                    headerShown: true,
                     headerTransparent: true,
                 }}>
                 <Stack.Screen name="login" component={Login}
@@ -61,9 +61,13 @@ const Navigation = () => {
                         headerTintColor: "white"
                     }} />
                 <Stack.Screen name="main" component={Menu}
-                    options={{
-                        headerTintColor: "black",
-                    }}
+                    options={
+                        ({ route }) => {
+                            global.Role = route.params.role
+                            console.log(global.Role);
+
+                        }
+                    }
                 />
             </Stack.Navigator>
         </NavigationContainer>
@@ -161,7 +165,6 @@ const Custom = props => {
 }
 
 const Menu = () => {
-    const [Role, setRole] = useState('Doctor')
 
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
@@ -178,7 +181,7 @@ const Menu = () => {
             }} >
 
 
-            <Drawer.Screen name="home" component={BottomTab}
+            {global.Role === 'User' ? <Drawer.Screen name="home" component={BottomTab}
                 options={{
                     drawerLabel: "หน้าหลัก",
                     drawerIcon: ({ focused, size }) => (
@@ -188,22 +191,22 @@ const Menu = () => {
                             color={focused ? '#007AFF' : '#ccc'}
                         />
                     ),
-                }} />
-            <Drawer.Screen name="appoint" component={Appointment}
+                }} /> : null}
+            {global.Role === 'User' ? <Drawer.Screen name="appoint" component={Appointment}
                 options={{
                     drawerLabel: "การนัดหมาย",
                     drawerIcon: ({ focused, size }) => (
                         <FontAwesome name="pencil-square-o" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),
-                }} />
-            <Drawer.Screen name="history" component={History}
+                }} /> : null}
+            {global.Role === 'User' ? <Drawer.Screen name="history" component={History}
                 options={{
                     drawerLabel: "ประวัติการรักษา",
                     drawerIcon: ({ focused, size }) => (
                         <FontAwesome5 name="history" size={size} color={focused ? '#007AFF' : '#ccc'} />
                     ),
-                }} />
-            {Role === 'Doctor' ? <Drawer.Screen name="pass" component={PassQueue}
+                }} /> : null}
+            {global.Role === 'Doctor' ? <Drawer.Screen name="pass" component={PassQueue}
                 options={{
                     drawerLabel: "การจัดการคิว",
                     drawerIcon: ({ focused, size }) => (
@@ -211,7 +214,7 @@ const Menu = () => {
                     ),
                 }} /> : null}
 
-            {Role === 'Doctor' ? <Drawer.Screen name="AandH" component={Patient}
+            {global.Role === 'Doctor' ? <Drawer.Screen name="AandH" component={Patient}
                 options={{
                     drawerLabel: "ผลการรักษาและการนัดหมาย",
                     drawerIcon: ({ focused, size }) => (

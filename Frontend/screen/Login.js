@@ -40,7 +40,7 @@ const login = ({ navigation }) => {
                 } else if (res.data == 'Incorrect Password') {
                     setAuthen(res.data)
                 } else {
-                    navigation.replace('main')
+                    navigation.replace('main', { role: 'Doctor' })
                 }
             }
             )
