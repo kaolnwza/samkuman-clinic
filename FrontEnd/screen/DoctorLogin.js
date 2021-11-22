@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Btn from '../components/Button';
+import * as Device from 'expo-device';
 import axios from 'axios'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
@@ -25,9 +25,19 @@ const login = ({ navigation }) => {
                 <View style={styles.image}>
                     <Image source={require('../assets/normal_u15.png')} />
                 </View>
-                <Text style={styles.headerText}>DOCTOR
-                    <FontAwesome name="sign-in" size={50} color="white" />
+                <Text style={{ ...styles.headerText, marginTop: Device.osName == "iPadOS" ? hp('15%') : hp('18%') }}>เข้าสู่ระบบ
+                    {'\n'}
+                    <View>
+                        <Text style={{
+                            color: '#FFF9EC',
+                            fontFamily: 'Kanit',
+                            fontWeight: 'bold',
+                            fontSize: RFPercentage(6),
+                            marginLeft: 50
+                        }}>หมอ<FontAwesome name="sign-in" size={50} color="white" /></Text></View>
+
                 </Text>
+
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Email</Text>
@@ -95,10 +105,9 @@ const styles = StyleSheet.create({
     },
     headerText: {
         position: "absolute",
-        fontSize: 50,
-        top: hp('20%'),
+        fontSize: RFPercentage(6),
         color: '#FFF9EC',
-        fontFamily: 'Poppins',
+        fontFamily: 'Kanit',
         fontWeight: 'bold',
         marginLeft: 10
     },

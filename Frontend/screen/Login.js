@@ -7,6 +7,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Btn from '../components/Button';
 import axios from 'axios'
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import * as Device from 'expo-device';
 
 
 const login = ({ navigation }) => {
@@ -75,7 +76,7 @@ const login = ({ navigation }) => {
                 <View style={styles.image}>
                     <Image source={require('../assets/normal_u15.png')} />
                 </View>
-                <Text style={styles.headerText}>เข้าสู่ระบบ
+                <Text style={{ ...styles.headerText, marginTop: Device.osName == "iPadOS" ? hp('15%') : hp('18%') }}>เข้าสู่ระบบ
                     <FontAwesome name="sign-in" size={50} color="white" />
                 </Text>
             </View>
@@ -161,13 +162,12 @@ const styles = StyleSheet.create({
     },
     headerText: {
         position: "absolute",
-        fontSize: 50,
-        top: hp('20%'),
+        fontSize: RFPercentage(6),
         color: '#FFF9EC',
         fontFamily: 'Kanit',
         fontWeight: 'bold',
         marginLeft: 10,
-       
+
     },
     btn: {
         marginBottom: hp('5%'),

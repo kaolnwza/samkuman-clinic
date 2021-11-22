@@ -7,6 +7,7 @@ import Moment from 'moment';
 import Bg from '../components/Pagebg'
 import * as Device from 'expo-device';
 import moment from 'moment';
+import { Picker } from '@react-native-picker/picker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -15,6 +16,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 const Patient = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [date, setDate] = useState(new Date());
+    const [selectedValue, setSelectedValue] = useState("user0");
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setDate(currentDate);
@@ -72,6 +75,17 @@ const Patient = () => {
                     </Modal>
                     <Text style={{ ...styles.label, alignSelf: 'center' }}>{moment(date).format('LLL')}</Text>
                     <KeyboardAwareScrollView style={{ height: hp('44%'), marginTop: RFPercentage(5) }}>
+                        <Text style={styles.label}>ผู้ป่วย</Text>
+
+                        <Picker
+                            selectedValue={selectedValue}
+                            style={{ width: wp('80%'), }}
+                            itemStyle={{ color: 'white', fontFamily: 'Kanit' }}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+                            <Picker.Item label="user0" value="0" />
+                            <Picker.Item label="user1" value="1" />
+                            <Picker.Item label="user2" value="2" />
+                        </Picker>
                         <Text style={styles.label}>อาการผู้ป่วย</Text>
 
                         <TextInput style={styles.input} placeholder="อาการผู้ป่วย" multiline
