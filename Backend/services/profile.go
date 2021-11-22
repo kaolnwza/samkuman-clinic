@@ -50,6 +50,10 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	}
 
 	// Edit BirthDay
+<<<<<<< HEAD
+=======
+
+>>>>>>> kao2
 	_, err := user_collection.UpdateOne(
 		ctx,
 		bson.M{"user_id": user_struct.User_id},

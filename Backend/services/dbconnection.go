@@ -20,3 +20,7 @@ func connectDB() {
 	client, _ = mongo.Connect(ctx, options.Client().ApplyURI("mongodb+srv://test:prayuth@samkumandb.gimth.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
 
 }
+
+func GetLocalIp() string {
+	return "http://192.168.1.4:19000"
+}

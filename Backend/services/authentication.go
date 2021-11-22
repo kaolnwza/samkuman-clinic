@@ -50,6 +50,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 	var data_get models.User
 	//data_get.Email = "404"
 	json.NewDecoder(request.Body).Decode(&data_get)
+	fmt.Println(data_get.Email)
 	// fmt.Println(data_get.Identity_number)
 	// fmt.Println(data_get.Password)
 	collection := client.Database(database).Collection("user")
@@ -57,7 +58,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 
 	var data models.User
 	_ = collection.FindOne(ctx, bson.M{"email": data_get.Email}).Decode(&data)
-
+	fmt.Println(data)
 	if data.Email == "" {
 		// fmt.Println(data.Identity_number)
 		fmt.Println("User not found")
@@ -97,7 +98,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 		})
 	fmt.Println("Login success token: ", token)
 
-	response.Header().Set("Access-Control-Allow-Origin", "http://http://192.168.1.4:19000")
+	response.Header().Set("Access-Control-Allow-Origin", GetLocalIp())
 
 	json.NewEncoder(response).Encode("Login success")
 }
