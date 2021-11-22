@@ -10,58 +10,8 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("boonmanee@gmail.com")
-    const [passwordLogin, setPasswordLogin] = useState("12345")
-    const [authen, setAuthen] = useState('')
-    const testLogin = () => {
-        console.log(usernameLogin, passwordLogin);
-        postData()
-    }
-    global.local = "http://172.20.10.3:12345"
-
-    const instance = axios.create({
-        withCredentials: true
-    })
-
-    const postData = async () => {
-
-
-        const data = {
-            email: usernameLogin,
-            password: passwordLogin
-        }
-        await instance
-            .post(global.local + "/login", data)
-            .then((res) => {
-                console.log(res.data)
-                if (res.data == 'User not found') {
-                    setAuthen(res.data)
-                } else if (res.data == 'Incorrect Password') {
-                    setAuthen(res.data)
-                } else {
-                    navigation.replace('main')
-                }
-            }
-            )
-        await instance.get(global.local + "/getcookie")
-            .then(res =>
-                console.log(res.data)
-            )
-
-
-    }
-
-
-
-    const [loaded] = useFonts({
-        Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
-        Kanit: require('../assets/fonts/Kanit-SemiBold.ttf')
-    });
-    if (!loaded) {
-        return null;
-    }
-
-
+    const [Docmail, setDocmail] = useState('')
+    const [Docpass, setDocpass] = useState('')
 
     return (
         <View style={styles.container}>
@@ -75,35 +25,19 @@ const login = ({ navigation }) => {
                 <View style={styles.image}>
                     <Image source={require('../assets/normal_u15.png')} />
                 </View>
-                <Text style={styles.headerText}>SIGN IN
+                <Text style={styles.headerText}>DOCTOR
                     <FontAwesome name="sign-in" size={50} color="white" />
                 </Text>
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>Email</Text>
-                <TextInput style={styles.input} placeholder="username" value={usernameLogin} onChangeText={usernameLogin => setUsernameLogin(usernameLogin)} />
+                <TextInput style={styles.input} placeholder="username" value={Docmail} onChangeText={setDocmail} />
                 <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="password" value={passwordLogin} onChangeText={passwordLogin => setPasswordLogin(passwordLogin)} secureTextEntry={true} />
-                <View style={{ marginTop: 20 }}>
+                <TextInput style={styles.input} placeholder="password" value={Docpass} onChangeText={setDocpass} secureTextEntry={true} />
 
-                    <TouchableOpacity style={{ alignItems: 'flex-end' }}
-                        onPress={() => {
-                            navigation.navigate("doctor")
-                        }}
-                    >
-                        <Text style={{ color: '#007AFF' }}>Doctor Login</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ alignItems: 'flex-end' }}
-                        onPress={() => {
-                            navigation.navigate("signup")
-                        }}
-                    >
-                        <Text style={{ color: '#007AFF' }}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
 
             </KeyboardAwareScrollView>
-            <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text>
+            {/* <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text> */}
 
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
