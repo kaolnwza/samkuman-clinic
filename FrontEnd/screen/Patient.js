@@ -17,21 +17,11 @@ const Patient = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [date, setDate] = useState(new Date());
     const [selectedValue, setSelectedValue] = useState("user0");
-<<<<<<< HEAD
     const [symptom, setSymptom] = useState('')
-=======
-    const [symtom, setSymtom] = useState('')
->>>>>>> main
     const [result, setResult] = useState('')
     const [advice, setAdvice] = useState('')
     const [medic, setMedic] = useState('')
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> main
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setDate(currentDate);
@@ -41,15 +31,15 @@ const Patient = () => {
     const postHistory = async () => {
         var data = {
             doctor_id: 0,
+            user_id: selectedValue,
             date: Moment(date).format(),
             symptom: symptom,
             diagnose: result,
             doctor_advice: advice,
             medicine: medic
         }
-        console.log(data);
-        // await axios.post(global.local + "/addhistory", data)
-        //     .then(res => console.log("post history success"))
+        await axios.post(global.local + "/addhistory", data)
+            .then(res => console.log("post history success"))
 
 
     }
@@ -120,11 +110,7 @@ const Patient = () => {
                         </Picker>
                         <Text style={styles.label}>อาการผู้ป่วย</Text>
                         <TextInput style={styles.input} placeholder="อาการผู้ป่วย" multiline
-<<<<<<< HEAD
                             numberOfLines={4} value={symptom} onChangeText={setSymptom} />
-=======
-                            numberOfLines={4} value={symtom} onChangeText={setSymtom} />
->>>>>>> main
                         <Text style={styles.label}>ผลวินิจฉัย</Text>
                         <TextInput style={styles.input} placeholder="ผลวินิจฉัย" multiline
                             numberOfLines={4} value={result} onChangeText={setResult} />
@@ -134,13 +120,6 @@ const Patient = () => {
                         <Text style={styles.label}>ยา และการใช้</Text>
                         <TextInput style={styles.input} placeholder="ยา และการใช้" multiline
                             numberOfLines={4} value={medic} onChangeText={setMedic} />
-<<<<<<< HEAD
-                        {/* <Text style={styles.label}>How to use</Text>
-
-                        <TextInput style={styles.input} placeholder="How to use Medicine" multiline
-                            numberOfLines={4} /> */}
-=======
->>>>>>> main
                     </KeyboardAwareScrollView>
 
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
