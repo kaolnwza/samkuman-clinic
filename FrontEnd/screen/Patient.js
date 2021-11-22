@@ -17,6 +17,13 @@ const Patient = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [date, setDate] = useState(new Date());
     const [selectedValue, setSelectedValue] = useState("user0");
+    const [symtom, setSymtom] = useState('')
+    const [result, setResult] = useState('')
+    const [advice, setAdvice] = useState('')
+    const [medic, setMedic] = useState('')
+
+
+
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -87,25 +94,17 @@ const Patient = () => {
                             <Picker.Item label="user2" value="2" />
                         </Picker>
                         <Text style={styles.label}>อาการผู้ป่วย</Text>
-
                         <TextInput style={styles.input} placeholder="อาการผู้ป่วย" multiline
-                            numberOfLines={4} />
+                            numberOfLines={4} value={symtom} onChangeText={setSymtom} />
                         <Text style={styles.label}>ผลวินิจฉัย</Text>
-
                         <TextInput style={styles.input} placeholder="ผลวินิจฉัย" multiline
-                            numberOfLines={4} />
+                            numberOfLines={4} value={result} onChangeText={setResult} />
                         <Text style={styles.label}>คำแนะนำแพทย์</Text>
-
                         <TextInput style={styles.input} placeholder="คำแนะนำแพทย์" multiline
-                            numberOfLines={4} />
+                            numberOfLines={4} value={advice} onChangeText={setAdvice} />
                         <Text style={styles.label}>ยา และการใช้</Text>
-
                         <TextInput style={styles.input} placeholder="ยา และการใช้" multiline
-                            numberOfLines={4} />
-                        {/* <Text style={styles.label}>How to use</Text>
-
-                        <TextInput style={styles.input} placeholder="How to use Medicine" multiline
-                            numberOfLines={4} /> */}
+                            numberOfLines={4} value={medic} onChangeText={setMedic} />
                     </KeyboardAwareScrollView>
 
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
