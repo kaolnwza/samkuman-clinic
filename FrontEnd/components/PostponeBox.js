@@ -50,7 +50,9 @@ const PostponeBox = (props) => {
                     <Text style={styles.detail}>Time : {Moment(item.date).format('HH.mm A')}</Text>
 
                     <TouchableOpacity onPress={() => {
-                        [setModalVisible(true), setCurrentId(item.appointment_id)]
+                        setModalVisible(true)
+                        setCurrentId(item.appointment_id)
+                        setDate(new Date(item.date))
                     }} style={{ backgroundColor: '#f9be7c', width: wp('30%'), borderRadius: RFPercentage(5), justifyContent: 'center' }}>
                         <Text style={{ fontFamily: 'Kanit', padding: RFPercentage(1), alignSelf: 'center', fontSize: RFPercentage(2) }}>เลื่อน</Text>
                     </TouchableOpacity>

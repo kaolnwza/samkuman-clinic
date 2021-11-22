@@ -20,11 +20,15 @@ const login = ({ navigation }) => {
     }
     const [loginStatus, setLoginStatus] = useState(false)
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     global.local = "http://192.168.43.39:12345"
 =======
     global.local = "http://192.168.1.47:12345"
 >>>>>>> Stashed changes
+=======
+    global.local = "http://172.20.10.3:12345"
+>>>>>>> main
 
     const instance = axios.create({
         withCredentials: true
