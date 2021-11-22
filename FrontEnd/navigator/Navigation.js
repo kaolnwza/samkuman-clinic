@@ -26,6 +26,7 @@ import { AntDesign } from '@expo/vector-icons';
 import PassQueue from '../screen/QueueManagement'
 import Patient from '../screen/Patient'
 import axios from 'axios'
+import { Restart } from 'fiction-expo-restart';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -64,7 +65,6 @@ const Navigation = () => {
                     options={
                         ({ route }) => {
                             global.Role = route.params.role
-                            console.log(global.Role);
 
                         }
                     }
@@ -99,6 +99,7 @@ const Custom = props => {
             .then(
                 res => {
                     console.log(res.data);
+                    Restart()
 
                 }
             )
@@ -123,7 +124,6 @@ const Custom = props => {
 
                     <TouchableOpacity style={styles.logout} onPress={() => {
                         logOut()
-                        props.navigation.replace('login');
                     }}>
                         <Text style={{
                             fontFamily: 'Kanit'

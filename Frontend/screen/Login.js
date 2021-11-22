@@ -14,10 +14,7 @@ const login = ({ navigation }) => {
     const [usernameLogin, setUsernameLogin] = useState("boonmanee@gmail.com")
     const [passwordLogin, setPasswordLogin] = useState("12345")
     const [authen, setAuthen] = useState('')
-    const testLogin = () => {
-        console.log(usernameLogin, passwordLogin);
-        postData()
-    }
+
     const [loginStatus, setLoginStatus] = useState(false)
 
     global.local = "http://172.20.10.3:12345"
@@ -47,13 +44,11 @@ const login = ({ navigation }) => {
                 }
             }
             )
-        if (loginStatus) {
-            await instance.get(global.local + "/getcookie")
-                .then(res =>
-                    //console.log(res.data)
-                    navigation.replace('main', { role: 'User' })
-                )
-        }
+        await instance.get(global.local + "/getcookie")
+            .then(res => {
+                console.log(res.data)
+                navigation.replace('main', { role: 'User' })
+            })
 
 
     }

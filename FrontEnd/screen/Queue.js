@@ -13,6 +13,7 @@ const Queue = ({ navigation }) => {
     const [remainQueue, setRemainQueue] = useState();
     const [userQueue, setUserQueue] = useState();
     const [_, runFetching] = useState()
+    global.noti = []
 
     const data = JSON.stringify({
         user_id: 15,
@@ -29,6 +30,7 @@ const Queue = ({ navigation }) => {
                     setCurrentQueue(res.data.current_queue)
                     setRemainQueue(res.data.remain_queue)
                     setUserQueue(res.data.user_queue)
+                    // global.noti.push({ title: "noti Added" })
                 })
         }
 
