@@ -18,12 +18,15 @@ func init() {
 	connectDB()
 }
 
+var doctorCookieId = -1
+
 func DoctorLogin(response http.ResponseWriter, request *http.Request) {
 	response.Header().Add("content-type", "application/json")
 
 	var data_get models.Doctor
 	//data_get.Email = "404"
 	json.NewDecoder(request.Body).Decode(&data_get)
+	fmt.Println("----------------------", data_get)
 	// fmt.Println(data_get.Identity_number)
 	// fmt.Println(data_get.Password)
 	collection := client.Database(database).Collection("doctor")
@@ -74,8 +77,6 @@ func DoctorLogin(response http.ResponseWriter, request *http.Request) {
 
 	json.NewEncoder(response).Encode("Login success")
 }
-
-var doctorCookieId = -1
 
 func DoctorGetCookie(response http.ResponseWriter, request *http.Request) {
 	tokenCookie, _ := request.Cookie("jwt")
