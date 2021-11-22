@@ -79,7 +79,9 @@ const Profile = (props, { navigation }) => {
             // Cpass: { required: true, equalPassword: NPass },
 
         });
-        console.log(isFormValid())
+        if (isFormValid()) {
+            setEdit(false)
+        }
     };
 
     const Pass = () => {
@@ -89,7 +91,9 @@ const Profile = (props, { navigation }) => {
             Cpass: { required: true, equalPassword: NPass },
 
         });
-        console.log(isFormValid())
+        if (isFormValid()) {
+            setChangePass(false)
+        }
     };
 
 
