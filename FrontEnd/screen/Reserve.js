@@ -34,7 +34,7 @@ const Reserve = ({ navigation }) => {
                     }
 
 
-                    runFetching(res.data)
+                    letFetching(res.data)
 
 
                 })
@@ -61,7 +61,7 @@ const Reserve = ({ navigation }) => {
                     navigation.navigate('Queue')
                 }
                 else {
-                    console.log(res.data);
+
                     navigation.navigate('Queue')
                 }
             })
