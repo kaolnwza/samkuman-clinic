@@ -58,5 +58,7 @@ func Router() *mux.Router {
 	//Profile
 	router.HandleFunc("/editprofile", services.EditProfile).Methods("GET")
 
+	//router.HandleFunc("/kuypp", services.Kuyprayuth).Methods("GET")
+
 	return router
 }

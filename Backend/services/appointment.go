@@ -31,16 +31,20 @@ func AddAppointment(response http.ResponseWriter, request *http.Request) {
 	doctor_collection.FindOne(ctx, bson.M{"doctor_id": appointment_structure.Doctor_id}).Decode(&appointment_structure)
 
 	cursor, _ := appointment_collection.Find(ctx, bson.M{})
-	count := 0
+	count := 1
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
 		count++
 	}
 	appointment_structure.Appointment_id = count
-	appointment_structure.Date = time.Now()
-
-	appointment_collection.InsertOne(ctx, appointment_structure) // inset ข้อมูลลง DB
-	json.NewEncoder(response).Encode(appointment_structure)      //แสดงใน PM
+	appointment_structure.Status = false
+	fmt.Println(appointment_structure)
+	res, err := appointment_collection.InsertOne(ctx, appointment_structure) // inset ข้อมูลลง DB
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("add appointment success", res)
+	json.NewEncoder(response).Encode(appointment_structure) //แสดงใน PM
 }
 
 func GetAppointment(response http.ResponseWriter, request *http.Request) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
@@ -10,18 +10,21 @@ import moment from 'moment';
 import { Picker } from '@react-native-picker/picker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import axios from 'axios';
 
 
 const Patient = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [createDate, setCreateDate] = useState(new Date());
     const [date, setDate] = useState(new Date());
-    const [selectedValue, setSelectedValue] = useState("user0");
-    const [symtom, setSymtom] = useState('')
+    const [isDate, setIsDate] = useState(false)
+    const [selectedValue, setSelectedValue] = useState("-1");
+    const [symptom, setSymptom] = useState('')
     const [result, setResult] = useState('')
     const [advice, setAdvice] = useState('')
     const [medic, setMedic] = useState('')
 
+    const [getHistoryId, setHistoryId] = useState(-1)
 
 
 
@@ -29,6 +32,39 @@ const Patient = () => {
         const currentDate = selectedDate || date;
         setDate(currentDate);
     };
+
+
+    const postHistory = async () => {
+        var data = {
+            doctor_id: 0,
+            user_id: parseInt(selectedValue),
+            date: Moment(createDate).format(),
+            symptom: symptom,
+            diagnose: result,
+            doctor_advice: advice,
+            medicine: medic
+        }
+
+
+        await axios.post(global.local + "/addhistory", data)
+            .then(res => {
+                console.log("post history success")
+                setHistoryId(res.data.history_id)
+            })
+
+        var data2 = {
+            doctor_id: 0,
+            user_id: parseInt(selectedValue),
+            date: Moment(date).format(),
+            history_id: getHistoryId
+        }
+        if (isDate) {
+            await axios.post(global.local + "/addappointment", data2)
+                .then(res => console.log("post appointment success"))
+        }
+
+    }
+
     return (
         <View style={styles.container}>
             <Bg Text1='ผลการรักษาและการนัดหมาย' />
@@ -66,13 +102,13 @@ const Patient = () => {
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: wp('70%') }}>
                                     <TouchableOpacity
                                         style={[styles.button, styles.buttonCancel]}
-                                        onPress={() => setModalVisible(!modalVisible)}
+                                        onPress={() => [setIsDate(false), setModalVisible(!modalVisible)]}
                                     >
                                         <Text style={styles.textStyle}>Cancel</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.button, styles.buttonSave]}
-                                        onPress={() => setModalVisible(!modalVisible)}
+                                        onPress={() => [setIsDate(true), setModalVisible(!modalVisible)]}
                                     >
                                         <Text style={styles.textStyle}>Save</Text>
                                     </TouchableOpacity>
@@ -95,7 +131,7 @@ const Patient = () => {
                         </Picker>
                         <Text style={styles.label}>อาการผู้ป่วย</Text>
                         <TextInput style={styles.input} placeholder="อาการผู้ป่วย" multiline
-                            numberOfLines={4} value={symtom} onChangeText={setSymtom} />
+                            numberOfLines={4} value={symptom} onChangeText={setSymptom} />
                         <Text style={styles.label}>ผลวินิจฉัย</Text>
                         <TextInput style={styles.input} placeholder="ผลวินิจฉัย" multiline
                             numberOfLines={4} value={result} onChangeText={setResult} />
@@ -108,7 +144,7 @@ const Patient = () => {
                     </KeyboardAwareScrollView>
 
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
-
+                        postHistory()
 
                     }}>
                         <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยืนยัน</Text>
