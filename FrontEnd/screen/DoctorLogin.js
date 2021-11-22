@@ -40,10 +40,10 @@ const login = ({ navigation }) => {
 
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput style={styles.input} placeholder="username" value={Docmail} onChangeText={setDocmail} />
-                <Text style={styles.label}>Password</Text>
-                <TextInput style={styles.input} placeholder="password" value={Docpass} onChangeText={setDocpass} secureTextEntry={true} />
+                <Text style={styles.label}>อีเมล</Text>
+                <TextInput style={styles.input} placeholder="โปรดระบุอีเมล" value={Docmail} onChangeText={setDocmail} />
+                <Text style={styles.label}>รหัสผ่าน</Text>
+                <TextInput style={styles.input} placeholder="โปรดใส่รหัสผ่าน" value={Docpass} onChangeText={setDocpass} secureTextEntry={true} />
 
 
             </KeyboardAwareScrollView>
@@ -52,7 +52,7 @@ const login = ({ navigation }) => {
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
             }}>
-                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>LOGIN</Text>
+                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
             </TouchableOpacity>
         </View >
     )

@@ -82,9 +82,9 @@ const login = ({ navigation }) => {
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>อีเมล</Text>
-                <TextInput style={styles.input} placeholder="username" value={usernameLogin} onChangeText={usernameLogin => setUsernameLogin(usernameLogin)} />
+                <TextInput style={styles.input} placeholder="โปรดระบุอีเมล" value={usernameLogin} onChangeText={usernameLogin => setUsernameLogin(usernameLogin)} />
                 <Text style={styles.label}>รหัสผ่าน</Text>
-                <TextInput style={styles.input} placeholder="password" value={passwordLogin} onChangeText={passwordLogin => setPasswordLogin(passwordLogin)} secureTextEntry={true} />
+                <TextInput style={styles.input} placeholder="โปรดระบุรหัสผ่าน" value={passwordLogin} onChangeText={passwordLogin => setPasswordLogin(passwordLogin)} secureTextEntry={true} />
                 <View style={{ marginTop: 20 }}>
 
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
