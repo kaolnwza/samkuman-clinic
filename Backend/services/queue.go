@@ -210,14 +210,47 @@ func GetAllQueue(response http.ResponseWriter, request *http.Request) {
 	findOptions.SetSort(bson.D{{"type", 1}})
 
 	cursor, _ := queue_collection.Find(ctx, bson.M{"status": true}, findOptions)
+
+	count := 0
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
+		count++
 		var temp models.Queue
 		cursor.Decode(&temp)
+
 		queue_struct_array = append(queue_struct_array, temp)
 
 	}
 
-	json.NewEncoder(response).Encode(queue_struct_array)
+	//fmt.Println(cursor)
+	res_val := bson.M{
+		"cursor": cursor,
+		"struct": queue_struct_array}
 
+	json.NewEncoder(response).Encode(res_val)
+
+}
+
+func GetRemainQueue(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+	queue_collection := client.Database(database).Collection("queue")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	var queue_struct models.Queue
+	var queue_response []models.Queue
+	json.NewDecoder(request.Body).Decode(&queue_struct)
+
+	cursor, _ := queue_collection.Find(ctx, bson.M{"type": queue_struct.Type, "queue_remain": 0})
+	defer cursor.Close(ctx)
+	for cursor.Next(ctx) {
+		var temp models.Queue
+		cursor.Decode(&temp)
+		queue_response = append(queue_response, temp)
+
+	}
+	res_val := bson.M{
+		"cursor": cursor,
+		"struct": queue_response}
+
+	json.NewEncoder(response).Encode(res_val)
 }
