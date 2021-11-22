@@ -9,7 +9,7 @@ import * as Device from 'expo-device';
 import moment from 'moment';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import axios from 'axios';
 
 
 const Patient = () => {
@@ -19,6 +19,11 @@ const Patient = () => {
         const currentDate = selectedDate || date;
         setDate(currentDate);
     };
+
+
+    const postHistory = async () => {
+
+    }
     return (
         <View style={styles.container}>
             <Bg Text1='ผลการรักษาและการนัดหมาย' />
@@ -95,7 +100,7 @@ const Patient = () => {
                     </KeyboardAwareScrollView>
 
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
-
+                        postHistory()
 
                     }}>
                         <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยืนยัน</Text>

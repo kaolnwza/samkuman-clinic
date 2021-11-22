@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // func AddHistory_old(response http.ResponseWriter, request *http.Request) {
@@ -62,6 +63,10 @@ func AddHistory(response http.ResponseWriter, request *http.Request) {
 	history_struct.History_id = history_id
 	history_struct.Date = time.Now()
 
+	//add symtom
+	queue_collection := client.Database(database).Collection("queue")
+	queue_collection.FindOne(ctx, bson.M{"user_id": history_struct.User_id}, options.FindOne().SetSort(bson.M{"_id": -1})).Decode(&history_struct.Symptom)
+
 	fmt.Println("Done of add history")
 
 	history_collection.InsertOne(ctx, history_struct)
@@ -108,3 +113,21 @@ func GetHistory(response http.ResponseWriter, request *http.Request) {
 
 	json.NewEncoder(response).Encode(history_struct)
 }
+
+// func Kuyprayuth(response http.ResponseWriter, request *http.Request) {
+// 	response.Header().Add("content-type", "application/json")
+
+// 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+// 	collection := client.Database(database).Collection("queue")
+
+// 	var structza models.Queue
+// 	json.NewDecoder(request.Body).Decode(&structza)
+
+// 	// findOptions := options.Find()
+// 	// findOptions.SetSort(bson.D{{"type", 1}})
+
+// 	collection.FindOne(ctx, bson.M{"user_id": structza.User_id}, options.FindOne().SetSort(bson.M{"_id": -1})).Decode(&structza)
+
+// 	json.NewEncoder(response).Encode(structza)
+
+// }
