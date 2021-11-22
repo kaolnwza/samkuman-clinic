@@ -51,7 +51,7 @@ const Notify = ({ navigation }) => {
             <NotiGridTile
                 // style={{ height: "50", }}
                 title={itemData.item.title}
-                info={itemData.item.info}
+            // info={itemData.item.info}
             // color={itemData.item.color}
             // onSelect={() => {
             //   // เขียนโค้ดเพิ่ม
@@ -70,7 +70,8 @@ const Notify = ({ navigation }) => {
         <View style={styles.container}>
             <Bg Text1='การแจ้งเตือน' />
             <View style={styles.position}>
-                <FlatList data={DATA1} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} />
+                {/* <FlatList data={global.noti} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} /> */}
+                <Text>{console.log(global.noti.title)}</Text>
             </View>
         </View>
 

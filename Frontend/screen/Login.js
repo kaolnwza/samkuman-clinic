@@ -20,7 +20,8 @@ const login = ({ navigation }) => {
     }
     const [loginStatus, setLoginStatus] = useState(false)
 
-    global.local = "http://172.20.10.3:12345"
+    global.local = "http://172.20.10.12:12345"
+
 
     const instance = axios.create({
         withCredentials: true
@@ -47,13 +48,13 @@ const login = ({ navigation }) => {
                 }
             }
             )
-        if (loginStatus) {
-            await instance.get(global.local + "/getcookie")
-                .then(res =>
-                    //console.log(res.data)
-                    navigation.replace('main', { role: 'User' })
-                )
-        }
+
+        await instance.get(global.local + "/getcookie")
+            .then(res =>
+                //console.log(res.data)
+                navigation.replace('main', { role: 'User' })
+            )
+
 
 
     }

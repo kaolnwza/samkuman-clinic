@@ -42,6 +42,7 @@ const Reserve = ({ navigation }) => {
                 }
                 else if (res.data == 'cannot queue') {
                     alert("You've already in Queue")
+                    navigation.navigate('Queue')
                 }
                 else {
                     console.log(res.data);

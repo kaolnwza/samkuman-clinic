@@ -10,8 +10,44 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 
 const login = ({ navigation }) => {
-    const [Docmail, setDocmail] = useState('')
-    const [Docpass, setDocpass] = useState('')
+    const [Docmail, setDocmail] = useState("somchai@gmail.com")
+    const [Docpass, setDocpass] = useState("12345")
+    const [authen, setAuthen] = useState('')
+
+    const doctorLogin = async () => {
+        const instance = axios.create({
+            withCredentials: true
+        })
+
+        const data = {
+            doctor_email: "somchai@gmail.com",
+            doctor_password: "12345"
+        }
+
+
+        await instance.post(global.local + "/doctorlogin", data)
+            .then((res) => {
+                //console.log(res.data)
+                if (res.data == 'User not found') {
+                    setAuthen(res.data)
+                } else if (res.data == 'Incorrect Password') {
+                    setAuthen(res.data)
+                } else {
+
+
+                }
+            }
+            )
+
+        await instance.get(global.local + "/doctorgetcookie")
+            .then(res =>
+                //console.log(res.data)
+                navigation.replace('main', { role: 'Staff' })
+            )
+
+
+
+    }
 
     return (
         <View style={styles.container}>
@@ -47,10 +83,10 @@ const login = ({ navigation }) => {
 
 
             </KeyboardAwareScrollView>
-            {/* <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text> */}
+            <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text>
 
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
-                postData()
+                doctorLogin()
             }}>
                 <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
             </TouchableOpacity>
