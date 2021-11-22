@@ -33,8 +33,8 @@ const login = ({ navigation }) => {
                             fontFamily: 'Kanit',
                             fontWeight: 'bold',
                             fontSize: RFPercentage(6),
-                            marginLeft: 50
-                        }}>หมอ<FontAwesome name="sign-in" size={50} color="white" /></Text></View>
+                            marginLeft: 20
+                        }}>เจ้าหน้าที่<FontAwesome name="sign-in" size={50} color="white" /></Text></View>
 
                 </Text>
 
@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 7, width: 0 }, // IOS
         shadowOpacity: 0.2, // IOS
         shadowRadius: 3,
-        fontFamily: 'Poppins'
+        fontFamily: 'Kanit'
     },
     label: {
         fontSize: RFPercentage(2),
         marginTop: 20,
-        fontFamily: 'Poppins'
+        fontFamily: 'Kanit'
     },
     header: {
         transform: [{ translateY: "20%" }]

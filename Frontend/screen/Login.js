@@ -92,7 +92,7 @@ const login = ({ navigation }) => {
                             navigation.navigate("doctor")
                         }}
                     >
-                        <Text style={{ color: '#007AFF' }}>Doctor Login</Text>
+                        <Text style={{ color: '#007AFF' }}>Staff Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ alignItems: 'flex-end' }}
                         onPress={() => {
