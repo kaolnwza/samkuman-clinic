@@ -9,6 +9,7 @@ import Notify from '../screen/Notify'
 import Appointment from '../screen/Appointment'
 import History from '../screen/History'
 import Profile from '../screen/Profile'
+import Doctor from '../screen/DoctorLogin'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -50,6 +51,11 @@ const Navigation = () => {
                         headerTintColor: "white"
                     }} />
                 <Stack.Screen name="signup" component={SignUp}
+                    options={{
+                        title: null,
+                        headerTintColor: "white"
+                    }} />
+                <Stack.Screen name="doctor" component={Doctor}
                     options={{
                         title: null,
                         headerTintColor: "white"

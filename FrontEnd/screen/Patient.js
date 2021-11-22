@@ -7,6 +7,7 @@ import Moment from 'moment';
 import Bg from '../components/Pagebg'
 import * as Device from 'expo-device';
 import moment from 'moment';
+import { Picker } from '@react-native-picker/picker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
@@ -16,11 +17,21 @@ const Patient = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [date, setDate] = useState(new Date());
     const [selectedValue, setSelectedValue] = useState("user0");
+<<<<<<< HEAD
     const [symptom, setSymptom] = useState('')
+=======
+    const [symtom, setSymtom] = useState('')
+>>>>>>> main
     const [result, setResult] = useState('')
     const [advice, setAdvice] = useState('')
     const [medic, setMedic] = useState('')
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> main
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setDate(currentDate);
@@ -95,27 +106,41 @@ const Patient = () => {
                         </View>
                     </Modal>
                     <Text style={{ ...styles.label, alignSelf: 'center' }}>{moment(date).format('LLL')}</Text>
-                    <KeyboardAwareScrollView style={{ height: hp('44%'), marginTop: RFPercentage(5) }}>
+                    <KeyboardAwareScrollView style={{ height: hp('44%'), marginTop: RFPercentage(5) }} extraScrollHeight={hp('37%')}>
+                        <Text style={styles.label}>ผู้ป่วย</Text>
+
+                        <Picker
+                            selectedValue={selectedValue}
+                            style={{ width: wp('80%'), }}
+                            itemStyle={{ color: 'white', fontFamily: 'Kanit' }}
+                            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+                            <Picker.Item label="user0" value="0" />
+                            <Picker.Item label="user1" value="1" />
+                            <Picker.Item label="user2" value="2" />
+                        </Picker>
                         <Text style={styles.label}>อาการผู้ป่วย</Text>
-
                         <TextInput style={styles.input} placeholder="อาการผู้ป่วย" multiline
+<<<<<<< HEAD
                             numberOfLines={4} value={symptom} onChangeText={setSymptom} />
+=======
+                            numberOfLines={4} value={symtom} onChangeText={setSymtom} />
+>>>>>>> main
                         <Text style={styles.label}>ผลวินิจฉัย</Text>
-
                         <TextInput style={styles.input} placeholder="ผลวินิจฉัย" multiline
                             numberOfLines={4} value={result} onChangeText={setResult} />
                         <Text style={styles.label}>คำแนะนำแพทย์</Text>
-
                         <TextInput style={styles.input} placeholder="คำแนะนำแพทย์" multiline
                             numberOfLines={4} value={advice} onChangeText={setAdvice} />
                         <Text style={styles.label}>ยา และการใช้</Text>
-
                         <TextInput style={styles.input} placeholder="ยา และการใช้" multiline
                             numberOfLines={4} value={medic} onChangeText={setMedic} />
+<<<<<<< HEAD
                         {/* <Text style={styles.label}>How to use</Text>
 
                         <TextInput style={styles.input} placeholder="How to use Medicine" multiline
                             numberOfLines={4} /> */}
+=======
+>>>>>>> main
                     </KeyboardAwareScrollView>
 
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {

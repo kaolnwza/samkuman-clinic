@@ -5,7 +5,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { MaterialIcons } from '@expo/vector-icons';
-import Btn from '../components/Button'
+import { useValidation } from 'react-native-form-validator';
 import InfoBox from '../components/InfoBox';
 import InfoHalfBox from '../components/InfoHalfBox';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -28,12 +28,69 @@ const Profile = (props, { navigation }) => {
     const [Phone, setPhone] = React.useState(userinfo.phone_number);
     const [Height, setHeight] = React.useState(userinfo.height);
     const [Weight, setWeight] = React.useState(userinfo.weight);
-
     const [Alllergic, setAllergic] = React.useState(userinfo.allergic);
     const [Disease, setDisease] = React.useState(userinfo.disease);
     const [Id, setId] = React.useState(userinfo.identity_number);
     const [Email, setEmail] = React.useState(userinfo.email);
+    const [OPass, setOPass] = React.useState('');
+    const [NPass, setNPass] = React.useState('');
+    const [Cpass, setCpass] = React.useState('');
+    const [changePass, setChangePass] = React.useState(false);
 
+
+
+    const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
+        useValidation({
+            state: {
+                Firstname,
+                Lastname,
+                DOB,
+                gender,
+                Address,
+                Phone,
+                Height,
+                Weight,
+                Alllergic,
+                Disease,
+                Id,
+                Email,
+                OPass,
+                NPass,
+                Cpass
+            },
+
+        });
+
+
+    const Info = () => {
+        validate({
+            Firstname: { required: true },
+            Lastname: { required: true },
+            DOB: { required: true, date: true },
+            gender: { required: true },
+            Address: { required: true },
+            Phone: { required: true, numbers: true, minlength: 10, maxlength: 10 },
+            Height: { required: true, numbers: true },
+            Weight: { required: true, numbers: true },
+            Id: { required: true, numbers: true, minlength: 13, maxlength: 13 },
+            Email: { required: true, email: true },
+            // OPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
+            // NPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
+            // Cpass: { required: true, equalPassword: NPass },
+
+        });
+        console.log(isFormValid())
+    };
+
+    const Pass = () => {
+        validate({
+            OPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
+            NPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
+            Cpass: { required: true, equalPassword: NPass },
+
+        });
+        console.log(isFormValid())
+    };
 
 
 
@@ -54,8 +111,16 @@ const Profile = (props, { navigation }) => {
                         <View style={{ width: '90%', }}>
                             <Text style={styles.label}>ชื่อ</Text>
                             <TextInput style={styles.input} placeholder="ชื่อ" value={Firstname} onChangeText={setFirstname} />
+                            {isFieldInError('Firstname') &&
+                                getErrorsInField('Firstname').map(errorMessage => (
+                                    <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                ))}
                             <Text style={styles.label}>นามสกุล</Text>
                             <TextInput style={styles.input} placeholder="นามสกุล" value={Lastname} onChangeText={setLastname} />
+                            {isFieldInError('Lastname') &&
+                                getErrorsInField('Lastname').map(errorMessage => (
+                                    <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                ))}
                         </View>
                     </View>
                 }
@@ -79,6 +144,10 @@ const Profile = (props, { navigation }) => {
                                             themeVariant="light"
                                             textColor="white"
                                         />
+                                        {isFieldInError('DOB') &&
+                                            getErrorsInField('DOB').map(errorMessage => (
+                                                <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                            ))}
                                     </View>
 
                                 </View>
@@ -90,6 +159,10 @@ const Profile = (props, { navigation }) => {
                                         <RadioButton.Item label="ผู้ชาย" labelStyle={{ fontFamily: 'Kanit', width: '70%', fontSize: RFPercentage(2) }} value="ชาย" />
                                         <RadioButton.Item label="ผู้หญิง" labelStyle={{ fontFamily: 'Kanit', fontSize: RFPercentage(2) }} value="หญิง" />
                                     </RadioButton.Group>
+                                    {isFieldInError('gender') &&
+                                        getErrorsInField('gender').map(errorMessage => (
+                                            <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                        ))}
                                 </View>
                             </View>
                         </View>
@@ -109,6 +182,10 @@ const Profile = (props, { navigation }) => {
                                             numberOfLines={4}
                                             value={Address}
                                             onChangeText={setAddress} />
+                                        {isFieldInError('Address') &&
+                                            getErrorsInField('Address').map(errorMessage => (
+                                                <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                            ))}
                                     </View>
 
                                 </View>
@@ -117,7 +194,10 @@ const Profile = (props, { navigation }) => {
                                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                                     <Text style={styles.label}>เบอร์โทรศัพท์</Text>
                                     <TextInput style={styles.inputH} placeholder="เบอร์โทรศัพท์" keyboardType='phone-pad' value={Phone} onChangeText={setPhone} />
-
+                                    {isFieldInError('Phone') &&
+                                        getErrorsInField('Phone').map(errorMessage => (
+                                            <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                        ))}
                                 </View>
                             </View>
                         </View>
@@ -131,7 +211,10 @@ const Profile = (props, { navigation }) => {
                                     <View style={{ width: '100%' }}>
                                         <Text style={styles.label}>ส่วนสูง</Text>
                                         <TextInput style={styles.inputH} placeholder="ส่วนสูง" keyboardType='decimal-pad' value={Height.toString()} onChangeText={setHeight} />
-
+                                        {isFieldInError('Height') &&
+                                            getErrorsInField('Height').map(errorMessage => (
+                                                <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                            ))}
                                     </View>
 
                                 </View>
@@ -140,7 +223,10 @@ const Profile = (props, { navigation }) => {
                                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                                     <Text style={styles.label}>น้ำหนัก</Text>
                                     <TextInput style={styles.inputH} placeholder="น้ำหนัก" keyboardType='decimal-pad' value={Weight.toString()} onChangeText={setWeight} />
-
+                                    {isFieldInError('Weight') &&
+                                        getErrorsInField('Weight').map(errorMessage => (
+                                            <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                        ))}
                                 </View>
                             </View>
                         </View>
@@ -176,12 +262,74 @@ const Profile = (props, { navigation }) => {
                             <View style={{ width: '90%', }}>
                                 <Text style={styles.label}>ID</Text>
                                 <TextInput style={styles.input} placeholder="ID" value={Id} onChangeText={setId} />
+                                {isFieldInError('Id') &&
+                                    getErrorsInField('Id').map(errorMessage => (
+                                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                    ))}
                                 <Text style={styles.label}>อีเมล</Text>
                                 <TextInput style={styles.input} placeholder="อีเมล" value={Email} onChangeText={setEmail} />
+                                {isFieldInError('Email') &&
+                                    getErrorsInField('Email').map(errorMessage => (
+                                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                    ))}
                             </View>
-                        </View>
 
+                        </View>
                     }
+
+
+                    {changePass ?
+                        <View style={{ ...styles.box, backgroundColor: '#309397' }}>
+                            <View style={{ width: '90%', }}>
+                                <Text style={styles.label}>รหัสเก่า</Text>
+                                <TextInput style={styles.input} placeholder="รหัสเก่า" value={OPass} onChangeText={setOPass} />
+                                {isFieldInError('OPass') &&
+                                    getErrorsInField('OPass').map(errorMessage => (
+                                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                    ))}
+                                <Text style={styles.label}>รหัสใหม่</Text>
+                                <TextInput style={styles.input} placeholder="รหัสใหม่" value={NPass} onChangeText={setNPass} />
+                                {isFieldInError('NPass') &&
+                                    getErrorsInField('NPass').map(errorMessage => (
+                                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                    ))}
+                                <Text style={styles.label}>ยืนยันรหัสใหม่</Text>
+                                <TextInput style={styles.input} placeholder="ยืนยันรหัสใหม่" value={Cpass} onChangeText={setCpass} />
+                                {isFieldInError('Cpass') &&
+                                    getErrorsInField('Cpass').map(errorMessage => (
+                                        <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
+                                    ))}
+                            </View>
+                        </View> :
+                        null
+                    }
+
+                    {!changePass ?
+                        <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#e46472' } }} onPress={() => {
+                            setChangePass(true)
+                        }}>
+                            <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>เปลี่ยนรหัสผ่าน</Text>
+                        </TouchableOpacity>
+                        :
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                            <TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#e46472' } }} onPress={() => {
+                                setOPass('')
+                                setNPass('')
+                                setCpass('')
+                                setChangePass(false)
+
+
+                            }}>
+                                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยกเลิก</Text>
+                            </TouchableOpacity><TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
+                                Pass()
+                            }}>
+                                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>บันทึก</Text>
+                            </TouchableOpacity>
+                        </View>
+                    }
+
+
 
 
                 </KeyboardAwareScrollView>
@@ -194,17 +342,33 @@ const Profile = (props, { navigation }) => {
                     :
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
                         <TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#e46472' } }} onPress={() => {
+
+                            setFirstname(userinfo.firstname)
+                            setLastname(userinfo.lastname)
+                            setDOB(new Date(userinfo.dob))
+                            setGender(userinfo.gender)
+                            setAddress(userinfo.address)
+                            setPhone(userinfo.phone_number)
+                            setHeight(userinfo.height)
+                            setWeight(userinfo.weight)
+                            setAllergic(userinfo.allergic)
+                            setDisease(userinfo.disease)
+                            setId(userinfo.identity_number)
+                            setEmail(userinfo.email)
                             setEdit(false)
+
+
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยกเลิก</Text>
                         </TouchableOpacity><TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
-                            setEdit(false)
+                            Info()
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>บันทึก</Text>
                         </TouchableOpacity>
                     </View>
                 }
             </View>
+
         </View>
     )
 }
@@ -265,7 +429,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9be7c',
         flexDirection: 'row',
         borderRadius: RFPercentage(4.5),
-        height: hp('18%'),
         width: wp('80%'),
         justifyContent: 'center',
         paddingHorizontal: RFPercentage(2),
@@ -343,4 +506,9 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(2),
         fontFamily: 'Kanit',
     },
+    warn: {
+        color: 'red',
+        fontFamily: 'Poppins',
+        textAlign: 'center'
+    }
 })

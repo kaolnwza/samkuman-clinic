@@ -4,65 +4,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import Btn from '../components/Button';
+import * as Device from 'expo-device';
 import axios from 'axios'
 import { RFPercentage } from 'react-native-responsive-fontsize';
-import * as Device from 'expo-device';
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("boonmanee@gmail.com")
-    const [passwordLogin, setPasswordLogin] = useState("12345")
-    const [authen, setAuthen] = useState('')
-    const testLogin = () => {
-        console.log(usernameLogin, passwordLogin);
-        postData()
-    }
-    global.local = "http://172.20.10.3:12345"
-
-    const instance = axios.create({
-        withCredentials: true
-    })
-
-    const postData = async () => {
-
-
-        const data = {
-            email: usernameLogin,
-            password: passwordLogin
-        }
-        await instance
-            .post(global.local + "/login", data)
-            .then((res) => {
-                console.log(res.data)
-                if (res.data == 'User not found') {
-                    setAuthen(res.data)
-                } else if (res.data == 'Incorrect Password') {
-                    setAuthen(res.data)
-                } else {
-                    navigation.replace('main')
-                }
-            }
-            )
-        await instance.get(global.local + "/getcookie")
-            .then(res =>
-                console.log(res.data)
-            )
-
-
-    }
-
-
-
-    const [loaded] = useFonts({
-        Poppins: require('../assets/fonts/Poppins-Bold.ttf'),
-        Kanit: require('../assets/fonts/Kanit-SemiBold.ttf')
-    });
-    if (!loaded) {
-        return null;
-    }
-
-
+    const [Docmail, setDocmail] = useState('')
+    const [Docpass, setDocpass] = useState('')
 
     return (
         <View style={styles.container}>
@@ -77,39 +26,33 @@ const login = ({ navigation }) => {
                     <Image source={require('../assets/normal_u15.png')} />
                 </View>
                 <Text style={{ ...styles.headerText, marginTop: Device.osName == "iPadOS" ? hp('15%') : hp('18%') }}>เข้าสู่ระบบ
-                    <FontAwesome name="sign-in" size={50} color="white" />
+                    {'\n'}
+                    <View>
+                        <Text style={{
+                            color: '#FFF9EC',
+                            fontFamily: 'Kanit',
+                            fontWeight: 'bold',
+                            fontSize: RFPercentage(6),
+                            marginLeft: 50
+                        }}>หมอ<FontAwesome name="sign-in" size={50} color="white" /></Text></View>
+
                 </Text>
+
             </View>
             <KeyboardAwareScrollView style={styles.containerinput} viewIsInsideTabBar={true} extraScrollHeight={-40}>
                 <Text style={styles.label}>อีเมล</Text>
-                <TextInput style={styles.input} placeholder="โปรดระบุอีเมล" value={usernameLogin} onChangeText={usernameLogin => setUsernameLogin(usernameLogin)} />
+                <TextInput style={styles.input} placeholder="โปรดระบุอีเมล" value={Docmail} onChangeText={setDocmail} />
                 <Text style={styles.label}>รหัสผ่าน</Text>
-                <TextInput style={styles.input} placeholder="โปรดระบุรหัสผ่าน" value={passwordLogin} onChangeText={passwordLogin => setPasswordLogin(passwordLogin)} secureTextEntry={true} />
-                <View style={{ marginTop: 20 }}>
+                <TextInput style={styles.input} placeholder="โปรดใส่รหัสผ่าน" value={Docpass} onChangeText={setDocpass} secureTextEntry={true} />
 
-                    <TouchableOpacity style={{ alignItems: 'flex-end' }}
-                        onPress={() => {
-                            navigation.navigate("doctor")
-                        }}
-                    >
-                        <Text style={{ color: '#007AFF' }}>Doctor Login</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ alignItems: 'flex-end' }}
-                        onPress={() => {
-                            navigation.navigate("signup")
-                        }}
-                    >
-                        <Text style={{ color: '#007AFF' }}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
 
             </KeyboardAwareScrollView>
-            <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text>
+            {/* <Text style={{ color: 'red', fontFamily: 'Poppins', alignSelf: 'center' }}>{authen}</Text> */}
 
             <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                 postData()
             }}>
-                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
+                <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Poppins', color: '#333333', alignSelf: 'center' }}>เข้าสู่ระบบ</Text>
             </TouchableOpacity>
         </View >
     )
@@ -142,7 +85,7 @@ const styles = StyleSheet.create({
     label: {
         fontSize: RFPercentage(2),
         marginTop: 20,
-        fontFamily: 'Kanit'
+        fontFamily: 'Poppins'
     },
     header: {
         transform: [{ translateY: "20%" }]
@@ -166,8 +109,7 @@ const styles = StyleSheet.create({
         color: '#FFF9EC',
         fontFamily: 'Kanit',
         fontWeight: 'bold',
-        marginLeft: 10,
-
+        marginLeft: 10
     },
     btn: {
         marginBottom: hp('5%'),

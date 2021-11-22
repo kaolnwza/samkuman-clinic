@@ -18,6 +18,7 @@ func Router() *mux.Router {
 	router.HandleFunc("/getdoc", services.GetDoctor).Methods("GET")
 	router.HandleFunc("/createuser", services.CreateUser).Methods("POST")
 	router.HandleFunc("/getuser", services.GetUser).Methods("GET")
+	router.HandleFunc("/adddoctor", services.AddDoctor).Methods("POST")
 
 	router.HandleFunc("/findtest", services.CallOnlyOneInOject).Methods("GET")
 	//router.HandleFunc("/createhistory", services.CreateHistory).Methods("POST")
