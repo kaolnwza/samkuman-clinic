@@ -16,13 +16,29 @@ const Reserve = ({ navigation }) => {
 
     useEffect(() => {
         const getQueue = async () => {
-            await axios.get(global.local + "/getallqueue")
+
+
+            var data = {
+                "type": selectedValue
+            }
+            await axios.post(global.local + "/getremainqueue", data)
                 .then(res => {
-                    var res_length = (res.data).filter(x => x.type == selectedValue).length
-                    setCurrentQueue(res_length)
+
+
+
+                    if (res.data.cursor.Current != null) {
+                        setCurrentQueue(res.data.struct[0].queue_id)
+                    }
+                    else if (res.data.cursor.Current == null) {
+                        setCurrentQueue('-')
+                    }
+
+
                     letFetching(res.data)
 
+
                 })
+
         }
 
         return (
@@ -45,7 +61,7 @@ const Reserve = ({ navigation }) => {
                     navigation.navigate('Queue')
                 }
                 else {
-                    console.log(res.data);
+
                     navigation.navigate('Queue')
                 }
             })

@@ -83,9 +83,9 @@ const Profile = (props, { navigation }) => {
             setEdit(false)
         }
         console.log(Firstname)
-        
 
-        
+
+
     };
 
     const Pass = () => {
@@ -100,7 +100,7 @@ const Profile = (props, { navigation }) => {
         }
     };
 
-    
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setDOB(currentDate);
@@ -119,11 +119,11 @@ const Profile = (props, { navigation }) => {
                 )
 
         var data = {
-            user_id: 0 ,
+            user_id: 0,
             identity_number: Id,
-            firstname:  Firstname,
-            lastname:  Lastname,
-            gender:  gender,
+            firstname: Firstname,
+            lastname: Lastname,
+            gender: gender,
             height: Height,
             weight: Weight,
             dob: DOB,
@@ -142,6 +142,7 @@ const Profile = (props, { navigation }) => {
             .then(res => {
                 // console.log(userinfo)
                 console.log("update profile success")
+                alert("Profile has Updated")
                 // setHistoryId(res.data.history_id)
 
             })
@@ -301,7 +302,8 @@ const Profile = (props, { navigation }) => {
                                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                                     <View style={{ width: '100%' }}>
                                         <Text style={styles.label}>การแพ้</Text>
-                                        <TextInput style={styles.inputH} placeholder="การแพ้" value={Alllergic} onChangeText={setAllergic} />
+                                        <TextInput style={styles.inputA} placeholder="การแพ้" multiline
+                                            numberOfLines={4} value={Alllergic} onChangeText={setAllergic} />
 
                                     </View>
 
@@ -310,7 +312,8 @@ const Profile = (props, { navigation }) => {
                             <View style={{ ...styles.boxH, backgroundColor: '#e46472' }}>
                                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                                     <Text style={styles.label}>โรคประจำตัว</Text>
-                                    <TextInput style={styles.inputH} placeholder="โรคประจำตัว" value={Disease} onChangeText={setDisease} />
+                                    <TextInput style={styles.inputA} placeholder="โรคประจำตัว" multiline
+                                        numberOfLines={4} value={Disease} onChangeText={setDisease} />
 
                                 </View>
                             </View>
@@ -423,11 +426,11 @@ const Profile = (props, { navigation }) => {
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>ยกเลิก</Text>
                         </TouchableOpacity>
-                        
+
                         <TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
-                           UpdateProfile()
-                            // Info()
-                            
+                            UpdateProfile()
+                            Info()
+
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>บันทึก</Text>
                         </TouchableOpacity>

@@ -38,6 +38,7 @@ func Router() *mux.Router {
 	router.HandleFunc("/dropallqueue", services.DropAllQueue).Methods("DELETE")
 	router.HandleFunc("/getuserqueue", services.GetUserQueue).Methods("GET")
 	router.HandleFunc("/getallqueue", services.GetAllQueue).Methods("GET")
+	router.HandleFunc("/getremainqueue", services.GetRemainQueue).Methods("POST")
 	//router.HandleFunc("/findtype", services.FindType).Methods("GET")
 
 	//history

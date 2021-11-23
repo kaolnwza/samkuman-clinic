@@ -32,9 +32,6 @@ const login = ({ navigation }) => {
                     setAuthen(res.data)
                 } else if (res.data == 'Incorrect Password') {
                     setAuthen(res.data)
-                } else {
-
-
                 }
             }
             )

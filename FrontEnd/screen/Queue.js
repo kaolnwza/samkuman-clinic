@@ -32,6 +32,7 @@ const Queue = ({ navigation }) => {
                     setUserQueue(res.data.user_queue)
                     // global.noti.push({ title: "noti Added" })
                 })
+
         }
 
         return (
