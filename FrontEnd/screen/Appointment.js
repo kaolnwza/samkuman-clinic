@@ -29,13 +29,17 @@ const Appointment = () => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(2000).then(() => {
+            setRefreshing(false)
+            getUserInfo()
+        }
+        );
     }, []);
-
-<<<<<<< HEAD
 
 
     useEffect(() => {
+
+
         getUserInfo()
 
     }, [])
@@ -49,22 +53,6 @@ const Appointment = () => {
 
             })
     }
-=======
-
-    useEffect(() => {
-        const getUserInfo = async () => {
-
-            await axios.get(global.local + "/getappointment")
-                .then(res => {
-                    setUserAppointment(res.data)
-                    //console.log(res.data)
-
-                })
-        }
-        return (
-            getUserInfo()
-        )
-    })
 
     const renderItem = ({ item }) => {
         const updateAppointment = async (ap_id) => {
@@ -151,7 +139,6 @@ const Appointment = () => {
     };
 
 
->>>>>>> main
 
     return (
         <View style={styles.container}

@@ -116,7 +116,7 @@ const Profile = (props, { navigation }) => {
 
     const UpdateProfile = async () => {
 
-        await instance.get(global.local + "/getcookie")
+        await axios.get(global.local + "/getcookie")
             .then(res =>
                 console.log(res.data)
 

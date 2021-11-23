@@ -31,7 +31,7 @@ const PostponeBox = (props) => {
     }, []);
     const renderItem = ({ item }) => {
         const updateAppointment = async (ap_id) => {
-            console.log(ap_id);
+
             var data = {
 
                 date: Moment(date).format(),
