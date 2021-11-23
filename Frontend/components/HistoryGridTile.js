@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View, Text, StyleSheet, Alert, Modal, Pressable } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet, Alert, Modal, Pressable, SafeAreaView } from "react-native";
 import { useFonts } from 'expo-font';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { RFPercentage } from 'react-native-responsive-fontsize';
@@ -10,7 +10,7 @@ import Moment from 'moment';
 const HistoryGridTile = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View>
+    <SafeAreaView>
       <Modal
         animationType="slide"
         transparent={true}
@@ -80,7 +80,8 @@ const HistoryGridTile = (props) => {
             {props.title}
           </Text>
         </View>
-      </Pressable></View>
+      </Pressable>
+    </SafeAreaView>
   );
 };
 

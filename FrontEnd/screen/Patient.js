@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView, RefreshControl } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -12,6 +12,9 @@ import { Picker } from '@react-native-picker/picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const Patient = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -26,7 +29,12 @@ const Patient = () => {
 
     const [getHistoryId, setHistoryId] = useState(-1)
 
+    const [refreshing, setRefreshing] = React.useState(false);
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -66,7 +74,14 @@ const Patient = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
             <Bg Text1='ผลการรักษาและการนัดหมาย' />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -153,7 +168,7 @@ const Patient = () => {
             </TouchableWithoutFeedback >
 
 
-        </View >
+        </ScrollView >
     )
 }
 

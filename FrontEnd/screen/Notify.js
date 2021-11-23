@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, } from 'react-native'
+import { StyleSheet, Text, View, FlatList, ScrollView, RefreshControl } from 'react-native'
 import Bg from '../components/Pagebg'
 import NotiGridTile from '../components/NotiGridTile';
 import { useFonts } from 'expo-font';
@@ -44,7 +44,18 @@ const DATA1 = [
 
 ];
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Notify = ({ navigation }) => {
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
+    
     const renderGridItem = (itemData) => {
         return (
 
@@ -67,13 +78,19 @@ const Notify = ({ navigation }) => {
 
 
 
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
             <Bg Text1='การแจ้งเตือน' />
             <View style={styles.position}>
                 {/* <FlatList data={global.noti} renderItem={renderGridItem} keyExtractor={item => item.title} numColumns={1} /> */}
-                <Text>{console.log(global.noti.title)}</Text>
             </View>
-        </View>
+        </ScrollView>
 
     );
 

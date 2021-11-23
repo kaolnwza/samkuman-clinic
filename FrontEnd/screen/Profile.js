@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, RefreshControl, ScrollView } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -15,8 +15,12 @@ import Moment from 'moment';
 // import { TextInput } from 'react-native-paper';
 import axios from "axios"
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const Profile = (props, { navigation }) => {
+
     const userinfo = props.route.params.userInfo
     const [Edit, setEdit] = React.useState(false);
 
@@ -150,10 +154,23 @@ const Profile = (props, { navigation }) => {
         // }
 
     }
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
 
             <Bg Text1='ข้อมูลผู้ใช้' />
             <View style={styles.position}>
@@ -429,7 +446,7 @@ const Profile = (props, { navigation }) => {
                 }
             </View>
 
-        </View>
+        </ScrollView>
     )
 }
 
@@ -440,6 +457,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         backgroundColor: '#6488e4',
+
     },
     position: {
         flexDirection: 'column',

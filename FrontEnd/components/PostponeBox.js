@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, FlatList, Modal } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, Modal, SafeAreaView } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -41,7 +41,7 @@ const PostponeBox = (props) => {
 
         return (
 
-            <View style={styles.box}>
+            <SafeAreaView style={styles.box}>
                 <Text style={{ margin: RFPercentage(2), fontFamily: 'Kanit', fontSize: RFPercentage(3) }}>การนัดหมายวันที่ {Moment(item.date).format('LL')}</Text>
                 <View style={{ marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(1) }}>
                     <Text style={styles.detail}>Name : {item.firstname} {item.lastname}</Text>
@@ -97,13 +97,12 @@ const PostponeBox = (props) => {
                         </View>
                     </Modal>
                 </View>
-            </View >
+            </SafeAreaView >
 
         );
     };
     return (
         <FlatList data={props.appintList} renderItem={renderItem} keyExtractor={item => item.appointment_id} numColumns={1} />
-
     )
 }
 

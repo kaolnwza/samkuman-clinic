@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard, ScrollView, RefreshControl } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Picker } from '@react-native-picker/picker';
@@ -7,12 +7,23 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Btn from '../components/Button';
 import axios from 'axios'
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Reserve = ({ navigation }) => {
     const [selectedValue, setSelectedValue] = useState("normal");
     const [Day, setDay] = useState('Monday')
     const [currentQueue, setCurrentQueue] = useState()
     const [symtomInput, setSymtomInput] = useState("")
     const [fetching, letFetching] = useState()
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
     useEffect(() => {
         const getQueue = async () => {
@@ -70,7 +81,14 @@ const Reserve = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
             <Bg Text1='ระบบการจองคิว' />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -123,7 +141,7 @@ const Reserve = ({ navigation }) => {
                 </View>
             </TouchableWithoutFeedback >
 
-        </View >
+        </ScrollView >
     )
 }
 

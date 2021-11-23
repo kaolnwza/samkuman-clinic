@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -8,12 +8,22 @@ import axios from 'axios'
 
 import Bg from '../components/Pagebg'
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Queue = ({ navigation }) => {
     const [currentQueue, setCurrentQueue] = useState();
     const [remainQueue, setRemainQueue] = useState();
     const [userQueue, setUserQueue] = useState();
     const [_, runFetching] = useState()
-    global.noti = []
+    
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
     const data = JSON.stringify({
         user_id: 15,
@@ -30,7 +40,6 @@ const Queue = ({ navigation }) => {
                     setCurrentQueue(res.data.current_queue)
                     setRemainQueue(res.data.remain_queue)
                     setUserQueue(res.data.user_queue)
-                    // global.noti.push({ title: "noti Added" })
                 })
 
         }
@@ -58,8 +67,16 @@ const Queue = ({ navigation }) => {
 
 
 
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
             <Bg Text1='คิวการรักษา' />
             <View style={styles.position}>
                 <View style={styles.queueBorder}>
@@ -86,7 +103,7 @@ const Queue = ({ navigation }) => {
 
             </View>
 
-        </View >
+        </ScrollView >
     )
 }
 

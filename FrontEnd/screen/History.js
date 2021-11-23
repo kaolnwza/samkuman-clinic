@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList, Alert, Modal, Pressable } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Alert, Modal, RefreshControl, ScrollView, SafeAreaView } from 'react-native'
 import Bg from '../components/Pagebg'
 import HistoryGridTile from '../components/HistoryGridTile';
 import { useFonts } from 'expo-font';
@@ -8,45 +8,19 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axios from "axios"
 
-
-const DATA1 = [
-    {
-        title: 'Puad Hua',
-        date: "10/11/2020",
-        symptom: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        diagnose: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        doctorAdvice: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        medicine: ["1", "2", "3"],
-        howToUse: ["HTU1", "HTU2", "HTU3"],
-
-    },
-
-    {
-        title: 'Jeb Korrr',
-        date: "10/11/2020",
-        symptom: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        diagnose: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        doctorAdvice: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        medicine: ["1", "2", "3"],
-        howToUse: ["HTU1", "HTU2", "HTU3"],
-
-    },
-    {
-        title: 'Puad Tong',
-        date: "10/11/2020",
-        symptom: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        diagnose: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        doctorAdvice: "Lorem Ipsum is  it to make a type specimen book. It has survived not only five centuries, but also the leap into electr",
-        medicine: ["1", "2", "3"],
-        howToUse: ["HTU1", "HTU2", "HTU3"],
-
-    },
-];
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const History = () => {
-
-
     const [userHistory, setuserHistory] = useState([])
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
     useEffect(() => {
         const getUserInfo = async () => {
             await axios.get(global.local + "/gethistory")
@@ -78,12 +52,19 @@ const History = () => {
         );
     };
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
             <Bg Text1='ประวัติการรักษา' />
             <View style={styles.position}>
                 <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item._id} numColumns={1} />
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
