@@ -16,7 +16,7 @@ const Reserve = ({ navigation }) => {
 
     const [selectedValue, setSelectedValue] = useState("normal");
     const [Day, setDay] = useState('Monday')
-    const [currentQueue, setCurrentQueue] = useState()
+    const [remainQueue, setRemainQueue] = useState()
     const [symtomInput, setSymtomInput] = useState("")
     const [fetching, letFetching] = useState()
 
@@ -46,12 +46,13 @@ const Reserve = ({ navigation }) => {
         await axios.post(global.local + "/getremainqueue", data)
             .then(res => {
                 letFetching(res.data)
+                //console.log(res.data);
                 // console.log("reserve");
                 if (res.data.cursor.Current != null) {
-                    setCurrentQueue(res.data.struct[0].queue_id)
+                    setRemainQueue(res.data.struct[0].queue_remain)
                 }
                 else if (res.data.cursor.Current == null) {
-                    setCurrentQueue('-')
+                    setRemainQueue(0)
                 }
             })
 
@@ -127,9 +128,9 @@ const Reserve = ({ navigation }) => {
                             onChangeText={x => { setSymtomInput(x) }} />
                     </View>
                     <View style={styles.queueBorder}>
-                        <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>{currentQueue}</Text>
+                        <Text style={[styles.font1, { fontSize: RFPercentage(5) }]}>{remainQueue}</Text>
                     </View>
-                    <Text style={[styles.font1, { fontSize: 20 }]}>คิวปัจจุบัน</Text>
+                    <Text style={[styles.font1, { fontSize: 20 }]}>จำนวนคิวปัจจุบัน</Text>
                     {/* <Btn navigation={navigation} label='CONFIRM' color='#309397' /> */}
                     <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                         // navigation.replace(props.to)
