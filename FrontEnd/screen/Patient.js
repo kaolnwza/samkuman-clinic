@@ -107,7 +107,10 @@ const Patient = () => {
             await axios.post(global.local + "/addappointment", data2)
                 .then(res => console.log("post appointment success"))
         }
-
+        alert("History Added")
+        setResult('')
+        setAdvice('')
+        setMedic('')
     }
     const renderItem = ({ item }) => (
 
