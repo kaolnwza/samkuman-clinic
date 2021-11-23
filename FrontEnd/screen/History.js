@@ -20,22 +20,28 @@ const History = () => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(2000).then(() => {
+            setRefreshing(false)
+            getUserInfo()
+        });
     }, []);
 
     useEffect(() => {
-        const getUserInfo = async () => {
-            await axios.get(global.local + "/gethistory")
-                .then(res => {
-                    setuserHistory(res.data)
-                })
-
-        }
 
         return (
             getUserInfo()
         )
-    })
+    }, [])
+
+    const getUserInfo = async () => {
+        await axios.get(global.local + "/gethistory")
+            .then(res => {
+                setuserHistory(res.data)
+            })
+
+    }
+
+
     const renderGridItem = (itemData) => {
         return (
             <HistoryGridTile

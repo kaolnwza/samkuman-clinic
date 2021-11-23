@@ -25,7 +25,9 @@ const PostponeBox = (props) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(2000).then(() => {
+            setRefreshing(false)
+        });
     }, []);
     const renderItem = ({ item }) => {
         const updateAppointment = async (ap_id) => {

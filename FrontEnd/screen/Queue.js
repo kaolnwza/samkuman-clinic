@@ -55,7 +55,7 @@ const Queue = ({ navigation }) => {
                 setCurrentQueue(res.data.current_queue)
                 setRemainQueue(res.data.remain_queue)
                 setUserQueue(res.data.user_queue)
-                console.log("queue");
+                // console.log("queue");
             })
 
 

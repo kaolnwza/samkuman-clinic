@@ -46,7 +46,7 @@ const Reserve = ({ navigation }) => {
         await axios.post(global.local + "/getremainqueue", data)
             .then(res => {
                 letFetching(res.data)
-                console.log("reserve");
+                // console.log("reserve");
                 if (res.data.cursor.Current != null) {
                     setCurrentQueue(res.data.struct[0].queue_id)
                 }

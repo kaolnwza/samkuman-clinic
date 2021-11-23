@@ -13,22 +13,23 @@ const Appointment = () => {
 
     const [userAppointment, setUserAppointment] = useState()
 
-    
+
 
     useEffect(() => {
-        const getUserInfo = async () => {
+        getUserInfo()
 
-            await axios.get(global.local + "/getappointment")
-                .then(res => {
-                    setUserAppointment(res.data)
-                    //console.log(res.data)
+    }, [])
 
-                })
-        }
-        return (
-            getUserInfo()
-        )
-    })
+    const getUserInfo = async () => {
+
+        await axios.get(global.local + "/getappointment")
+            .then(res => {
+                setUserAppointment(res.data)
+                //console.log(res.data)
+
+            })
+    }
+
     return (
         <View style={styles.container}
         >
