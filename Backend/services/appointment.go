@@ -28,7 +28,7 @@ func AddAppointment(response http.ResponseWriter, request *http.Request) {
 	user_collection.FindOne(ctx, bson.M{"user_id": appointment_structure.User_id}).Decode(&appointment_structure)
 
 	doctor_collection := client.Database(database).Collection("doctor") // รับข้อมูลมาจาก DB
-	doctor_collection.FindOne(ctx, bson.M{"doctor_id": appointment_structure.Doctor_id}).Decode(&appointment_structure)
+	doctor_collection.FindOne(ctx, bson.M{"doctor_id": doctorCookieId}).Decode(&appointment_structure)
 
 	cursor, _ := appointment_collection.Find(ctx, bson.M{})
 	count := 1

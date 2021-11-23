@@ -75,7 +75,7 @@ func AddHistory(response http.ResponseWriter, request *http.Request) {
 
 	history_collection.InsertOne(ctx, history_struct)
 
-	json.NewEncoder(response).Encode(history_struct)
+	json.NewEncoder(response).Encode(history_struct.History_id)
 
 }
 

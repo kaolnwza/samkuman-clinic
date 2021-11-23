@@ -22,6 +22,7 @@ type User struct {
 	Disease         string             `json:"disease" bson:"disease"`
 	Email           string             `json:"email" bson:"email"`
 	Password        string             `json:"password" bson:"password"`
+	Age             int                `json:"age" bson:"age"`
 }
 
 type Doctor struct {

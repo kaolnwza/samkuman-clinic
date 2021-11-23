@@ -102,7 +102,7 @@ const Queue = ({ navigation }) => {
                 <View style={styles.queueBorder2}>
                     <Text style={[styles.font1, { fontSize: RFPercentage(7) }]}>{userQueue}</Text>
                 </View>
-                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>{remainQueue}  คิวก่อนหน้าคุณ</Text>
+                <Text style={[styles.font1, { fontSize: RFPercentage(2) }]}>มีคิว {remainQueue} อยู่ก่อนหน้าคุณ</Text>
                 <TouchableOpacity style={{ ...styles.btn }} onPress={() => {
                     // navigation.replace(props.to)
                     cancelQueue()

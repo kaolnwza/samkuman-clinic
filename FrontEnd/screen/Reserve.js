@@ -47,10 +47,10 @@ const Reserve = ({ navigation }) => {
         }
         await axios.post(global.local + "/getqueuetype", data)
             .then(res => {
-                letFetching(res.data)
+                // letFetching(res.data)
 
                 setRemainQueue(res.data)
-                setDay(moment(new Date()).format('dddd').toString())
+                // console.log(res.data);
             })
 
     }
