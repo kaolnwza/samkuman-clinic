@@ -121,16 +121,33 @@ const Profile = (props, { navigation }) => {
 
         });
         if (isFormValid()) {
-            data: {
+            var data = {
+                user_id: userinfo.user_id,
+                old_password: OPass,
+                new_password: NPass
 
             }
             updatePassword()
-            setChangePass(false)
+
         }
     };
 
 
-    const updatePassword()
+    const updatePassword = async () => {
+        await axios.put(global.local + "/changepassword", data)
+            .then(res => {
+                if (res.data == "no_user") {
+                    alert("User Not Found")
+                }
+                else if (res.data == "Incorrect Password") {
+                    alert("Incorrect Password")
+                }
+                else {
+                    alert("Password has updated")
+                    setChangePass(false)
+                }
+            })
+    }
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
