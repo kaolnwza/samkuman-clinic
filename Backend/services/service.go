@@ -164,3 +164,21 @@ func CreateTest2(response http.ResponseWriter, request *http.Request) {
 
 	json.NewEncoder(response).Encode(result)
 }
+
+func GetAllUser(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	collection := client.Database(database).Collection("user")
+
+	var all_user []models.User
+	cursor, _ := collection.Find(ctx, bson.M{})
+	defer cursor.Close(ctx)
+	for cursor.Next(ctx) {
+		var temp models.User
+		cursor.Decode(&temp)
+		all_user = append(all_user, temp)
+
+	}
+	json.NewEncoder(response).Encode(all_user)
+}

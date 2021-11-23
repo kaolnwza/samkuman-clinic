@@ -23,10 +23,10 @@ const SignUp = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
     const [gender, setGender] = useState("Male")
     const [address, setAddress] = useState('asd');
-    const [phone, setPhone] = useState(1234567890);
+    const [phone, setPhone] = useState('1234567890');
     const [email, setEmail] = useState('asdasd@gmail.com');
-    const [height, setHeight] = useState(123);
-    const [weight, setWeight] = useState(123);
+    const [height, setHeight] = useState('123');
+    const [weight, setWeight] = useState('123');
     const [allergic, setAllergic] = useState('asd');
     const [disease, setDisease] = useState('hfg');
     const [password, setPassword] = useState('Kk123');

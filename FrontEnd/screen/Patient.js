@@ -11,12 +11,15 @@ import { Picker } from '@react-native-picker/picker';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
+import { useIsFocused } from '@react-navigation/core';
 
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
 const Patient = () => {
+    const isFocused = useIsFocused()
+
     const [modalVisible, setModalVisible] = useState(false);
     const [createDate, setCreateDate] = useState(new Date());
     const [date, setDate] = useState(new Date());
@@ -27,9 +30,27 @@ const Patient = () => {
     const [advice, setAdvice] = useState('')
     const [medic, setMedic] = useState('')
 
+    const [userList, setUserList] = useState([])
+
+
     const [getHistoryId, setHistoryId] = useState(-1)
 
     const [refreshing, setRefreshing] = React.useState(false);
+
+    useEffect(() => {
+        if (isFocused) {
+            getAllUser()
+        }
+    }, [])
+
+    const getAllUser = async () => {
+        await axios.get(global.local + "/getalluser")
+            .then(res => {
+                setUserList(res.data)
+                console.log(res.data);
+            })
+    }
+
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
