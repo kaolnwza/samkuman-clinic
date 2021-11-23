@@ -40,22 +40,37 @@ const Patient = () => {
     useEffect(() => {
         if (isFocused) {
             getAllUser()
+            getSymtom()
         }
-    }, [])
+    }, [selectedValue])
 
     const getAllUser = async () => {
         await axios.get(global.local + "/getalluser")
             .then(res => {
                 setUserList(res.data)
-                console.log(res.data);
+                // console.log(res.data);
             })
     }
 
+    const getSymtom = async () => {
+        await axios.post(global.local + "/getsymtomqueue", { user_id: selectedValue })
+            .then(res => {
+                if (res.data.symtom != "not_found") {
+                    setSymptom(res.data.symtom)
+                }
+                else {
+
+                }
+
+            })
+    }
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         wait(2000).then(() => {
             setRefreshing(false)
+            getAllUser()
+            getSymtom()
         });
     }, []);
 
@@ -169,7 +184,7 @@ const Patient = () => {
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
                             {
                                 userList.map(function (user, i) {
-                                    return (<Picker.Item value={i} label={"ID : " + user.user_id + "  " + user.firstname + " " + user.lastname} />);
+                                    return (<Picker.Item value={i} key={i} label={"ID : " + user.user_id + "  " + user.firstname + " " + user.lastname} />);
                                 })
                             }
 
