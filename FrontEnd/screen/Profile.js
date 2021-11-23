@@ -48,7 +48,7 @@ const Profile = (props, { navigation }) => {
 
 
     useEffect(() => {
-        onRefresh()
+        getUser()
     }, [])
 
     const getUser = async () => {
@@ -121,10 +121,16 @@ const Profile = (props, { navigation }) => {
 
         });
         if (isFormValid()) {
+            data: {
+
+            }
+            updatePassword()
             setChangePass(false)
         }
     };
 
+
+    const updatePassword()
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -190,10 +196,11 @@ const Profile = (props, { navigation }) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        getUser()
+
 
         wait(1500).then(() => {
             setRefreshing(false)
+            getUser()
         });
     }, []);
 
