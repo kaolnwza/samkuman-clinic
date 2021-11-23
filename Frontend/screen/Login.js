@@ -20,7 +20,7 @@ const login = ({ navigation }) => {
     }
     const [loginStatus, setLoginStatus] = useState(false)
 
-    global.local = "http://192.168.1.4:12345"
+    global.local = "http://192.168.43.247:12345"
 
 
     const instance = axios.create({
@@ -50,9 +50,10 @@ const login = ({ navigation }) => {
             )
 
         await instance.get(global.local + "/getcookie")
-            .then(res =>
-                //console.log(res.data)
+            .then(res => {
+                console.log(res.data)
                 navigation.replace('main', { role: 'User' })
+            }
             )
 
 
