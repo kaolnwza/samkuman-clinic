@@ -189,6 +189,7 @@ func SignUp(response http.ResponseWriter, request *http.Request) {
 	var user models.User
 
 	json.NewDecoder(request.Body).Decode(&user)
+	fmt.Println(user)
 	user.User_id = count
 	user.Password = EncodePassword(user.Password)
 	collection := client.Database(database).Collection("user")

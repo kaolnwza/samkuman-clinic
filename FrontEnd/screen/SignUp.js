@@ -77,19 +77,19 @@ const SignUp = ({ navigation }) => {
 
     const signupPost = async () => {
         var data = {
-            fistname: firstname,
+            identity_number: identityNumber,
+            firstname: firstname,
             lastname: lastname,
             gender: gender,
-            height: height,
-            weight: weight,
+            height: parseInt(height),
+            weight: parseFloat(weight),
             dob: date,
             // age: age,
             address: address,
             phone_number: phone,
             allergic: allergic,
             disease: disease,
-            email: email,
-            password, password
+            email: email
         }
 
         await axios.post(global.local + "/signup", data)
