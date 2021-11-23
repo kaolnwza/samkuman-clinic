@@ -26,7 +26,7 @@ const Queue = ({ navigation }) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(200).then(() => {
+        wait(1500).then(() => {
             setRefreshing(false)
             getQueue()
         });
