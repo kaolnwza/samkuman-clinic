@@ -121,7 +121,7 @@ const Profile = (props, { navigation }) => {
 
         });
         if (isFormValid()) {
-            
+
             updatePassword()
 
         }
@@ -169,7 +169,7 @@ const Profile = (props, { navigation }) => {
 
         var data = {
             user_id: 0,
-            identity_number: Id,
+            // identity_number: Id,
             firstname: Firstname,
             lastname: Lastname,
             gender: gender,
@@ -395,12 +395,12 @@ const Profile = (props, { navigation }) => {
                         :
                         <View style={styles.box}>
                             <View style={{ width: '90%', }}>
-                                <Text style={styles.label}>ID</Text>
+                                {/* <Text style={styles.label}>ID</Text>
                                 <TextInput style={styles.input} placeholder="ID" value={Id} onChangeText={setId} />
                                 {isFieldInError('Id') &&
                                     getErrorsInField('Id').map(errorMessage => (
                                         <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
-                                    ))}
+                                    ))} */}
                                 <Text style={styles.label}>อีเมล</Text>
                                 <TextInput style={styles.input} placeholder="อีเมล" value={Email} onChangeText={setEmail} />
                                 {isFieldInError('Email') &&
