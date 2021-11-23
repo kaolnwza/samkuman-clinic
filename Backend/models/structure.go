@@ -113,3 +113,9 @@ type UserInformation struct {
 	User
 	History
 }
+
+type PasswordManage struct {
+	User_id      int    `json:"user_id" bson:"user_id"`
+	Old_Password string `json:"old_password" bson:"old_password"`
+	New_Password string `json:"new_password" bson:"new_password"`
+}
