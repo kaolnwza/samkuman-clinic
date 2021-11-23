@@ -115,7 +115,7 @@ const Custom = props => {
     return (
         <DrawerContentScrollView style={{ backgroundColor: '#fff9ec' }} {...props}>
             <TouchableOpacity style={{ flexDirection: 'row', flex: 1, }} onPress={() => {
-                props.navigation.navigate('profile');
+                { global.Role === 'User' ? props.navigation.navigate('profile') : null }
 
             }}>
 
