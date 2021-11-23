@@ -15,19 +15,20 @@ const login = ({ navigation }) => {
     const [authen, setAuthen] = useState('')
 
     const doctorLogin = async () => {
+        console.log('doctor login')
         const instance = axios.create({
             withCredentials: true
         })
 
         const data = {
-            doctor_email: "somchai@gmail.com",
-            doctor_password: "12345"
+            doctor_email: Docmail,
+            doctor_password: Docpass
         }
 
 
         await instance.post(global.local + "/doctorlogin", data)
             .then((res) => {
-                //console.log(res.data)
+                console.log(res.data)
                 if (res.data == 'User not found') {
                     setAuthen(res.data)
                 } else if (res.data == 'Incorrect Password') {

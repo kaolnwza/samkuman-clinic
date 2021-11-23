@@ -66,5 +66,7 @@ func Router() *mux.Router {
 	router.HandleFunc("/doctorlogout", services.DoctorLogout).Methods("GET")
 	//router.HandleFunc("/kuypp", services.Kuyprayuth).Methods("GET")
 
+	//user
+	router.HandleFunc("/getalluser", services.GetAllUser).Methods("GET")
 	return router
 }
