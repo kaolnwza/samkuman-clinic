@@ -45,9 +45,10 @@ const Reserve = ({ navigation }) => {
         }
         await axios.post(global.local + "/getqueuetype", data)
             .then(res => {
-                letFetching(res.data)
+                // letFetching(res.data)
 
                 setRemainQueue(res.data)
+                console.log(res.data);
             })
 
     }
