@@ -62,7 +62,7 @@ func AddHistory(response http.ResponseWriter, request *http.Request) {
 	}
 
 	doctor_collection := client.Database(database).Collection("doctor")
-	doctor_collection.FindOne(ctx, bson.M{"doctor_id": history_struct.Doctor.Doctor_id}).Decode(&history_struct.Doctor)
+	doctor_collection.FindOne(ctx, bson.M{"doctor_id": doctorCookieId}).Decode(&history_struct.Doctor)
 
 	history_struct.History_id = history_id
 	history_struct.Date = time.Now()
