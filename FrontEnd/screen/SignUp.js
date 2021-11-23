@@ -89,7 +89,8 @@ const SignUp = ({ navigation }) => {
             phone_number: phone,
             allergic: allergic,
             disease: disease,
-            email: email
+            email: email,
+            password: password
         }
 
         await axios.post(global.local + "/signup", data)

@@ -50,7 +50,7 @@ func Login(response http.ResponseWriter, request *http.Request) {
 	var data_get models.User
 	//data_get.Email = "404"
 	json.NewDecoder(request.Body).Decode(&data_get)
-	fmt.Println(data_get.Email)
+	// fmt.Println(data_get.Password)
 	// fmt.Println(data_get.Identity_number)
 	// fmt.Println(data_get.Password)
 	collection := client.Database(database).Collection("user")
