@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, FlatList, Modal, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, Modal, ScrollView, SafeAreaView, RefreshControl } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -7,9 +7,13 @@ import Moment from 'moment';
 import * as Device from 'expo-device';
 import axios from 'axios'
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 const PostponeBox = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [date, setDate] = useState(new Date());
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setDate(currentDate);
@@ -17,7 +21,12 @@ const PostponeBox = (props) => {
     const [currentId, setCurrentId] = useState(-1)
 
     const [appointmentTitle, setAppointmentTitle] = useState();
+    const [refreshing, setRefreshing] = React.useState(false);
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
     const renderItem = ({ item }) => {
         const updateAppointment = async (ap_id) => {
             console.log(ap_id);
@@ -41,7 +50,7 @@ const PostponeBox = (props) => {
 
         return (
 
-            <SafeAreaView style={styles.box}>
+            <View style={styles.box}>
                 <Text style={{ margin: RFPercentage(2), fontFamily: 'Kanit', fontSize: RFPercentage(3) }}>การนัดหมายวันที่ {Moment(item.date).format('LL')}</Text>
                 <View style={{ marginHorizontal: RFPercentage(4), marginBottom: RFPercentage(1) }}>
                     <Text style={styles.detail}>Name : {item.firstname} {item.lastname}</Text>
@@ -97,12 +106,18 @@ const PostponeBox = (props) => {
                         </View>
                     </Modal>
                 </View>
-            </SafeAreaView >
+            </View >
 
         );
     };
     return (
-        <FlatList data={props.appintList} renderItem={renderItem} keyExtractor={item => item.appointment_id} numColumns={1} />
+        <FlatList data={props.appintList} renderItem={renderItem} keyExtractor={item => item.appointment_id} numColumns={1}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            } />
     )
 }
 

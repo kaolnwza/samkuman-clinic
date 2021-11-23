@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList, Alert, Modal, RefreshControl, ScrollView, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Alert, Modal, RefreshControl } from 'react-native'
 import Bg from '../components/Pagebg'
 import HistoryGridTile from '../components/HistoryGridTile';
 import { useFonts } from 'expo-font';
@@ -13,6 +13,7 @@ const wait = (timeout) => {
 }
 
 const History = () => {
+
     const [userHistory, setuserHistory] = useState([])
 
     const [refreshing, setRefreshing] = React.useState(false);
@@ -21,6 +22,7 @@ const History = () => {
         setRefreshing(true);
         wait(2000).then(() => setRefreshing(false));
     }, []);
+
     useEffect(() => {
         const getUserInfo = async () => {
             await axios.get(global.local + "/gethistory")
@@ -52,19 +54,18 @@ const History = () => {
         );
     };
     return (
-        <ScrollView style={styles.container}
-            showsVerticalScrollIndicator={false}
-            refreshControl={
-                <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                />
-            }>
+        <View style={styles.container}>
             <Bg Text1='ประวัติการรักษา' />
             <View style={styles.position}>
-                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item._id} numColumns={1} />
+                <FlatList data={userHistory} renderItem={renderGridItem} keyExtractor={item => item._id} numColumns={1}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    } />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

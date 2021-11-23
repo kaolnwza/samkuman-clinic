@@ -6,9 +6,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios'
 
-const wait = (timeout) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-}
 
 
 const PassQueue = () => {
@@ -18,12 +15,7 @@ const PassQueue = () => {
     const [remainQueue, setRemainQueue] = useState();
     const [_, runFetching] = useState()
 
-    const [refreshing, setRefreshing] = React.useState(false);
-
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
-    }, []);
+    
 
     useEffect(() => {
         const getQueue = async () => {
@@ -116,14 +108,7 @@ const PassQueue = () => {
     }
 
     return (
-        <ScrollView style={styles.container}
-            showsVerticalScrollIndicator={false}
-            refreshControl={
-                <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                />
-            }>
+        <View style={styles.container}>
             <Bg Text1='การจัดการคิว' />
             <View style={styles.position}>
 
@@ -159,7 +144,7 @@ const PassQueue = () => {
                     <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>คิวต่อไป</Text>
                 </TouchableOpacity>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
