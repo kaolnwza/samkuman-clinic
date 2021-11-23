@@ -6,13 +6,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios'
 import { useIsFocused } from '@react-navigation/native';
+import moment from 'moment';
 
 
 const PassQueue = () => {
     const isFocused = useIsFocused()
 
     const [selectedValue, setSelectedValue] = useState("normal");
-    const [Day, setDay] = useState('Monday')
+    const [Day, setDay] = useState('')
     const [currentQueue, setCurrentQueue] = useState(555);
     const [remainQueue, setRemainQueue] = useState();
     const [_, runFetching] = useState()
@@ -41,6 +42,7 @@ const PassQueue = () => {
                 }
                 runFetching(res.data)
             })
+        setDay(moment(new Date()).format('dddd').toString())
     }
 
     const queueDelete = async () => {
@@ -60,7 +62,7 @@ const PassQueue = () => {
                     onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                 >
                     <Picker.Item label="แผนกทั่วไป" value="normal" />
-                    {Day === 'Monday' || 'Thursday' ? <Picker.Item label="จิตแพทย์" value="psychiatrist" /> : null}
+                    {Day === 'Monday' | 'Thursday' ? <Picker.Item label="จิตแพทย์" value="psychiatrist" /> : null}
                     {Day === 'Monday' ? <Picker.Item label="สูตินารีเวช" value="obstetrician" /> : null}
                     {Day === 'Tuesday' ? <Picker.Item label="ระบบทางเดินอาหาร" value="gastro-enterologist" /> : null}
                     {Day === 'Wednesday' ? <Picker.Item label="กายภาพบำบัด" value="physiatrist" /> : null}

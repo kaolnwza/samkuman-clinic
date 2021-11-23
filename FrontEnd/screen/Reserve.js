@@ -7,6 +7,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Btn from '../components/Button';
 import axios from 'axios'
 import { useIsFocused } from '@react-navigation/core';
+import moment from 'moment';
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
@@ -15,8 +16,8 @@ const Reserve = ({ navigation }) => {
     const isFocused = useIsFocused();
 
     const [selectedValue, setSelectedValue] = useState("normal");
-    const [Day, setDay] = useState('Monday')
-    const [remainQueue, setRemainQueue] = useState()
+    const [Day, setDay] = useState('')
+    const [remainQueue, setRemainQueue] = useState('')
     const [symtomInput, setSymtomInput] = useState("")
     const [fetching, letFetching] = useState()
 
@@ -27,7 +28,7 @@ const Reserve = ({ navigation }) => {
         wait(2000).then(() => {
             setRefreshing(false)
             getQueue()
-            
+
         });
     }, []);
 
@@ -49,6 +50,7 @@ const Reserve = ({ navigation }) => {
                 letFetching(res.data)
 
                 setRemainQueue(res.data)
+                setDay(moment(new Date()).format('dddd').toString())
             })
 
     }
@@ -99,7 +101,7 @@ const Reserve = ({ navigation }) => {
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     >
                         <Picker.Item label="แผนกทั่วไป" value="normal" />
-                        {Day === 'Monday' || 'Thursday' ? <Picker.Item label="จิตแพทย์" value="psychiatrist" /> : null}
+                        {Day === 'Monday' | 'Thursday' ? <Picker.Item label="จิตแพทย์" value="psychiatrist" /> : null}
                         {Day === 'Monday' ? <Picker.Item label="สูตินารีเวช" value="obstetrician" /> : null}
                         {Day === 'Tuesday' ? <Picker.Item label="ระบบทางเดินอาหาร" value="gastro-enterologist" /> : null}
                         {Day === 'Wednesday' ? <Picker.Item label="กายภาพบำบัด" value="physiatrist" /> : null}
