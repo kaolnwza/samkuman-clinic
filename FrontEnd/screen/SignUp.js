@@ -8,6 +8,7 @@ import * as Device from 'expo-device';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useValidation } from 'react-native-form-validator';
+import axios from 'axios';
 
 const SignUp = ({ navigation }) => {
     const [value, setValue] = React.useState('first');
@@ -16,20 +17,20 @@ const SignUp = ({ navigation }) => {
         setDate(currentDate);
     };
 
-    const [identityNumber, setIdentityNumber] = useState('');
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
+    const [identityNumber, setIdentityNumber] = useState('1234574567895');
+    const [firstname, setFirstname] = useState('asdasd');
+    const [lastname, setLastname] = useState('asd');
     const [date, setDate] = useState(new Date());
-    const [gender, setGender] = useState("")
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [height, setHeight] = useState();
-    const [weight, setWeight] = useState();
-    const [allergic, setAllergic] = useState('');
-    const [disease, setDisease] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [gender, setGender] = useState("Male")
+    const [address, setAddress] = useState('asd');
+    const [phone, setPhone] = useState(1234567890);
+    const [email, setEmail] = useState('asdasd@gmail.com');
+    const [height, setHeight] = useState(123);
+    const [weight, setWeight] = useState(123);
+    const [allergic, setAllergic] = useState('asd');
+    const [disease, setDisease] = useState('hfg');
+    const [password, setPassword] = useState('Kk123');
+    const [confirmPassword, setConfirmPassword] = useState('Kk123');
 
     const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
         useValidation({
@@ -67,11 +68,33 @@ const SignUp = ({ navigation }) => {
             gender: { required: true }
         });
         if (isFormValid()) {
+            signupPost()
             navigation.replace('login')
         } else {
             console.log(isFormValid())
         }
     };
+
+    const signupPost = async () => {
+        var data = {
+            fistname: firstname,
+            lastname: lastname,
+            gender: gender,
+            height: height,
+            weight: weight,
+            dob: date,
+            // age: age,
+            address: address,
+            phone_number: phone,
+            allergic: allergic,
+            disease: disease,
+            email: email,
+            password, password
+        }
+
+        await axios.post(global.local + "/signup", data)
+            .then(console.log("signuop done"))
+    }
 
     return (
         <View style={styles.container}>
