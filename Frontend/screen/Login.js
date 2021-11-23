@@ -43,24 +43,26 @@ const login = ({ navigation }) => {
                 } else if (res.data == 'Incorrect Password') {
                     setAuthen(res.data)
                 } else {
+                    getCookieFn()
                     setLoginStatus(true)
 
                 }
             }
             )
 
-        await instance.get(global.local + "/getcookie")
-            .then(res => {
-                console.log(res.data)
-                navigation.replace('main', { role: 'User' })
-            }
-            )
+       
 
 
 
     }
-
-
+const getCookieFn = async () => {
+    await instance.get(global.local + "/getcookie")
+    .then(res => {
+        console.log(res.data)
+        navigation.replace('main', { role: 'User' })
+    }
+    )
+}
 
     const [loaded] = useFonts({
         Poppins: require('../assets/fonts/Poppins-Bold.ttf'),

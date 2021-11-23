@@ -24,9 +24,10 @@ const Reserve = ({ navigation }) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(200).then(() => {
+        wait(2000).then(() => {
             setRefreshing(false)
             getQueue()
+            
         });
     }, []);
 
@@ -46,7 +47,7 @@ const Reserve = ({ navigation }) => {
         await axios.post(global.local + "/getremainqueue", data)
             .then(res => {
                 letFetching(res.data)
-                //console.log(res.data);
+                console.log(res.data);
                 // console.log("reserve");
                 if (res.data.cursor.Current != null) {
                     setRemainQueue(res.data.struct[0].queue_remain)

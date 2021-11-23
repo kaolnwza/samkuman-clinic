@@ -23,7 +23,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Firstname != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 			bson.D{
 				{"$set", bson.D{{"firstname", user_struct.Firstname}}},
 			},
@@ -38,7 +38,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Lastname != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 			bson.D{
 				{"$set", bson.D{{"lastname", user_struct.Lastname}}},
 			},
@@ -52,7 +52,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	// Edit BirthDay
 	_, err := user_collection.UpdateOne(
 		ctx,
-		bson.M{"user_id": user_struct.User_id},
+		bson.M{"user_id": userCookieId},
 		bson.D{
 			{"$set", bson.D{{"dob", user_struct.Dob}}},
 		},
@@ -66,7 +66,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Gender != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 
 			bson.D{
 				{"$set", bson.D{{"gender", user_struct.Gender}}},
@@ -82,7 +82,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Address != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 
 			bson.D{
 				{"$set", bson.D{{"address", user_struct.Address}}},
@@ -98,7 +98,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Phone_number != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 
 			bson.D{
 				{"$set", bson.D{{"phone_number", user_struct.Phone_number}}},
@@ -114,7 +114,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 
 	user_collection.UpdateOne(
 		ctx,
-		bson.M{"user_id": user_struct.User_id},
+		bson.M{"user_id": userCookieId},
 		bson.D{
 			{"$set", bson.D{{"height", user_struct.Height}}},
 		},
@@ -125,7 +125,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	// Edit weight
 	user_collection.UpdateOne(
 		ctx,
-		bson.M{"user_id": user_struct.User_id},
+		bson.M{"user_id": userCookieId},
 		bson.D{
 			{"$set", bson.D{{"weight", user_struct.Weight}}},
 		},
@@ -137,7 +137,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Allergic != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 			bson.D{
 				{"$set", bson.D{{"allergic", user_struct.Allergic}}},
 			},
@@ -152,7 +152,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Disease != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 			bson.D{
 				{"$set", bson.D{{"disease", user_struct.Disease}}},
 			},
@@ -167,7 +167,7 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	if user_struct.Email != "" {
 		_, err := user_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": user_struct.User_id},
+			bson.M{"user_id": userCookieId},
 			bson.D{
 				{"$set", bson.D{{"email", user_struct.Email}}},
 			},
@@ -176,21 +176,6 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 			fmt.Println(err)
 		}
 		json.NewEncoder(response).Encode("Email") //แสดงใน PM
-	}
-
-	// Edit Password
-	if user_struct.Password != "" {
-		_, err := user_collection.UpdateOne(
-			ctx,
-			bson.M{"user_id": user_struct.User_id},
-			bson.D{
-				{"$set", bson.D{{"password", EncodePassword(user_struct.Password)}}},
-			},
-		)
-		if err != nil {
-			fmt.Println(err)
-		}
-		json.NewEncoder(response).Encode("Password") //แสดงใน PM
 	}
 
 }
