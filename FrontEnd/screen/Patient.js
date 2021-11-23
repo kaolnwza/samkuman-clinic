@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView, RefreshControl } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView, RefreshControl, FlatList } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -95,6 +95,10 @@ const Patient = () => {
         }
 
     }
+    const renderItem = ({ item }) => (
+
+        <Text>{item.lastname}</Text>
+    );
 
     return (
         <ScrollView style={styles.container}
@@ -163,9 +167,12 @@ const Patient = () => {
                             style={{ width: wp('80%'), }}
                             itemStyle={{ color: 'white', fontFamily: 'Kanit' }}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-                            <Picker.Item label="user0" value="0" />
-                            <Picker.Item label="user1" value="1" />
-                            <Picker.Item label="user2" value="2" />
+                            {
+                                userList.map(function (user, i) {
+                                    return (<Picker.Item value={i} label={"ID : " + user.user_id + "  " + user.firstname + " " + user.lastname} />);
+                                })
+                            }
+
                         </Picker>
                         <Text style={styles.label}>อาการผู้ป่วย</Text>
                         <TextInput style={styles.input} placeholder="อาการผู้ป่วย" multiline
