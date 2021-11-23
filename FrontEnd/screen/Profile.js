@@ -4,6 +4,7 @@ import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import { MaterialIcons } from '@expo/vector-icons';
 import { useValidation } from 'react-native-form-validator';
 import InfoBox from '../components/InfoBox';
@@ -11,6 +12,7 @@ import InfoHalfBox from '../components/InfoHalfBox';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { RadioButton } from 'react-native-paper';
 import Moment from 'moment';
+
 
 // import { TextInput } from 'react-native-paper';
 import axios from "axios"
@@ -21,17 +23,19 @@ const wait = (timeout) => {
 
 const Profile = (props, { navigation }) => {
 
-    const userinfo = props.route.params.userInfo
+    const [userinfo, setUser] = useState({})
+
+    // const userinfo = props.route.params.userInfo
     const [Edit, setEdit] = React.useState(false);
 
     const [Firstname, setFirstname] = React.useState(userinfo.firstname);
     const [Lastname, setLastname] = React.useState(userinfo.lastname);
-    const [DOB, setDOB] = React.useState(new Date(userinfo.dob));
+    const [DOB, setDOB] = React.useState(userinfo.dob);
     const [gender, setGender] = React.useState(userinfo.gender);
     const [Address, setAddress] = React.useState(userinfo.address);
     const [Phone, setPhone] = React.useState(userinfo.phone_number);
-    const [Height, setHeight] = React.useState(userinfo.height);
-    const [Weight, setWeight] = React.useState(userinfo.weight);
+    const [Height, setHeight] = React.useState();
+    const [Weight, setWeight] = React.useState();
     const [Alllergic, setAllergic] = React.useState(userinfo.allergic);
     const [Disease, setDisease] = React.useState(userinfo.disease);
     const [Id, setId] = React.useState(userinfo.identity_number);
@@ -41,6 +45,22 @@ const Profile = (props, { navigation }) => {
     const [Cpass, setCpass] = React.useState('');
     const [changePass, setChangePass] = React.useState(false);
     const [User_id, setUser_id] = React.useState();
+
+
+    useEffect(() => {
+        onRefresh()
+    }, [])
+
+    const getUser = async () => {
+        if (global.Role == "User") {
+            await axios.get(global.local + "/finduser")
+                .then(res => {
+                    setUser(res.data)
+                    // console.log(res.data.height)
+                })
+        }
+
+    }
 
 
     const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
@@ -87,7 +107,7 @@ const Profile = (props, { navigation }) => {
             UpdateProfile()
             setEdit(false)
         }
-        console.log(Firstname)
+        // console.log(Firstname)
 
 
 
@@ -95,7 +115,7 @@ const Profile = (props, { navigation }) => {
 
     const Pass = () => {
         validate({
-            OPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
+            OPass: { required: true, },
             NPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
             Cpass: { required: true, equalPassword: NPass },
 
@@ -130,7 +150,7 @@ const Profile = (props, { navigation }) => {
             lastname: Lastname,
             gender: gender,
             height: parseInt(Height),
-            weight: Double.parseDouble(Weight),
+            weight: parseFloat(Weight),
             dob: DOB,
             address: Address,
             phone_number: Phone,
@@ -148,7 +168,7 @@ const Profile = (props, { navigation }) => {
                 // console.log(userinfo)
                 console.log("update profile success")
                 alert("Profile has Updated")
-
+                onRefresh()
                 // setHistoryId(res.data.history_id)
 
             })
@@ -170,7 +190,11 @@ const Profile = (props, { navigation }) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(300).then(() => setRefreshing(false));
+        getUser()
+
+        wait(1500).then(() => {
+            setRefreshing(false)
+        });
     }, []);
 
 
@@ -186,6 +210,7 @@ const Profile = (props, { navigation }) => {
 
             <Bg Text1='ข้อมูลผู้ใช้' />
             <View style={styles.position}>
+
                 {/* <Text>{console.log(new Date())}</Text> */}
                 {!Edit ?
                     <InfoBox f={userinfo.firstname} m={userinfo.lastname} icon='person' titleTop='ชื่อ' titleMid='นามสกุล' />
@@ -208,7 +233,8 @@ const Profile = (props, { navigation }) => {
                     </View>
                 }
 
-                <KeyboardAwareScrollView style={{ marginTop: RFPercentage(1), height: hp('42%') }} extraScrollHeight={-100}>
+                <KeyboardAwareScrollView style={{ marginTop: RFPercentage(1), height: hp('42%') }}
+                    viewIsInsideTabBar={false} extraScrollHeight={-130}>
                     {!Edit ?
                         <InfoHalfBox titleL='วันเกิด' infoL={Moment(userinfo.dob).format('L')} colorL='#309397' titleR='เพศ' infoR={userinfo.gender} colorR='#e46472' iconL='birthday-cake' iconR='transgender' />
                         :
@@ -218,15 +244,14 @@ const Profile = (props, { navigation }) => {
                                     <View style={{ width: '100%' }}>
                                         <Text style={styles.label}>วันเกิด</Text>
                                         <DateTimePicker
-                                            style={{ width: 100, fontSize: RFPercentage(2) }}
+                                            style={{ width: 100 }}
                                             testID="dateTimePicker"
-                                            value={DOB}
+                                            value={new Date(userinfo.dob)}
                                             mode="date"
                                             display="default"
                                             onChange={onChange}
-                                            themeVariant="light"
-                                            textColor="white"
                                         />
+
                                         {isFieldInError('DOB') &&
                                             getErrorsInField('DOB').map(errorMessage => (
                                                 <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
@@ -292,8 +317,8 @@ const Profile = (props, { navigation }) => {
                             <View style={{ ...styles.boxH, backgroundColor: '#e46472' }}>
                                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                                     <View style={{ width: '100%' }}>
-                                        <Text style={styles.label}>ส่วนสูง</Text>
-                                        <TextInput style={styles.inputH} placeholder="ส่วนสูง" keyboardType='decimal-pad' value={Height.toString()} onChangeText={setHeight} />
+                                        <Text style={styles.label}>ส่วนสูง {Height}</Text>
+                                        <TextInput style={styles.inputH} placeholder="ส่วนสูง" keyboardType='decimal-pad' value={Height} onChangeText={setHeight} />
                                         {isFieldInError('Height') &&
                                             getErrorsInField('Height').map(errorMessage => (
                                                 <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
@@ -304,8 +329,8 @@ const Profile = (props, { navigation }) => {
                             </View>
                             <View style={{ ...styles.boxH, backgroundColor: '#f9be7c' }}>
                                 <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                                    <Text style={styles.label}>น้ำหนัก</Text>
-                                    <TextInput style={styles.inputH} placeholder="น้ำหนัก" keyboardType='decimal-pad' value={Weight.toString()} onChangeText={setWeight} />
+                                    <Text style={styles.label}>น้ำหนัก {Weight}</Text>
+                                    <TextInput style={styles.inputH} placeholder="น้ำหนัก" keyboardType='decimal-pad' value={Weight} onChangeText={setWeight} />
                                     {isFieldInError('Weight') &&
                                         getErrorsInField('Weight').map(errorMessage => (
                                             <Text style={styles.warn} key={errorMessage}>{errorMessage}</Text>
@@ -421,6 +446,18 @@ const Profile = (props, { navigation }) => {
                 {Edit == false ?
                     <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                         setEdit(true)
+                        setFirstname(userinfo.firstname)
+                        setLastname(userinfo.lastname)
+                        setDOB(new Date(userinfo.dob))
+                        setGender(userinfo.gender)
+                        setAddress(userinfo.address)
+                        setPhone(userinfo.phone_number)
+                        setHeight(userinfo.height.toString())
+                        setWeight(userinfo.weight.toString())
+                        setAllergic(userinfo.allergic)
+                        setDisease(userinfo.disease)
+                        setId(userinfo.identity_number)
+                        setEmail(userinfo.email)
 
                     }}>
                         <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>แก้ไข</Text>
@@ -435,8 +472,8 @@ const Profile = (props, { navigation }) => {
                             setGender(userinfo.gender)
                             setAddress(userinfo.address)
                             setPhone(userinfo.phone_number)
-                            setHeight(userinfo.height)
-                            setWeight(userinfo.weight)
+                            setHeight(userinfo.height.toString())
+                            setWeight(userinfo.weight.toString())
                             setAllergic(userinfo.allergic)
                             setDisease(userinfo.disease)
                             setId(userinfo.identity_number)
