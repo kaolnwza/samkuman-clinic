@@ -58,6 +58,7 @@ func Router() *mux.Router {
 
 	//Profile
 	router.HandleFunc("/editprofile", services.EditProfile).Methods("POST")
+	router.HandleFunc("/changepassword", services.ChangePassword).Methods("PUT")
 
 	//doctor auth
 	router.HandleFunc("/doctorlogin", services.DoctorLogin).Methods("POST")

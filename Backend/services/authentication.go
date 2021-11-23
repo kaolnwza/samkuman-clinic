@@ -245,3 +245,38 @@ func GetCurrentUser(response http.ResponseWriter, request *http.Request) {
 
 	json.NewEncoder(response).Encode(userCookieId)
 }
+
+func ChangePassword(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+	collection := client.Database(database).Collection("user")
+	var data_get models.PasswordManage
+	json.NewDecoder(request.Body).Decode(&data_get)
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	var data models.User
+	err := collection.FindOne(ctx, bson.M{"user_id": data_get.User_id}).Decode(&data)
+	if err != nil {
+		json.NewEncoder(response).Encode("no_user")
+		return
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(data.Password), []byte(data_get.Old_Password)); err != nil {
+		// fmt.Println(data.Password)
+		// fmt.Println(data_get.Password)
+		fmt.Println("Incorrect Password")
+		json.NewEncoder(response).Encode("Incorrect Password")
+		return
+
+	}
+
+	data.Password = EncodePassword(data_get.New_Password)
+
+	collection.UpdateOne(ctx,
+		bson.M{"user_id": data_get.User_id},
+		bson.D{
+			{"$set", bson.D{{"password", data.Password}}},
+		})
+
+	json.NewEncoder(response).Encode("update password success")
+
+}
