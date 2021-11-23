@@ -36,7 +36,7 @@ const Profile = (props, { navigation }) => {
     const [NPass, setNPass] = React.useState('');
     const [Cpass, setCpass] = React.useState('');
     const [changePass, setChangePass] = React.useState(false);
-
+    const [User_id, setUser_id] = React.useState();
 
 
     const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
@@ -106,9 +106,18 @@ const Profile = (props, { navigation }) => {
         setDOB(currentDate);
     };
 
+  
+
 
 
     const UpdateProfile = async () => {
+
+    await instance.get(global.local + "/getcookie")
+                .then(res =>
+                    console.log(res.data)
+                   
+                )
+
         var data = {
             user_id: 0 ,
             identity_number: Id,
