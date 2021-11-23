@@ -112,28 +112,26 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 
 	// Edit height
 
-		user_collection.UpdateOne(
-			ctx,
-			bson.M{"user_id": user_struct.User_id},
-			bson.D{
-				{"$set", bson.D{{"height", user_struct.Height}}},
-			},
-		)
-		
-		json.NewEncoder(response).Encode("Height") //แสดงใน PM
-	
+	user_collection.UpdateOne(
+		ctx,
+		bson.M{"user_id": user_struct.User_id},
+		bson.D{
+			{"$set", bson.D{{"height", user_struct.Height}}},
+		},
+	)
+
+	json.NewEncoder(response).Encode("Height") //แสดงใน PM
 
 	// Edit weight
 	user_collection.UpdateOne(
-			ctx,
-			bson.M{"user_id": user_struct.User_id},
-			bson.D{
-				{"$set", bson.D{{"weight", user_struct.Weight}}},
-			},
-		)
-		
-		json.NewEncoder(response).Encode("Weight") //แสดงใน PM
-	}
+		ctx,
+		bson.M{"user_id": user_struct.User_id},
+		bson.D{
+			{"$set", bson.D{{"weight", user_struct.Weight}}},
+		},
+	)
+
+	json.NewEncoder(response).Encode("Weight") //แสดงใน PM
 
 	// Edit Allergic
 	if user_struct.Allergic != "" {
