@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import Bg from '../components/Pagebg'
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import Information from '../components/Information';
-import GridInformation from '../components/GridInformation';
+import { DataTable } from 'react-native-paper';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axios from "axios"
 
@@ -95,7 +95,80 @@ const Main = ({ navigation }) => {
                 </View>
                 {Select === true ? <SafeAreaView style={styles.content}>
                     <Information datalist={news} />
-                </SafeAreaView> : null}
+                </SafeAreaView>
+                    :
+                    <View style={{
+                        height: hp('22%'),
+                        marginVertical: 50
+                    }}>
+                        <ScrollView>
+                            <DataTable style={{
+                                backgroundColor: '#FFF9EC',
+                                borderRadius: RFPercentage(5),
+                                padding: RFPercentage(2),
+                            }}>
+                                <DataTable.Header >
+                                    <DataTable.Title><Text style={styles.title}>วัน</Text></DataTable.Title>
+                                    <DataTable.Title><Text style={styles.title}>เฉพาะทาง</Text></DataTable.Title>
+                                    <DataTable.Title ><Text style={styles.title}>ชื่อเเพทย์</Text></DataTable.Title>
+                                </DataTable.Header>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell>จันทร์</DataTable.Cell>
+                                    <DataTable.Cell>จิตแพทย์ </DataTable.Cell>
+                                    <DataTable.Cell >แพทย์หญิงสมดี ไม่มีพิษภัย</DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell></DataTable.Cell>
+                                    <DataTable.Cell>สูตินารีเวช </DataTable.Cell>
+                                    <DataTable.Cell >นายแพทย์สมหมาย  พิษภัยไม่มี</DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell>อังคาร</DataTable.Cell>
+                                    <DataTable.Cell>ระบบทางเดินอาหาร </DataTable.Cell>
+                                    <DataTable.Cell >ดร.คิดดี มีใจใฝ่รู้</DataTable.Cell>
+                                </DataTable.Row>
+                                <DataTable.Row>
+                                    <DataTable.Cell>พุธ</DataTable.Cell>
+                                    <DataTable.Cell>กายภาพบำบัด  </DataTable.Cell>
+                                    <DataTable.Cell >ก.ภ.รักษาได้ หายเร็ว</DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell></DataTable.Cell>
+                                    <DataTable.Cell>สมองและเส้นประสาท   </DataTable.Cell>
+                                    <DataTable.Cell >นายแพทย์สมชาย มีใจรักดี</DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell>พฤหัส</DataTable.Cell>
+                                    <DataTable.Cell>จิตแพทย์    </DataTable.Cell>
+                                    <DataTable.Cell >แพทย์หญิงสมดี ไม่มีพิษภัย</DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell></DataTable.Cell>
+                                    <DataTable.Cell>หู คอ จมูก </DataTable.Cell>
+                                    <DataTable.Cell >แพทย์หญิงสมหญิง มีใจรักสงบ</DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell>ศุกร์</DataTable.Cell>
+                                    <DataTable.Cell>โรคผิวหนัง </DataTable.Cell>
+                                    <DataTable.Cell >นายแพทย์สมควร ไม่มีพิษภัย</DataTable.Cell>
+                                </DataTable.Row>
+                                <DataTable.Row>
+                                    <DataTable.Cell></DataTable.Cell>
+                                    <DataTable.Cell>จักษุ  </DataTable.Cell>
+                                    <DataTable.Cell >นายแพทย์ปกป้อง เก่งกล้า</DataTable.Cell>
+                                </DataTable.Row>
+
+                            </DataTable>
+                        </ScrollView>
+                    </View>
+                }
                 <View style={{ ...styles.tabSelect }} >
                     <Text style={styles.tabFont}>ข่าวสารสุขภาพ</Text>
                 </View>
@@ -137,6 +210,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
         fontSize: RFPercentage(2)
     },
+    title: {
+        fontFamily: 'Kanit',
+        fontSize: RFPercentage(2),
+    }
 
 
 
