@@ -251,12 +251,14 @@ func ChangePassword(response http.ResponseWriter, request *http.Request) {
 	collection := client.Database(database).Collection("user")
 	var data_get models.PasswordManage
 	json.NewDecoder(request.Body).Decode(&data_get)
+	fmt.Println(data_get)
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
 	var data models.User
 	err := collection.FindOne(ctx, bson.M{"user_id": data_get.User_id}).Decode(&data)
 	if err != nil {
 		json.NewEncoder(response).Encode("no_user")
+		fmt.Println("no user")
 		return
 	}
 
@@ -277,6 +279,7 @@ func ChangePassword(response http.ResponseWriter, request *http.Request) {
 			{"$set", bson.D{{"password", data.Password}}},
 		})
 
+	fmt.Println("update success")
 	json.NewEncoder(response).Encode("update password success")
 
 }
