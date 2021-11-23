@@ -99,7 +99,7 @@ const Main = ({ navigation }) => {
                     :
                     <View style={{
                         height: hp('22%'),
-                        marginVertical: 50
+                        marginVertical: hp('4.5%')
                     }}>
                         <ScrollView>
                             <DataTable style={{
@@ -114,55 +114,55 @@ const Main = ({ navigation }) => {
                                 </DataTable.Header>
 
                                 <DataTable.Row>
-                                    <DataTable.Cell>จันทร์</DataTable.Cell>
-                                    <DataTable.Cell>จิตแพทย์ </DataTable.Cell>
-                                    <DataTable.Cell >แพทย์หญิงสมดี ไม่มีพิษภัย</DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>จันทร์</Text></DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>จิตแพทย์ </Text></DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>แพทย์หญิงสมดี ไม่มีพิษภัย</Text></DataTable.Cell>
                                 </DataTable.Row>
 
                                 <DataTable.Row>
                                     <DataTable.Cell></DataTable.Cell>
-                                    <DataTable.Cell>สูตินารีเวช </DataTable.Cell>
-                                    <DataTable.Cell >นายแพทย์สมหมาย  พิษภัยไม่มี</DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>สูตินารีเวช </Text></DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>นายแพทย์สมหมาย  พิษภัยไม่มี</Text></DataTable.Cell>
                                 </DataTable.Row>
 
                                 <DataTable.Row>
-                                    <DataTable.Cell>อังคาร</DataTable.Cell>
-                                    <DataTable.Cell>ระบบทางเดินอาหาร </DataTable.Cell>
-                                    <DataTable.Cell >ดร.คิดดี มีใจใฝ่รู้</DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>อังคาร</Text></DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>ระบบทางเดินอาหาร</Text> </DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>ดร.คิดดี มีใจใฝ่รู้</Text></DataTable.Cell>
                                 </DataTable.Row>
                                 <DataTable.Row>
-                                    <DataTable.Cell>พุธ</DataTable.Cell>
-                                    <DataTable.Cell>กายภาพบำบัด  </DataTable.Cell>
-                                    <DataTable.Cell >ก.ภ.รักษาได้ หายเร็ว</DataTable.Cell>
-                                </DataTable.Row>
-
-                                <DataTable.Row>
-                                    <DataTable.Cell></DataTable.Cell>
-                                    <DataTable.Cell>สมองและเส้นประสาท   </DataTable.Cell>
-                                    <DataTable.Cell >นายแพทย์สมชาย มีใจรักดี</DataTable.Cell>
-                                </DataTable.Row>
-
-                                <DataTable.Row>
-                                    <DataTable.Cell>พฤหัส</DataTable.Cell>
-                                    <DataTable.Cell>จิตแพทย์    </DataTable.Cell>
-                                    <DataTable.Cell >แพทย์หญิงสมดี ไม่มีพิษภัย</DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>พุธ</Text></DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>กายภาพบำบัด </Text> </DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>ก.ภ.รักษาได้ หายเร็ว</Text></DataTable.Cell>
                                 </DataTable.Row>
 
                                 <DataTable.Row>
                                     <DataTable.Cell></DataTable.Cell>
-                                    <DataTable.Cell>หู คอ จมูก </DataTable.Cell>
-                                    <DataTable.Cell >แพทย์หญิงสมหญิง มีใจรักสงบ</DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>สมองและเส้นประสาท </Text>  </DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>นายแพทย์สมชาย มีใจรักดี</Text></DataTable.Cell>
                                 </DataTable.Row>
 
                                 <DataTable.Row>
-                                    <DataTable.Cell>ศุกร์</DataTable.Cell>
-                                    <DataTable.Cell>โรคผิวหนัง </DataTable.Cell>
-                                    <DataTable.Cell >นายแพทย์สมควร ไม่มีพิษภัย</DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>พฤหัส</Text></DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>จิตแพทย์  </Text>  </DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>แพทย์หญิงสมดี ไม่มีพิษภัย</Text></DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell></DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>หู คอ จมูก</Text> </DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>แพทย์หญิงสมหญิง มีใจรักสงบ</Text></DataTable.Cell>
+                                </DataTable.Row>
+
+                                <DataTable.Row>
+                                    <DataTable.Cell><Text style={styles.text}>ศุกร์</Text></DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>โรคผิวหนัง </Text></DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>นายแพทย์สมควร ไม่มีพิษภัย</Text></DataTable.Cell>
                                 </DataTable.Row>
                                 <DataTable.Row>
                                     <DataTable.Cell></DataTable.Cell>
-                                    <DataTable.Cell>จักษุ  </DataTable.Cell>
-                                    <DataTable.Cell >นายแพทย์ปกป้อง เก่งกล้า</DataTable.Cell>
+                                    <DataTable.Cell><Text style={styles.text}>จักษุ </Text> </DataTable.Cell>
+                                    <DataTable.Cell ><Text style={styles.text}>นายแพทย์ปกป้อง เก่งกล้า</Text></DataTable.Cell>
                                 </DataTable.Row>
 
                             </DataTable>
@@ -213,6 +213,10 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Kanit',
         fontSize: RFPercentage(2),
+    },
+    text: {
+        fontFamily: 'Kanit',
+
     }
 
 
