@@ -84,6 +84,7 @@ const Profile = (props, { navigation }) => {
 
         });
         if (isFormValid()) {
+            UpdateProfile()
             setEdit(false)
         }
         console.log(Firstname)
@@ -448,7 +449,6 @@ const Profile = (props, { navigation }) => {
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
-                            UpdateProfile()
                             Info()
                             onRefresh()
 
