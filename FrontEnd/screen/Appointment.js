@@ -27,11 +27,17 @@ const Appointment = () => {
     const [userAppointment, setUserAppointment] = useState()
     const [refreshing, setRefreshing] = React.useState(false);
 
-    const filtered = userAppointment.filter(item => Moment(new Date(item.date)).format() >= Moment(new Date()).format())
+    // const filtered = userAppointment.filter(item => new Date(item.date) >= new Date())
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(2000).then(() => {
+            setRefreshing(false)
+            // setUserAppointment(userAppointment.filter(item => new Date(item.date) >= new Date()))
+
+        });
+        // { console.log(userAppointment.filter(item => new Date(item.date) >= new Date())) }
+
     }, []);
 
 
@@ -40,14 +46,16 @@ const Appointment = () => {
 
             await axios.get(global.local + "/getappointment")
                 .then(res => {
-                    setUserAppointment(res.data)
+                    setUserAppointment(res.data.filter(item => new Date(item.date) >= new Date()))
                     //console.log(res.data)
+                    // onRefresh()
 
                 })
         }
         return (
             getUserInfo()
         )
+
     })
 
     const renderItem = ({ item }) => {
@@ -139,8 +147,7 @@ const Appointment = () => {
     return (
         <View style={styles.container}
         >
-            {/* {console.log(Moment(new Date('2021-12-23T23:30:00Z')).format() >= Moment(new Date()).format())} */}
-            {/* {console.log(userAppointment)} */}
+            {/* {console.log(userAppointment.filter(item => Moment(new Date(item.date)).format() >= Moment(new Date()).format()))} */}
             <Bg Text1='การนัดหมาย' />
             <View style={styles.position}>
                 <View style={{ marginTop: RFPercentage(1), height: hp('62%') }}>
