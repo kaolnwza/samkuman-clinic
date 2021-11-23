@@ -111,32 +111,27 @@ func EditProfile(response http.ResponseWriter, request *http.Request) {
 	}
 
 	// Edit height
-	if user_struct.Height > 0 {
-		_, err := user_collection.UpdateOne(
+
+		user_collection.UpdateOne(
 			ctx,
 			bson.M{"user_id": user_struct.User_id},
 			bson.D{
 				{"$set", bson.D{{"height", user_struct.Height}}},
 			},
 		)
-		if err != nil {
-			fmt.Println(err)
-		}
+		
 		json.NewEncoder(response).Encode("Height") //แสดงใน PM
-	}
+	
 
 	// Edit weight
-	if user_struct.Weight > 0 {
-		_, err := user_collection.UpdateOne(
+	user_collection.UpdateOne(
 			ctx,
 			bson.M{"user_id": user_struct.User_id},
 			bson.D{
 				{"$set", bson.D{{"weight", user_struct.Weight}}},
 			},
 		)
-		if err != nil {
-			fmt.Println(err)
-		}
+		
 		json.NewEncoder(response).Encode("Weight") //แสดงใน PM
 	}
 

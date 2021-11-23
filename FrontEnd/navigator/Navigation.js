@@ -80,8 +80,11 @@ const Custom = props => {
 
     useEffect(() => {
 
-        getUser()
 
+        return (
+
+            getUser()
+        )
     }, [])
 
     const getUser = async () => {

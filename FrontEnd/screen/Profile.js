@@ -147,9 +147,11 @@ const Profile = (props, { navigation }) => {
                 // console.log(userinfo)
                 console.log("update profile success")
                 alert("Profile has Updated")
+
                 // setHistoryId(res.data.history_id)
 
             })
+
 
         // var data2 = {
         //     doctor_id: 0,
