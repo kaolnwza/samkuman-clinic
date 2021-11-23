@@ -121,12 +121,7 @@ const Profile = (props, { navigation }) => {
 
         });
         if (isFormValid()) {
-            var data = {
-                user_id: userinfo.user_id,
-                old_password: OPass,
-                new_password: NPass
-
-            }
+            
             updatePassword()
 
         }
@@ -134,6 +129,12 @@ const Profile = (props, { navigation }) => {
 
 
     const updatePassword = async () => {
+        var data = {
+            user_id: userinfo.user_id,
+            old_password: OPass,
+            new_password: NPass
+
+        }
         await axios.put(global.local + "/changepassword", data)
             .then(res => {
                 if (res.data == "no_user") {

@@ -105,7 +105,9 @@ const Custom = props => {
             .then(
                 res => {
                     console.log(res.data);
-                    Restart()
+                    // Restart()
+                    global.Role = ''
+                    props.navigation.replace('login');
 
                 }
             )
