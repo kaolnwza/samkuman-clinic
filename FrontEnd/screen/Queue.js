@@ -1,19 +1,36 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect, Component } from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios'
 
 
 import Bg from '../components/Pagebg'
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Queue = ({ navigation }) => {
+    const isFocused = useIsFocused();
+
     const [currentQueue, setCurrentQueue] = useState();
     const [remainQueue, setRemainQueue] = useState();
     const [userQueue, setUserQueue] = useState();
     const [_, runFetching] = useState()
-    global.noti = []
+
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(200).then(() => {
+            setRefreshing(false)
+            getQueue()
+        });
+    }, []);
 
     const data = JSON.stringify({
         user_id: 15,
@@ -22,23 +39,27 @@ const Queue = ({ navigation }) => {
 
     //let isMount = true
 
-    useEffect(() => {
-        const getQueue = async () => {
-            await axios.get(global.local + "/getuserqueue")
-                .then(res => {
-                    runFetching(res.data)
-                    setCurrentQueue(res.data.current_queue)
-                    setRemainQueue(res.data.remain_queue)
-                    setUserQueue(res.data.user_queue)
-                    // global.noti.push({ title: "noti Added" })
-                })
 
+    useEffect(() => {
+        if (isFocused) {
+            getQueue()
         }
 
-        return (
-            getQueue()
-        )
+
     })
+
+    const getQueue = async () => {
+        await axios.get(global.local + "/getuserqueue")
+            .then(res => {
+                runFetching(res.data)
+                setCurrentQueue(res.data.current_queue)
+                setRemainQueue(res.data.remain_queue)
+                setUserQueue(res.data.user_queue)
+                // console.log("queue");
+            })
+
+
+    }
 
     const cancelQueue = async () => {
         await axios.delete(global.local + "/usercanclequeue")
@@ -58,8 +79,16 @@ const Queue = ({ navigation }) => {
 
 
 
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
             <Bg Text1='คิวการรักษา' />
             <View style={styles.position}>
                 <View style={styles.queueBorder}>
@@ -86,7 +115,7 @@ const Queue = ({ navigation }) => {
 
             </View>
 
-        </View >
+        </ScrollView >
     )
 }
 

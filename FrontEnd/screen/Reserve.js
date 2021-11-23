@@ -1,50 +1,61 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard, ScrollView, RefreshControl } from 'react-native'
 import Bg from '../components/Pagebg'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Picker } from '@react-native-picker/picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Btn from '../components/Button';
 import axios from 'axios'
+import { useIsFocused } from '@react-navigation/core';
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const Reserve = ({ navigation }) => {
+    const isFocused = useIsFocused();
+
     const [selectedValue, setSelectedValue] = useState("normal");
     const [Day, setDay] = useState('Monday')
     const [currentQueue, setCurrentQueue] = useState()
     const [symtomInput, setSymtomInput] = useState("")
     const [fetching, letFetching] = useState()
 
-    useEffect(() => {
-        const getQueue = async () => {
+    const [refreshing, setRefreshing] = React.useState(false);
 
-
-            var data = {
-                "type": selectedValue
-            }
-            await axios.post(global.local + "/getremainqueue", data)
-                .then(res => {
-
-
-
-                    if (res.data.cursor.Current != null) {
-                        setCurrentQueue(res.data.struct[0].queue_id)
-                    }
-                    else if (res.data.cursor.Current == null) {
-                        setCurrentQueue('-')
-                    }
-
-
-                    letFetching(res.data)
-
-
-                })
-
-        }
-
-        return (
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(200).then(() => {
+            setRefreshing(false)
             getQueue()
-        )
+        });
+    }, []);
+
+    useEffect(() => {
+        if (isFocused) { getQueue() }
+
+
     })
+
+
+    const getQueue = async () => {
+
+
+        var data = {
+            "type": selectedValue
+        }
+        await axios.post(global.local + "/getremainqueue", data)
+            .then(res => {
+                letFetching(res.data)
+                // console.log("reserve");
+                if (res.data.cursor.Current != null) {
+                    setCurrentQueue(res.data.struct[0].queue_id)
+                }
+                else if (res.data.cursor.Current == null) {
+                    setCurrentQueue('-')
+                }
+            })
+
+    }
 
     const postQueue = async () => {
         var data = {
@@ -70,7 +81,14 @@ const Reserve = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
             <Bg Text1='ระบบการจองคิว' />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -123,7 +141,7 @@ const Reserve = ({ navigation }) => {
                 </View>
             </TouchableWithoutFeedback >
 
-        </View >
+        </ScrollView >
     )
 }
 

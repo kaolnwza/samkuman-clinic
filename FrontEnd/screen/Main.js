@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, SafeAreaView, ScrollView, RefreshControl } from 'react-native'
 import { useFonts } from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
 import Bg from '../components/Pagebg'
@@ -9,13 +9,21 @@ import GridInformation from '../components/GridInformation';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import axios from "axios"
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const Main = ({ navigation }) => {
     const [Select, setSelect] = useState(true);
     let isMount = true
     const [news, setNews] = useState([])
     const [relation, setRelation] = useState([])
+    const [refreshing, setRefreshing] = React.useState(false);
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
     useEffect(() => {
         const getInformation = async () => {
@@ -62,8 +70,16 @@ const Main = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
-            <Bg  Text1='หน้าหลัก' />
+        <ScrollView style={styles.container}
+            showsVerticalScrollIndicator={false}
+
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
+            <Bg Text1='หน้าหลัก' />
             <View style={styles.contentContainer}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity onPress={() => {
@@ -90,7 +106,7 @@ const Main = ({ navigation }) => {
 
 
             </View >
-        </View >
+        </ScrollView >
     )
 }
 
@@ -121,7 +137,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Kanit',
         fontSize: RFPercentage(2)
     },
-    
+
 
 
 })

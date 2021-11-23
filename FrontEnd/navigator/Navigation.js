@@ -80,23 +80,19 @@ const Custom = props => {
 
     useEffect(() => {
 
-        const getUser = async () => {
-            if (global.Role == "User") {
-                await axios.get(global.local + "/finduser")
-                    .then(res => {
-                        setUser(res.data)
-                    })
-            }
-            else {
-                await setUser('')
-            }
+        getUser()
+
+    }, [])
+
+    const getUser = async () => {
+        if (global.Role == "User") {
+            await axios.get(global.local + "/finduser")
+                .then(res => {
+                    setUser(res.data)
+                })
         }
-        return (
 
-            getUser()
-        )
-    })
-
+    }
 
     const logOut = async () => {
         const instance = axios.create({
