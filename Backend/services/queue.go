@@ -288,3 +288,29 @@ func GetSymtomQueue(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(queue_arr[0])
 
 }
+
+func GetQueueType(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("Content-Type", "application/json")
+	queue_collection := client.Database(database).Collection("queue")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	//fmt.Println("in queue")
+	var user_queue models.Queue
+
+	json.NewDecoder(request.Body).Decode(&user_queue)
+
+	//var hee bson.M
+
+	//fmt.Println("type = ", user_queue)
+	//fmt.Println("req = ", request)
+
+	cursor, _ := queue_collection.Find(ctx, bson.M{"type": user_queue.Type, "status": true})
+	count := 0
+	defer cursor.Close(ctx)
+	for cursor.Next((ctx)) {
+
+		count++
+	}
+
+	json.NewEncoder(response).Encode(count)
+
+}
