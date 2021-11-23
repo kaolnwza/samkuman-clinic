@@ -5,7 +5,6 @@ import SignUp from '../screen/SignUp'
 import Main from '../screen/Main'
 import Queue from '../screen/Queue'
 import Reserve from '../screen/Reserve'
-import Notify from '../screen/Notify'
 import Appointment from '../screen/Appointment'
 import History from '../screen/History'
 import Profile from '../screen/Profile'
@@ -263,15 +262,7 @@ const BottomTab = () => {
                     },
                 }}
             />
-            <Tab.Screen name="Noti" component={Notify}
-                options={{
-                    tabBarBadge: 999,
-                    tabBarIcon: ({ color, size }) => {
-                        return <Ionicons name="notifications" size={size} color={color} />;
-                    },
 
-                }}
-            />
 
         </Tab.Navigator>
     )
