@@ -6,12 +6,14 @@ import { Picker } from '@react-native-picker/picker';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Btn from '../components/Button';
 import axios from 'axios'
-
+import { useIsFocused } from '@react-navigation/core';
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
 const Reserve = ({ navigation }) => {
+    const isFocused = useIsFocused();
+
     const [selectedValue, setSelectedValue] = useState("normal");
     const [Day, setDay] = useState('Monday')
     const [currentQueue, setCurrentQueue] = useState()
@@ -22,40 +24,38 @@ const Reserve = ({ navigation }) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(200).then(() => {
+            setRefreshing(false)
+            getQueue()
+        });
     }, []);
 
     useEffect(() => {
-        const getQueue = async () => {
+        if (isFocused) { getQueue() }
 
 
-            var data = {
-                "type": selectedValue
-            }
-            await axios.post(global.local + "/getremainqueue", data)
-                .then(res => {
-
-
-
-                    if (res.data.cursor.Current != null) {
-                        setCurrentQueue(res.data.struct[0].queue_id)
-                    }
-                    else if (res.data.cursor.Current == null) {
-                        setCurrentQueue('-')
-                    }
-
-
-                    letFetching(res.data)
-
-
-                })
-
-        }
-
-        return (
-            getQueue()
-        )
     })
+
+
+    const getQueue = async () => {
+
+
+        var data = {
+            "type": selectedValue
+        }
+        await axios.post(global.local + "/getremainqueue", data)
+            .then(res => {
+                letFetching(res.data)
+                console.log("reserve");
+                if (res.data.cursor.Current != null) {
+                    setCurrentQueue(res.data.struct[0].queue_id)
+                }
+                else if (res.data.cursor.Current == null) {
+                    setCurrentQueue('-')
+                }
+            })
+
+    }
 
     const postQueue = async () => {
         var data = {

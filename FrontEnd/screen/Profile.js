@@ -110,17 +110,17 @@ const Profile = (props, { navigation }) => {
         setDOB(currentDate);
     };
 
-  
+
 
 
 
     const UpdateProfile = async () => {
 
-    await instance.get(global.local + "/getcookie")
-                .then(res =>
-                    console.log(res.data)
-                   
-                )
+        await instance.get(global.local + "/getcookie")
+            .then(res =>
+                console.log(res.data)
+
+            )
 
         var data = {
             user_id: 0,
@@ -167,7 +167,7 @@ const Profile = (props, { navigation }) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(300).then(() => setRefreshing(false));
     }, []);
 
 
@@ -418,6 +418,7 @@ const Profile = (props, { navigation }) => {
                 {Edit == false ?
                     <TouchableOpacity style={{ ...styles.btn, ...{ backgroundColor: '#f9be7c' } }} onPress={() => {
                         setEdit(true)
+
                     }}>
                         <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>แก้ไข</Text>
                     </TouchableOpacity>
@@ -447,6 +448,7 @@ const Profile = (props, { navigation }) => {
                         <TouchableOpacity style={{ ...styles.btnH, ...{ backgroundColor: '#309397' } }} onPress={() => {
                             UpdateProfile()
                             Info()
+                            onRefresh()
 
                         }}>
                             <Text style={{ fontSize: RFPercentage(3), fontFamily: 'Kanit', alignSelf: 'center' }}>บันทึก</Text>

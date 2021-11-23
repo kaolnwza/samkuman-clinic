@@ -95,7 +95,7 @@ const Custom = props => {
 
             getUser()
         )
-    })
+    }, [])
 
 
     const logOut = async () => {

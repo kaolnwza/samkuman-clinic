@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 import { useFonts } from 'expo-font';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios'
 
 
@@ -13,16 +14,22 @@ const wait = (timeout) => {
 }
 
 const Queue = ({ navigation }) => {
+    const isFocused = useIsFocused();
+
     const [currentQueue, setCurrentQueue] = useState();
     const [remainQueue, setRemainQueue] = useState();
     const [userQueue, setUserQueue] = useState();
     const [_, runFetching] = useState()
-    
+
+
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(200).then(() => {
+            setRefreshing(false)
+            getQueue()
+        });
     }, []);
 
     const data = JSON.stringify({
@@ -32,22 +39,27 @@ const Queue = ({ navigation }) => {
 
     //let isMount = true
 
-    useEffect(() => {
-        const getQueue = async () => {
-            await axios.get(global.local + "/getuserqueue")
-                .then(res => {
-                    runFetching(res.data)
-                    setCurrentQueue(res.data.current_queue)
-                    setRemainQueue(res.data.remain_queue)
-                    setUserQueue(res.data.user_queue)
-                })
 
+    useEffect(() => {
+        if (isFocused) {
+            getQueue()
         }
 
-        return (
-            getQueue()
-        )
+
     })
+
+    const getQueue = async () => {
+        await axios.get(global.local + "/getuserqueue")
+            .then(res => {
+                runFetching(res.data)
+                setCurrentQueue(res.data.current_queue)
+                setRemainQueue(res.data.remain_queue)
+                setUserQueue(res.data.user_queue)
+                console.log("queue");
+            })
+
+
+    }
 
     const cancelQueue = async () => {
         await axios.delete(global.local + "/usercanclequeue")
