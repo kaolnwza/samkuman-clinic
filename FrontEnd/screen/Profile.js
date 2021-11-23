@@ -96,7 +96,7 @@ const Profile = (props, { navigation }) => {
             Phone: { required: true, numbers: true, minlength: 10, maxlength: 10 },
             Height: { required: true, numbers: true },
             Weight: { required: true, numbers: true },
-            Id: { required: true, numbers: true, minlength: 13, maxlength: 13 },
+
             Email: { required: true, email: true },
             // OPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },
             // NPass: { required: true, hasNumber: true, hasUpperCase: true, hasLowerCase: true },

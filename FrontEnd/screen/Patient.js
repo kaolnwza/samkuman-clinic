@@ -30,6 +30,8 @@ const Patient = () => {
     const [advice, setAdvice] = useState('')
     const [medic, setMedic] = useState('')
 
+    const [isSave, setIsSave] = useState(false)
+
     const [userList, setUserList] = useState([])
 
 
@@ -94,20 +96,29 @@ const Patient = () => {
         await axios.post(global.local + "/addhistory", data)
             .then(res => {
                 console.log("post history success")
-                setHistoryId(res.data.history_id)
+                // setHistoryId(res.data.history_id)
+                console.log(res.data);
+                AddAp(res.data)
             })
 
+
+
+
+    }
+
+    const AddAp = async (val) => {
         var data2 = {
-            doctor_id: 0,
             user_id: parseInt(selectedValue),
             date: Moment(date).format(),
-            history_id: getHistoryId
+            history_id: val
         }
-        if (isDate) {
+        if (isSave) {
             await axios.post(global.local + "/addappointment", data2)
-                .then(res => console.log("post appointment success"))
+                .then(res => {
+                    console.log("post appointment success")
+                    setIsSave(false)
+                })
         }
-
     }
     const renderItem = ({ item }) => (
 
@@ -158,13 +169,13 @@ const Patient = () => {
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: wp('70%') }}>
                                     <TouchableOpacity
                                         style={[styles.button, styles.buttonCancel]}
-                                        onPress={() => [setIsDate(false), setModalVisible(!modalVisible)]}
+                                        onPress={() => [setIsDate(false), setModalVisible(!modalVisible), setIsSave(false)]}
                                     >
                                         <Text style={styles.textStyle}>Cancel</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.button, styles.buttonSave]}
-                                        onPress={() => [setIsDate(true), setModalVisible(!modalVisible)]}
+                                        onPress={() => [setIsDate(true), setModalVisible(!modalVisible), setIsSave(true)]}
                                     >
                                         <Text style={styles.textStyle}>Save</Text>
                                     </TouchableOpacity>
