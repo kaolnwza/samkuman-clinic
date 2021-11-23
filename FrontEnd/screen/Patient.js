@@ -82,7 +82,6 @@ const Patient = () => {
 
     const postHistory = async () => {
         var data = {
-            doctor_id: 0,
             user_id: parseInt(selectedValue),
             date: Moment(createDate).format(),
             symptom: symptom,
