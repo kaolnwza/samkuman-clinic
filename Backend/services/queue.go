@@ -206,7 +206,6 @@ func GetAllQueue(response http.ResponseWriter, request *http.Request) {
 	json.NewDecoder(request.Body).Decode(&queue_struct)
 
 	findOptions := options.Find()
-	// Sort by `price` field descending
 	findOptions.SetSort(bson.D{{"type", 1}})
 
 	cursor, _ := queue_collection.Find(ctx, bson.M{"status": true}, findOptions)
@@ -253,4 +252,39 @@ func GetRemainQueue(response http.ResponseWriter, request *http.Request) {
 		"struct": queue_response}
 
 	json.NewEncoder(response).Encode(res_val)
+}
+
+func GetSymtomQueue(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("Content-Type", "application/json")
+	queue_collection := client.Database(database).Collection("queue")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	//fmt.Println("in queue")
+	var user_queue models.Queue
+
+	json.NewDecoder(request.Body).Decode(&user_queue)
+
+	//var hee bson.M
+
+	//fmt.Println("type = ", user_queue)
+	//fmt.Println("req = ", request)
+	findOptions := options.Find()
+	findOptions.SetSort(bson.D{{"_id", -1}})
+	// fmt.Println("getsymqueue")
+	var queue_arr []models.Queue
+	cursor, _ := queue_collection.Find(ctx, bson.M{"user_id": user_queue.User_id, "status": false, "queue_remain": -1}, findOptions)
+	count := 0
+	defer cursor.Close(ctx)
+	for cursor.Next((ctx)) {
+		var temp models.Queue
+		cursor.Decode(&temp)
+		queue_arr = append(queue_arr, temp)
+		count++
+	}
+	// fmt.Println(queue_arr)
+	if count == 0 {
+		json.NewEncoder(response).Encode("not_found")
+		return
+	}
+	json.NewEncoder(response).Encode(queue_arr[0])
+
 }
