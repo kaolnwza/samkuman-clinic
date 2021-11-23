@@ -11,7 +11,7 @@ import * as Device from 'expo-device';
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("boonnum@gmail.com")
+    const [usernameLogin, setUsernameLogin] = useState("earn@hotmail.com")
     const [passwordLogin, setPasswordLogin] = useState("12345")
     const [authen, setAuthen] = useState('')
     const testLogin = () => {
@@ -20,7 +20,7 @@ const login = ({ navigation }) => {
     }
     const [loginStatus, setLoginStatus] = useState(false)
 
-    global.local = "http://192.168.43.39:12345"
+    global.local = "http://172.20.10.3:12345"
 
 
     const instance = axios.create({

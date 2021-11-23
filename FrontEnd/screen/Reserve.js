@@ -52,7 +52,7 @@ const Reserve = ({ navigation }) => {
                 setRemainQueue(res.data)
                 // console.log(res.data);
             })
-
+        setDay(moment(new Date()).format('dddd').toString())
     }
 
     const postQueue = async () => {
