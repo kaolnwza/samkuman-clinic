@@ -56,6 +56,7 @@ const Patient = () => {
         setRefreshing(true);
         wait(2000).then(() => {
             setRefreshing(false)
+            getAllUser()
         });
     }, []);
 
