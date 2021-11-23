@@ -475,7 +475,7 @@ const Profile = (props, { navigation }) => {
 
                             setFirstname(userinfo.firstname)
                             setLastname(userinfo.lastname)
-                            setDOB(new Date(userinfo.dob))
+                            setDOB(new Date(DOB))
                             setGender(userinfo.gender)
                             setAddress(userinfo.address)
                             setPhone(userinfo.phone_number)
