@@ -139,7 +139,7 @@ func ReachQueue(response http.ResponseWriter, request *http.Request) {
 		cursor.Decode(&temp)
 		queue_collection.UpdateOne(
 			ctx,
-			bson.M{"user_id": temp.User_id, "type": temp.Type},
+			bson.M{"user_id": temp.User_id, "type": temp.Type, "status": true},
 			bson.D{
 				{"$set", bson.D{{"queue_remain", temp.Queue_remain - 1}}},
 			},
