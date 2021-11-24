@@ -95,8 +95,13 @@ const SignUp = ({ navigation }) => {
 
         await axios.post(global.local + "/signup", data)
             .then(res => {
+                console.log(res.data);
                 if (res.data == "already_email") {
                     alert("อีเมล์นี้ถูกลงทะเบียนไว้แล้ว")
+
+
+                }
+                else {
                     navigation.replace('login')
                 }
             })
