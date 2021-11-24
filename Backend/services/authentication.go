@@ -187,7 +187,9 @@ func SignUp(response http.ResponseWriter, request *http.Request) {
 		var temp models.User
 		cursor.Decode(&temp)
 		if temp.Email == user.Email {
+			fmt.Println("already has email")
 			json.NewEncoder(response).Encode("already_email")
+			return
 		}
 
 		count++
@@ -198,9 +200,9 @@ func SignUp(response http.ResponseWriter, request *http.Request) {
 	fmt.Println(user)
 	user.User_id = count
 	user.Password = EncodePassword(user.Password)
-	collection := client.Database(database).Collection("user")
-	result, _ := collection.InsertOne(ctx, user)
-	_ = result
+	//collection := client.Database(database).Collection("user")
+	//result, _ := collection.InsertOne(ctx, user)
+	//_ = result
 	json.NewEncoder(response).Encode(user)
 
 }
