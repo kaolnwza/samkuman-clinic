@@ -172,6 +172,9 @@ func SignUp(response http.ResponseWriter, request *http.Request) {
 	user_collection := client.Database(database).Collection("user")
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 
+	var user models.User
+	json.NewDecoder(request.Body).Decode(&user)
+
 	cursor, err := user_collection.Find(ctx, bson.M{})
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
@@ -181,14 +184,17 @@ func SignUp(response http.ResponseWriter, request *http.Request) {
 	count := 0
 	defer cursor.Close(ctx)
 	for cursor.Next(ctx) {
+		var temp models.User
+		cursor.Decode(&temp)
+		if temp.Email == user.Email {
+			json.NewEncoder(response).Encode("already_email")
+		}
 
 		count++
 	}
 	// end of finding user range
 	fmt.Println(count)
-	var user models.User
 
-	json.NewDecoder(request.Body).Decode(&user)
 	fmt.Println(user)
 	user.User_id = count
 	user.Password = EncodePassword(user.Password)

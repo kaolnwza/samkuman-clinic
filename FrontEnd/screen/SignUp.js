@@ -69,7 +69,7 @@ const SignUp = ({ navigation }) => {
         });
         if (isFormValid()) {
             signupPost()
-            navigation.replace('login')
+
         } else {
             console.log(isFormValid())
         }
@@ -94,7 +94,12 @@ const SignUp = ({ navigation }) => {
         }
 
         await axios.post(global.local + "/signup", data)
-            .then(console.log("signuop done"))
+            .then(res => {
+                if (res.data == "already_email") {
+                    alert("อีเมล์นี้ถูกลงทะเบียนไว้แล้ว")
+                    navigation.replace('login')
+                }
+            })
     }
 
     return (
