@@ -200,9 +200,9 @@ func SignUp(response http.ResponseWriter, request *http.Request) {
 	fmt.Println(user)
 	user.User_id = count
 	user.Password = EncodePassword(user.Password)
-	//collection := client.Database(database).Collection("user")
-	//result, _ := collection.InsertOne(ctx, user)
-	//_ = result
+	collection := client.Database(database).Collection("user")
+	result, _ := collection.InsertOne(ctx, user)
+	_ = result
 	json.NewEncoder(response).Encode(user)
 
 }
