@@ -17,20 +17,20 @@ const SignUp = ({ navigation }) => {
         setDate(currentDate);
     };
 
-    const [identityNumber, setIdentityNumber] = useState('1234574567895');
-    const [firstname, setFirstname] = useState('asdasd');
-    const [lastname, setLastname] = useState('asd');
+    const [identityNumber, setIdentityNumber] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
     const [date, setDate] = useState(new Date());
-    const [gender, setGender] = useState("Male")
-    const [address, setAddress] = useState('asd');
-    const [phone, setPhone] = useState('1234567890');
-    const [email, setEmail] = useState('asdasd@gmail.com');
-    const [height, setHeight] = useState('123');
-    const [weight, setWeight] = useState('123');
-    const [allergic, setAllergic] = useState('asd');
-    const [disease, setDisease] = useState('hfg');
-    const [password, setPassword] = useState('Kk123');
-    const [confirmPassword, setConfirmPassword] = useState('Kk123');
+    const [gender, setGender] = useState("")
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
+    const [allergic, setAllergic] = useState('');
+    const [disease, setDisease] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const { validate, isFieldInError, getErrorsInField, getErrorMessages, isFormValid } =
         useValidation({
@@ -185,7 +185,7 @@ const SignUp = ({ navigation }) => {
                     ))}
                 <View style={{ flexDirection: 'row', }}>
                     <View style={{ flex: 1, marginRight: 5 }}>
-                        <Text style={styles.label}>ส่วนสูง {height}</Text>
+                        <Text style={styles.label}>ส่วนสูง </Text>
                         <TextInput style={styles.input} placeholder="ส่วนสูง" keyboardType='decimal-pad' value={height} onChangeText={setHeight} />
                         {isFieldInError('height') &&
                             getErrorsInField('height').map(errorMessage => (

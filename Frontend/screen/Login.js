@@ -11,8 +11,8 @@ import * as Device from 'expo-device';
 
 
 const login = ({ navigation }) => {
-    const [usernameLogin, setUsernameLogin] = useState("earn@hotmail.com")
-    const [passwordLogin, setPasswordLogin] = useState("12345")
+    const [usernameLogin, setUsernameLogin] = useState("")
+    const [passwordLogin, setPasswordLogin] = useState("")
     const [authen, setAuthen] = useState('')
     const testLogin = () => {
         console.log(usernameLogin, passwordLogin);
