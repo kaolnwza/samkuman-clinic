@@ -99,6 +99,7 @@ const Patient = () => {
                 // setHistoryId(res.data.history_id)
                 console.log(res.data);
                 AddAp(res.data)
+                alert("Add history success")
             })
 
 

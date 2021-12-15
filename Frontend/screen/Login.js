@@ -19,8 +19,7 @@ const login = ({ navigation }) => {
         postData()
     }
     const [loginStatus, setLoginStatus] = useState(false)
-
-    global.local = "http://172.20.10.3:12345"
+    global.local = "http://192.168.1.6:12345"
 
 
     const instance = axios.create({
